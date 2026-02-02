@@ -1,0 +1,30 @@
+/* Eliminăm scroll-ul implicit și marginile */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Blochează scroll-ul */
+}
+
+.split-screen {
+    height: 100vh; /* 100% din înălțimea ecranului (Viewport Height) */
+}
+
+.left-side, .right-side {
+    flex: 1; /* Împarte spațiul egal (50/50) */
+    min-width: 350px; /* Pentru a fi responsive pe ecrane mici */
+    height: 100%;
+}
+
+.logo-hero {
+    max-width: 80%;
+    height: auto;
+}
+
+/* Stil pentru input-uri să se potrivească cu brandul tău */
+.form-control:focus {
+    background-image: url(  );
+    border-color: #f3ff33; /* Galbenul tău neon */
+    box-shadow: 0 0 10px rgba(243, 255, 51, 0.2);
+    color: white;
+}
