@@ -1,0 +1,74 @@
+/* Reset și layout principal */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.split-screen {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Stiluri STÂNGA: Branding */
+.left-branding {
+  flex: 1;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.hero-logo {
+  max-width: 80%;
+  height: auto;
+}
+
+/* Stiluri DREAPTĂ: Video & Content */
+.right-interactive {
+  flex: 1;
+  position: relative; /* Esențial pentru a poziționa video și form corect */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1; /* Video este la bază */
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Face video-ul mai întunecat ca să se vadă formularul */
+  z-index: 2;
+}
+
+.form-container {
+  position: relative;
+  z-index: 3; /* Formularul stă deasupra tuturor */
+  width: 80%;
+  max-width: 400px;
+  color: #000000;
+  background-color: aliceblue;
+}
