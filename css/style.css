@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Space+Grotesk:wght@300..700&display=swap');
+
+*{
+  margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   VARIABILELE REALE AXIOBYTE (Galben Electrizant)
+   /* ==========================================================================  */
+:root {
+    --bg-black: #050505;
+    --accent-yellow-acid: #eff052; 
+    --text-white: #ffffff;
+    --text-gray: #94a3b8;
+    --border-dark: #1e293b;
+}
+
+body {
+    background-color: var(--bg-black);
+    color: var(--text-white);
+    margin: 0;
+}
+
+#hero {
+    width: 100%;
+    height: 100vh;
+    scroll-snap-align: start;
+    position: relative;
+    overflow: hidden;
+    
+
+    background: linear-gradient(
+        180deg,
+        #050505 0%,    
+        #1c1d07 25%,   
+        #494b0d 50%,   
+        #9fa31d 75%,   
+        #aeb11e 90%,   
+        #eff052 100%   
+    );
+}
+
+/* ==========================================================================
+   NAVBAR - AXIOBYTEITSOLUTION
+/* ==========================================================================  */
+
+
+header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 35px 60px;
+  background: transparent;
+}
+
+.nav-links{
+  font-family: space grotesk;
+  display: flex;
+  color:var(--text-white) ;
+  list-style: none;
+  width: 100%;
+  font-weight: 500;
+}
+
+.nav-links > li{
+  margin-right: 40px;
+}
+
+.nav-links a {
+  font-family: space grotesk;
+  font-size: 18px;
+  color: var(--text-white);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover{
+  color: #eff052;
+}
+
+
+
+.contact-information{
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 500;
+}
+
+.contact-information ul{
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  align-items: center;
+}
+
+.contact-information li , .contact-information a {
+  font-family: space grotesk;
+  font-size: 18px;
+  color: var(--text-white);
+}
+
+.contact-info{
+  margin-left: auto;
+}
+
+.contact-info ul {
+  list-style: none;
+}
+
+.contact-info a {
+  font-family: space grotesk;
+  font-size: 18px;
+  color: var(--text-white);
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+/* subliniera fina contact us */
+.contact-info a::after{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--text-white);
+}
