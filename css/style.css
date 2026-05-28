@@ -15,6 +15,7 @@
     --text-white: #ffffff;
     --text-gray: #94a3b8;
     --border-dark: #1e293b;
+    --index-inactive:#ffffff5d;
 }
 
 body {
@@ -63,7 +64,7 @@ header{
   color:var(--text-white) ;
   list-style: none;
   width: 100%;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .nav-links > li{
@@ -78,16 +79,49 @@ header{
   transition: color 0.2s ease;
 }
 
+/* ==========================================================================
+(HOVER EFFECT)
+========================================================================== 
+*/
+
+.nav-links > li:not(.contact-information):not(.contact-info) {
+  margin-right: 40px;
+  position: relative; 
+}
+
+
+.nav-links > li:not(.contact-information):not(.contact-info) a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;               /* Are exact lățimea textului respectiv */
+  height: 1px;               
+  background-color: var(--text-white); 
+  
+  transform: scaleX(0);       
+  transform-origin: center;   /* Pleacă din centrul cuvântului către margini! */
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+}
+
+/* STAREA DE HOVER PENTRU CELE 4 LINK-URI */
+.nav-links > li:not(.contact-information):not(.contact-info) a:hover {
+  color: var(--accent-yellow-acid);
+}
+
+.nav-links > li:not(.contact-information):not(.contact-info) a:hover::after {
+  transform: scaleX(1);       /* Se deschide la lățime maximă pe centrul cuvântului */
+}
+
 .nav-links a:hover{
   color: #eff052;
 }
 
 
-
 .contact-information{
   margin-left: auto;
   margin-right: auto;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .contact-information ul{
@@ -115,7 +149,7 @@ header{
   font-family: space grotesk;
   font-size: 18px;
   color: var(--text-white);
-  font-weight: 500;
+  font-weight: 400;
   position: relative;
   padding-bottom: 2px;
 }
@@ -129,4 +163,45 @@ header{
   width: 100%;
   height: 1px;
   background-color: var(--text-white);
+}
+
+.hero-services-index{
+  position: absolute;
+  top: 180px;
+  left: 60px;
+  z-index: 10;
+}
+
+.hero-services-index ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-services-index li a {
+  font-family: space grotesk;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--index-inactive);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transform-origin: left center;
+  transition: color 0.3s ease , transform 0.3s cubic-bezier(0.25 , 0.46 , 0.45 , 0.94);
+}
+
+.hero-services-index li a .num{
+  margin-right: 15px;
+  font-size: 16px;
+}
+
+.hero-services-index li a:hover{
+  color: var(--text-white);
+  transform: scale(1.06) translateX(4px);
+}
+
+.hero-services-index li.active a{
+  color: var(--text-white) !important;
+  font-weight: 500;
+  transform: scale(1.06);
 }
