@@ -187,7 +187,7 @@ header{
   text-decoration: none;
   letter-spacing: 0.02em;
   transform-origin: left center;
-  transition: color 0.3s ease , transform 0.3s cubic-bezier(0.25 , 0.46 , 0.45 , 0.94);
+  transition: color 0.3s ease , transform 0.1s cubic-bezier(0.25 , 0.46 , 0.45 , 0.94);
 }
 
 .hero-services-index li a .num{
@@ -204,4 +204,21 @@ header{
   color: var(--text-white) !important;
   font-weight: 500;
   transform: scale(1.06);
+}
+
+.hero-services-index ul:hover li a {
+  color: var(--index-inactive);
+  transform: scale(0.95);
+}
+
+.hero-services-index ul li a:hover{
+  color: var(--text-white) !important;
+  transform: scale(1.08) translateX(6px) !important;
+  opacity: 1 !important;
+}
+
+.hero-services-index li.active a{
+  color: var(--text-white) !important;
+  transform: scale(1.08) translateX(6px);
+  opacity: 1 !important;
 }
