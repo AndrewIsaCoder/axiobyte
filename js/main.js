@@ -1,38 +1,69 @@
-const serviceList = document.querySelector(".hero-services-index ul");
-const services = document.querySelectorAll(".hero-services-index li");
-let currentIndex = 2; // Pornim de la 03 (Web Experiences), adică indexul 2 în tablou
-let autoHoverInterval;
+/* ==========================================================================
+   SISTEM AUTO-HOVER MEMORABIL (REIA DE ACOLO UNDE A FOST CURSORUL)
+   ========================================================================== */
 
-// Funcția care mută clasa .active automat de la un link la altul
+const servicesContainer = document.querySelector('.hero-services-index ul');
+const serviceItems = document.querySelectorAll('.hero-services-index li');
+
+let currentIndex = 2; 
+let autoHoverInterval = null;
+
+/**
+ * Porneste ciclul automat
+ */
 function startAutoHover() {
-  autoHoverInterval = setInterval(() => {
-    // Scoatem clasa .active de la elementul curent
-    services[currentIndex].classList.remove("active");
+    if (autoHoverInterval) return;
 
-    // Trecem la următorul element (și o luăm de la capăt dacă ajungem la final)
-    currentIndex = (currentIndex + 1) % services.length;
+    autoHoverInterval = setInterval(() => {
+        // Ștergem starea activă de la vechiul element
+        serviceItems[currentIndex].classList.remove('active');
 
-    // Adăugăm clasa .active pe noul element
-    services[currentIndex].classList.add("active");
-  }, 3000); // Schimbă serviciul la fiecare 3 secunde (poți pune 2000 pentru 2 secunde)
+        // Trecem la următorul element din listă
+        currentIndex = (currentIndex + 1) % serviceItems.length;
+
+        // Îl activăm pe cel nou
+        serviceItems[currentIndex].classList.add('active');
+    }, 1000); // Schimbă la fiecare 1 secunde
 }
 
-// Funcția care oprește complet automatizarea
+/**
+ * Oprește animația fără a pierde indexul curent
+ */
 function stopAutoHover() {
-  clearInterval(autoHoverInterval);
-  // Curățăm toate clasele active automate când utilizatorul pune mouse-ul
-  services.forEach((service) => service.classList.remove("active"));
+    clearInterval(autoHoverInterval);
+    autoHoverInterval = null;
+
+    // Scoatem clasa active pentru ca stilurile de hover din CSS să funcționeze curat
+    serviceItems.forEach(item => item.classList.remove('active'));
 }
 
-// Pornim sistemul la încărcarea paginii
-startAutoHover();
+/* ==========================================================================
+   EVENIMENTE MOUSE - DETECTARE INDEX ȘI MEMORARE
+   ========================================================================== */
 
-// Când MOUSE-UL INTRĂ în listă, oprim motorul automat
-serviceList.addEventListener("mouseenter", () => {
-  stopAutoHover();
+// Monitorizăm fiecare element în parte când utilizatorul trece cu mouse-ul peste el
+serviceItems.forEach((item, index) => {
+    item.addEventListener('mouseenter', () => {
+        // ACTUALIZARE MAGICĂ: Salvăm instant în memorie indexul pe care se află utilizatorul
+        currentIndex = index;
+    });
 });
 
-// Când MOUSE-UL IESE din listă, repornim motorul automat de unde a rămas utilizatorul
-serviceList.addEventListener("mouseleave", () => {
-  startAutoHover();
+// Când mouse-ul intră în zona mare a containerului, oprim intervalul automat
+servicesContainer.addEventListener('mouseenter', () => {
+    stopAutoHover();
+});
+
+// Când mouse-ul părăsește containerul, activăm IMEDIAT elementul unde a rămas și repornim
+servicesContainer.addEventListener('mouseleave', () => {
+    // Îi punem clasa active exact elementului pe care a fost lăsat cursorul
+    serviceItems[currentIndex].classList.add('active');
+    
+    // Repornim intervalul care va continua natural către următorul element
+    startAutoHover();
+});
+
+// Inițializăm sistemul la deschiderea site-ului
+document.addEventListener('DOMContentLoaded', () => {
+    startAutoHover();
 });
