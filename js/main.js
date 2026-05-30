@@ -41,25 +41,21 @@ function stopAutoHover() {
    EVENIMENTE MOUSE - DETECTARE INDEX ȘI MEMORARE
    ========================================================================== */
 
-// Monitorizăm fiecare element în parte când utilizatorul trece cu mouse-ul peste el
 serviceItems.forEach((item, index) => {
     item.addEventListener('mouseenter', () => {
-        // ACTUALIZARE MAGICĂ: Salvăm instant în memorie indexul pe care se află utilizatorul
         currentIndex = index;
     });
 });
 
-// Când mouse-ul intră în zona mare a containerului, oprim intervalul automat
 servicesContainer.addEventListener('mouseenter', () => {
     stopAutoHover();
 });
 
-// Când mouse-ul părăsește containerul, activăm IMEDIAT elementul unde a rămas și repornim
+
 servicesContainer.addEventListener('mouseleave', () => {
-    // Îi punem clasa active exact elementului pe care a fost lăsat cursorul
+
     serviceItems[currentIndex].classList.add('active');
     
-    // Repornim intervalul care va continua natural către următorul element
     startAutoHover();
 });
 
@@ -67,3 +63,35 @@ servicesContainer.addEventListener('mouseleave', () => {
 document.addEventListener('DOMContentLoaded', () => {
     startAutoHover();
 });
+
+/* ==========================================================================
+   EFECT DE TYPEWRITER (TASTATURĂ) PENTRU PARAGRAFUL DESCRIPTIV
+   ========================================================================== */
+
+
+const descElement = document.querySelector('.hero-description p');
+
+if (descElement) {
+
+    const fullText = descElement.textContent.trim();
+    descElement.textContent = '';
+
+    descElement.classList.add('typing-cursor');
+
+    let charIndex = 0;
+    const typingSpeed = 40; 
+
+
+    function typeWriterEffect() {
+        if (charIndex < fullText.length) {
+            descElement.textContent += fullText.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeWriterEffect, typingSpeed);
+        } else {
+
+        }
+    }
+
+    
+    setTimeout(typeWriterEffect, 1000);
+}

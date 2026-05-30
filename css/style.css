@@ -25,7 +25,7 @@ body {
     width: 100%;
     height: 100vh;
     scroll-snap-align: start;
-    position: relative;
+    position: relative; /* Esențial pentru poziționarea absolută din interior */
     overflow: hidden;
     background: linear-gradient(
         180deg,
@@ -206,57 +206,52 @@ header{
     opacity: 1 !important;
 }
 
+
+/* ========================================================= */
+/* MODIFICAT: Containerul invizibil care permite poziționarea */
+/* ========================================================= */
 .hero-center-title {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 1100px;
+  width: max-content; /* AICI e magia: cutia e fix cât cuvintele! */
   z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center; 
+  pointer-events: auto;
 }
 
 .hero-center-title h1 {
   font-family: 'Oswald', sans-serif;
-  font-size: 125px;
+  font-size: 140px; 
   font-weight: 700;
-  line-height: 0.85;
+  line-height: 0.9;
   letter-spacing: -0.01em;
   color: var(--text-white);
   text-transform: uppercase;
   display: flex;
   flex-direction: column;
+  align-items: center; 
   width: 100%;
+  margin: 0;
 }
 
 .title-line1 {
-  align-self: flex-start;
-  padding-left: 120px;
+  
+  transform: translateX(-80px); 
 }
 
 .title-line2 {
-  align-self: flex-end;
-  margin-right: 244px;
+  transform: translateX(140px); 
   color: var(--text-white);
 }
 
-.symbol-font {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 40px;
-  vertical-align: super;
-  font-weight: 400;
-  margin-left: 5px;
-}
-
 .hero-cta {
-  width: 100%;
-  margin-top: 75px;
-  display: flex;
-  justify-content: flex-start;
-  padding-left: 65px; 
+  align-self: flex-start;
+  margin-top: 40px; 
+  transform: translateX(-75px); 
 }
 
 .btn-session {
@@ -279,8 +274,8 @@ header{
   height: 1px;
   background-color: var(--text-white);
   transform: scaleX(1);
-  transform-origin: left;
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: right; 
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
 }
 
 .btn-session:hover {
@@ -288,5 +283,159 @@ header{
 }
 
 .btn-session:hover::after {
+  transform: scaleX(0); 
   background-color: var(--accent-yellow-acid);
+}
+
+/* ========================================================= */
+/* TEXT DESCRIPTIV - STÂNGA JOS                              */
+/* ========================================================= */
+
+.hero-description {
+  position: absolute;
+  bottom: 60px; 
+  left: 60px;   
+  max-width: 420px; /* Am redus de la 420px. Acum va arăta ca un pătrat perfect echilibrat! */
+  z-index: 10;
+}
+
+.hero-description p {
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 16px; /* O idee mai vizibil */
+  font-weight: 500; /* Mai gros, pentru a nu fi "înghițit" de lumina galbenului */
+  line-height: 1.6; 
+  letter-spacing: 0.01em; 
+  color: var(--text-white);
+  opacity: 1; /* Opacitate aproape de maximum pentru claritate chirurgicală */
+  margin: 0;
+}
+
+/* ========================================================= */
+/* CURSOR ANIMAT PENTRU EFECTUL DE TYPEWRITER                */
+/* ========================================================= */
+
+.typing-cursor::after {
+  content: '|';
+  color: var(--text-white); 
+  margin-left: 4px;
+  animation: blinkCursor 0.8s step-end infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.hero-floating-showcase {
+  position: absolute;
+  bottom: 80px;
+  right: 60px;
+  width: 450px;
+  height: 350px; /* Spatiu pentru carduri */
+  z-index: 10;
+  pointer-events: none; /* Lasă click-urile să treacă dacă sunt elemente sub */
+}
+
+/* Stilul de bază al cardului (Glassmorphism) */
+.showcase-card {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 16px;
+  color: var(--text-white);
+  font-family: 'Space Grotesk', sans-serif;
+  pointer-events: auto; /* Permite interacțiunea cu cardurile */
+  
+  /* EFECTUL DE STICLĂ: Fundal transparent + Blur + Border fin */
+  background: rgba(255, 255, 255, 0.03); 
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  opacity: 0; /* Ascuns inițial pentru animație */
+  
+  /* Animații: Intrare + Plutire continuă */
+  animation: 
+    slideUpFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    floatCards 6s ease-in-out infinite;
+}
+
+/* --- Poziționarea individuală a cardurilor (Suprapuse elegant) --- */
+
+.card-design {
+  top: 0;
+  right: 80px;
+  width: max-content;
+  z-index: 12;
+  animation-delay: 0.2s, 0s; /* Întârziere intrare, nicio întârziere plutire */
+}
+
+.card-tech {
+  top: 100px;
+  right: 0;
+  width: max-content;
+  z-index: 13; /* Mai sus decât primul */
+  animation-delay: 0.5s, 1s; /* Decalăm animațiile */
+}
+
+.card-perf {
+  top: 210px;
+  right: 90px;
+  width: max-content;
+  z-index: 11; /* Mai jos */
+  animation-delay: 0.8s, 2s; /* Decalăm animațiile */
+}
+
+/* --- Detalii interne carduri --- */
+
+.card-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Accent pe iconița CSS3 */
+.icon-css {
+  background: rgba(239, 240, 82, 0.05); /* Galbenul tău acid cu transparență */
+  border: 1px solid rgba(239, 240, 82, 0.1);
+}
+
+.icon-css svg path {
+  fill: var(--accent-yellow-acid);
+}
+
+.card-content h4 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.card-content p {
+  font-size: 14px;
+  font-weight: 300;
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* --- KEYFRAMES PENTRU ANIMAȚIA DE PLUTIRE (FLOAT) --- */
+@keyframes floatCards {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(5px, 15px); } /* Se mișcă ușor jos-dreapta */
+  100% { transform: translate(0, 0); }
+}
+
+/* Păstrăm slideUpFade existent, doar ne asigurăm că face opacity: 1 la final */
+@keyframes slideUpFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
