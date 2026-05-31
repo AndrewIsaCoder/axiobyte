@@ -8,7 +8,7 @@
 
 :root {
     --bg-black: #050505;
-    --accent-yellow-acid: #eff052; 
+    --accent-orange-acid: #e36b2c; 
     --text-white: #ffffff;
     --text-gray: #94a3b8;
     --border-dark: #1e293b;
@@ -25,16 +25,18 @@ body {
     width: 100%;
     height: 100vh;
     scroll-snap-align: start;
-    position: relative; /* Esențial pentru poziționarea absolută din interior */
+    position: relative;
     overflow: hidden;
+    
+    /* Un gradient cald, de studio premium (Teracotă/Portocaliu Ars) */
     background: linear-gradient(
         180deg,
         #050505 0%,    
-        #1c1d07 25%,   
-        #494b0d 50%,   
-        #9fa31d 75%,   
-        #aeb11e 90%,   
-        #eff052 100%   
+        #1c0e0a 25%,   
+        #401b10 50%,   
+        #7d3419 75%,   
+        #b54f24 90%,   
+        #e36b2c 100%   
     );
 }
 
@@ -89,7 +91,7 @@ header{
 }
 
 .nav-links > li:not(.contact-information):not(.contact-info) a:hover {
-  color: var(--accent-yellow-acid);
+  color: var(--accent-orange-acid);
 }
 
 .nav-links > li:not(.contact-information):not(.contact-info) a:hover::after {
@@ -97,7 +99,7 @@ header{
 }
 
 .nav-links a:hover{
-  color: #eff052;
+  color: var(--accent-orange-acid);
 }
 
 .contact-information{
@@ -215,7 +217,7 @@ header{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: max-content; /* AICI e magia: cutia e fix cât cuvintele! */
+  width: max-content; 
   z-index: 5;
   display: flex;
   flex-direction: column;
@@ -225,7 +227,7 @@ header{
 
 .hero-center-title h1 {
   font-family: 'Oswald', sans-serif;
-  font-size: 140px; 
+  font-size: 120px; 
   font-weight: 700;
   line-height: 0.9;
   letter-spacing: -0.01em;
@@ -244,7 +246,7 @@ header{
 }
 
 .title-line2 {
-  transform: translateX(140px); 
+  transform: translateX(109px); 
   color: var(--text-white);
 }
 
@@ -279,12 +281,12 @@ header{
 }
 
 .btn-session:hover {
-  color: var(--accent-yellow-acid);
+  color: var(--accent-orange-acid);
 }
 
 .btn-session:hover::after {
   transform: scaleX(0); 
-  background-color: var(--accent-yellow-acid);
+  background-color: var(--accent-orange-acid);
 }
 
 /* ========================================================= */
@@ -295,18 +297,18 @@ header{
   position: absolute;
   bottom: 60px; 
   left: 60px;   
-  max-width: 420px; /* Am redus de la 420px. Acum va arăta ca un pătrat perfect echilibrat! */
+  max-width: 420px; 
   z-index: 10;
 }
 
 .hero-description p {
   font-family: 'Space Grotesk', sans-serif; 
-  font-size: 16px; /* O idee mai vizibil */
-  font-weight: 500; /* Mai gros, pentru a nu fi "înghițit" de lumina galbenului */
+  font-size: 16px; 
+  font-weight: 500; 
   line-height: 1.6; 
   letter-spacing: 0.01em; 
   color: var(--text-white);
-  opacity: 1; /* Opacitate aproape de maximum pentru claritate chirurgicală */
+  opacity: 1; 
   margin: 0;
 }
 
@@ -331,12 +333,12 @@ header{
   bottom: 80px;
   right: 60px;
   width: 450px;
-  height: 350px; /* Spatiu pentru carduri */
+  height: 350px; 
   z-index: 10;
-  pointer-events: none; /* Lasă click-urile să treacă dacă sunt elemente sub */
+  pointer-events: none; 
 }
 
-/* Stilul de bază al cardului (Glassmorphism) */
+
 .showcase-card {
   position: absolute;
   display: flex;
@@ -346,50 +348,49 @@ header{
   border-radius: 16px;
   color: var(--text-white);
   font-family: 'Space Grotesk', sans-serif;
-  pointer-events: auto; /* Permite interacțiunea cu cardurile */
+  pointer-events: auto; 
   
-  /* EFECTUL DE STICLĂ: Fundal transparent + Blur + Border fin */
   background: rgba(255, 255, 255, 0.03); 
   backdrop-filter: blur(12px) saturate(180%);
   -webkit-backdrop-filter: blur(12px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  opacity: 0; /* Ascuns inițial pentru animație */
+  opacity: 0; 
   
-  /* Animații: Intrare + Plutire continuă */
+  
   animation: 
     slideUpFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards,
     floatCards 6s ease-in-out infinite;
 }
 
-/* --- Poziționarea individuală a cardurilor (Suprapuse elegant) --- */
+
 
 .card-design {
   top: 0;
   right: 80px;
   width: max-content;
   z-index: 12;
-  animation-delay: 0.2s, 0s; /* Întârziere intrare, nicio întârziere plutire */
+  animation-delay: 0.2s, 0s; 
 }
 
 .card-tech {
   top: 100px;
   right: 0;
   width: max-content;
-  z-index: 13; /* Mai sus decât primul */
-  animation-delay: 0.5s, 1s; /* Decalăm animațiile */
+  z-index: 13; 
+  animation-delay: 0.5s, 1s; 
 }
 
 .card-perf {
   top: 210px;
   right: 90px;
   width: max-content;
-  z-index: 11; /* Mai jos */
-  animation-delay: 0.8s, 2s; /* Decalăm animațiile */
+  z-index: 11; 
+  animation-delay: 0.8s, 2s; 
 }
 
-/* --- Detalii interne carduri --- */
+
 
 .card-icon {
   display: flex;
@@ -402,14 +403,13 @@ header{
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Accent pe iconița CSS3 */
 .icon-css {
-  background: rgba(239, 240, 82, 0.05); /* Galbenul tău acid cu transparență */
+  background: rgba(239, 240, 82, 0.05); 
   border: 1px solid rgba(239, 240, 82, 0.1);
 }
 
 .icon-css svg path {
-  fill: var(--accent-yellow-acid);
+  fill: var(--accent-orange-acid);
 }
 
 .card-content h4 {
@@ -425,17 +425,53 @@ header{
   margin: 0;
 }
 
-/* --- KEYFRAMES PENTRU ANIMAȚIA DE PLUTIRE (FLOAT) --- */
 @keyframes floatCards {
   0% { transform: translate(0, 0); }
-  50% { transform: translate(5px, 15px); } /* Se mișcă ușor jos-dreapta */
+  50% { transform: translate(5px, 15px); } 
   100% { transform: translate(0, 0); }
 }
 
-/* Păstrăm slideUpFade existent, doar ne asigurăm că face opacity: 1 la final */
 @keyframes slideUpFade {
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
+/* ==========================================================================
+   HERO FLOATING SHOWCASE CARDS (TRUE PREMIUM GLASSMORPHISM)
+   ========================================================================== */
+
+.showcase-card {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 16px;
+  color: var(--text-white);
+  font-family: 'Space Grotesk', sans-serif;
+  pointer-events: auto; 
+  cursor: pointer;
+  
+
+  background: rgba(255, 255, 255, 0.03); 
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  
+
+  box-shadow: 0 30px 60px rgba(40, 15, 5, 0.35);
+  
+  opacity: 0; 
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  animation: 
+    slideUpFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    floatCards 6s ease-in-out infinite;
+}
+

@@ -26,9 +26,7 @@ function startAutoHover() {
     }, 1000); // Schimbă la fiecare 1 secunde
 }
 
-/**
- * Oprește animația fără a pierde indexul curent
- */
+
 function stopAutoHover() {
     clearInterval(autoHoverInterval);
     autoHoverInterval = null;
