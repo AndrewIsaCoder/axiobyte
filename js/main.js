@@ -61,3 +61,42 @@ if (descElement) {
     
     setTimeout(typeWriterEffect, 1000);
 }
+
+const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    orientation: 'vertical',
+    gestureOrientation: 'vertical',
+    smoothWheel: true,
+    wheelMultiplier: 1,
+    touchMultiplier: 2,
+    infinite: false,
+});
+
+function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+            // Dacă folosești Lenis, apelăm funcția sa nativă pentru scroll smooth
+            if (typeof lenis !== 'undefined') {
+                lenis.scrollTo(targetElement);
+            } else {
+                // Alternativă clasică dacă librăria nu este încărcată
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        }
+    });
+});

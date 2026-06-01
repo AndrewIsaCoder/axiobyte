@@ -9,6 +9,10 @@
     box-sizing: border-box;
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 :root {
     --bg-black: #050505;
     --accent-orange-acid: #e36b2c; 
@@ -329,4 +333,132 @@ header{
 @keyframes blinkCursor {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+/* ==========================================================================
+   7. MANIFEST SECTION (RECONSTRUCȚIE EDITORIALĂ PREMIUM)
+   ========================================================================== */
+
+#manifest {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #000000; 
+    padding: 180px 80px; /* Am mărit padding-ul lateral pentru mai multă respirație */
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.manifest-container {
+    width: 100%;
+    max-width: 1600px; /* Deschidem containerul ca să muște din margini */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.manifest-tag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    color: var(--accent-orange-acid);
+    position: relative;
+    padding-left: 30px;
+    text-transform: uppercase;
+}
+
+.manifest-tag::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 16px;
+    height: 1px;
+    background-color: var(--accent-orange-acid);
+}
+
+.manifest-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(54px, 6.5vw, 100px); 
+    font-weight: 700;
+    line-height: 1.15; /* REPARAT: Am dat aer textului ca să respire brutal */
+    letter-spacing: -0.01em;
+    color: var(--text-white);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+}
+
+.text-stroke {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.25);
+    transition: -webkit-text-stroke 0.4s ease;
+}
+
+.manifest-title:hover .text-stroke {
+    -webkit-text-stroke: 1px var(--accent-orange-acid);
+}
+
+
+.manifest-footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr; 
+    gap: 60px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 50px;
+}
+
+.manifest-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.meta-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.meta-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-white);
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+}
+
+.manifest-detail p {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px; 
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0;
+}
+
+/* ==========================================================================
+   LENIS SMOOTH SCROLL CORE STYLES
+   ========================================================================== */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  scroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
