@@ -159,3 +159,43 @@ if (headerElement && typeof lenis !== 'undefined') {
         }
     });
 }
+
+/* ==========================================================================
+   6. INTERACTIVE KINETIC SERVICES ACCORDION ENGINE (ULTRA-SMOOTH)
+   ========================================================================== */
+const accordionItems = document.querySelectorAll('.services-accordion-item');
+
+accordionItems.forEach(item => {
+    const trigger = item.querySelector('.accordion-trigger');
+    const content = item.querySelector('.accordion-content');
+    
+    // Inițializăm elementul marcat ca activ implicit la încărcarea paginii
+    if (item.classList.contains('active') && content) {
+        content.style.height = content.scrollHeight + 'px';
+    }
+
+    if (trigger && content) {
+        trigger.addEventListener('click', () => {
+            // Dacă utilizatorul apasă pe tab-ul deja deschis, nu facem nimic
+            if (item.classList.contains('active')) return;
+            
+            // Închidem fluid elementul deschis anterior
+            accordionItems.forEach(i => {
+                if (i.classList.contains('active')) {
+                    const activeContent = i.querySelector('.accordion-content');
+                    if (activeContent) activeContent.style.height = '0px';
+                    i.classList.remove('active');
+                }
+            });
+            
+            // Deschidem fluid elementul curent calculându-i înălțimea reală de randare
+            item.classList.add('active');
+            content.style.height = content.scrollHeight + 'px';
+            
+            // Notificăm motorul Lenis că structura paginii s-a extins pentru a recalcula scroll-ul cu inerție
+            if (typeof lenis !== 'undefined') {
+                setTimeout(() => { lenis.resize(); }, 150);
+            }
+        });
+    }
+});

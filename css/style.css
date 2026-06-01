@@ -645,3 +645,261 @@ header.scrolled {
         transform: translate3d(calc(-50% - 20px), 0, 0); /* Mutare exactă la jumătatea setului duplicat */
     }
 }
+
+
+/* ==========================================================================
+   9. SERVICES SECTION (EDITORIAL KINETIC ACCORDION - MASTER FINISHED)
+   ========================================================================== */
+
+#services {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #050505;
+    padding: 180px 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.services-wrapper {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    gap: 80px;
+}
+
+.services-sidebar {
+    width: 120px;
+}
+
+.services-side-tag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: -0.01em;
+    position: sticky;
+    top: 140px;
+    display: block;
+}
+
+.services-accordion-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.services-accordion-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 55px 0;
+    transition: border-color 0.5s ease;
+}
+
+.accordion-trigger {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Alinierea titlului cu iconița plus din capătul din dreapta */
+.trigger-headline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.accordion-trigger h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(48px, 5.5vw, 76px);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.25); /* Stare inactivă implicită */
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.acc-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    margin-right: 30px;
+    vertical-align: middle;
+    opacity: 0.5;
+}
+
+/* Iconița plus tehnică */
+.accordion-icon {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.25);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
+    will-change: transform;
+}
+
+.accordion-trigger .short-desc {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.2);
+    letter-spacing: -0.01em;
+    padding-left: 65px;
+    transition: color 0.5s ease;
+}
+
+/* --- REPARAT GLOBAL: HOVER PE ELEMENTELE INACTIVE --- */
+.services-accordion-item:not(.active):hover .accordion-trigger h2 {
+    color: rgba(255, 255, 255, 0.85); /* Devine alb pur strălucitor la hover, indicând interacțiune */
+}
+
+.services-accordion-item:not(.active):hover .accordion-icon {
+    color: rgba(255, 255, 255, 0.85);
+    transform: scale(1.1);
+}
+
+.services-accordion-item:not(.active):hover .short-desc {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* CONTAINERUL DINAMIC FLUID */
+.accordion-content {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: height 0.65s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- INTERACȚIUNI ELEMENT ACTIV --- */
+.services-accordion-item.active {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.services-accordion-item.active .accordion-trigger h2 {
+    color: var(--accent-orange-acid); 
+}
+
+/* Rotirea plusului la 45 grade pentru a deveni un 'x' chirurgical */
+.services-accordion-item.active .accordion-icon {
+    color: var(--accent-orange-acid);
+    transform: rotate(45deg) scale(1.05);
+}
+
+.services-accordion-item.active .accordion-trigger .short-desc {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.services-accordion-item.active .accordion-content {
+    opacity: 1;
+}
+
+.accordion-inner-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 100%;
+    padding-top: 40px;
+    padding-left: 65px;
+}
+
+.accordion-text-side {
+    max-width: 850px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    opacity: 0;
+    transform: translateY(15px);
+    will-change: transform, opacity;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+}
+
+.services-accordion-item.active .animate-text {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.accordion-text-side .main-pitch {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.capabilities-list h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+}
+
+.capabilities-list ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.capabilities-list li {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+/* Săgețile listei devin portocalii acid */
+.bullet {
+    color: var(--accent-orange-acid);
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+/* CAROUSEL MOCKUPS WITH INTERNAL PARALLAX */
+.accordion-visual-side {
+    width: 100%;
+    overflow: hidden;
+}
+
+.mockup-glide-carousel {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+}
+
+.mock-img-box {
+    flex: 1;
+    height: 360px;
+    overflow: hidden;
+    background-color: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    opacity: 0;
+    transform: translate3d(50px, 0, 0);
+    will-change: transform, opacity;
+    transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+}
+
+.mock-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.15); /* Spațiu masiv pentru mișcarea de parallax reactivă */
+    filter: brightness(0.85);
+    will-change: transform;
+    transition: filter 0.4s ease, transform 0.1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.services-accordion-item.active .animate-glide {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+.services-accordion-item.active .animate-glide:nth-child(1) { transition-delay: 0.08s; }
+.services-accordion-item.active .animate-glide:nth-child(2) { transition-delay: 0.16s; }
+.services-accordion-item.active .animate-glide:nth-child(3) { transition-delay: 0.24s; }
+
+.mock-img-box:hover img {
+    filter: brightness(1);
+}
