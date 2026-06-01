@@ -1,3 +1,6 @@
+/* ==========================================================================
+   1. SISTEM AUTO-HOVER MEMORABIL (SERVICES INDEX)
+   ========================================================================== */
 const servicesContainer = document.querySelector('.hero-services-index ul');
 const serviceItems = document.querySelectorAll('.hero-services-index li');
 
@@ -41,6 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
     startAutoHover();
 });
 
+/* ==========================================================================
+   2. EFECT DE TYPEWRITER (TASTATURĂ) 
+   ========================================================================== */
 const descElement = document.querySelector('.hero-description p');
 
 if (descElement) {
@@ -62,6 +68,9 @@ if (descElement) {
     setTimeout(typeWriterEffect, 1000);
 }
 
+/* ==========================================================================
+   3. INIȚIALIZARE LENIS (SMOOTH SCROLL CU INERȚIE)
+   ========================================================================== */
 const lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -90,3 +99,63 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+/* ==========================================================================
+   4. MOTOR PARALLAX GLOBAL RECTIV LA CURSOR (SMOOTH INTERACTIVE LERP)
+   ========================================================================== */
+const parallaxElements = document.querySelectorAll('.parallax-element');
+
+let mouseX = 0;
+let mouseY = 0;
+let targetX = 0;
+let targetY = 0;
+
+/* --- PANOUL TĂU DE CONTROL PENTRU MIȘCAREA SITE-ULUI --- */
+const easeFactor = 0.08;     // Fluiditate: Cu cât e mai mic (ex: 0.04), cu atât plutirea e mai leneșă și smooth
+const maxDeplasare = 20;    // Amplitudine: Distanța maximă în pixeli pe care o pot parcurge elementele
+
+window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX - window.innerWidth / 2;
+    mouseY = e.clientY - window.innerHeight / 2;
+});
+
+function animateParallax() {
+    targetX += (mouseX - targetX) * easeFactor;
+    targetY += (mouseY - targetY) * easeFactor;
+
+    parallaxElements.forEach(element => {
+        const speed = parseFloat(element.getAttribute('data-speed')) || 0.05;
+        
+        // Calculăm translația finală raportată la rezoluția ecranului și limita setată
+        const xTranslation = (targetX / (window.innerWidth / 2)) * maxDeplasare * (speed * 10);
+        const yTranslation = (targetY / (window.innerHeight / 2)) * maxDeplasare * (speed * 10);
+
+        if (element.classList.contains('hero-center-title')) {
+            element.style.transform = `translate(calc(-50% + ${xTranslation}px), calc(-50% + ${yTranslation}px))`;
+        } else {
+            element.style.transform = `translate3d(${xTranslation}px, ${yTranslation}px, 0)`;
+        }
+    });
+
+    requestAnimationFrame(animateParallax);
+}
+
+if (window.matchMedia('(min-width: 1024px)').matches) {
+    animateParallax();
+}
+
+/* ==========================================================================
+   5. DETECTARE SCROLL PENTRU NAVBAR GLASSMORPHISM
+   ========================================================================== */
+const headerElement = document.querySelector('header');
+
+if (headerElement && typeof lenis !== 'undefined') {
+    lenis.on('scroll', (e) => {
+        // Dacă scroll-ul trece de 20 de pixeli în jos, adăugăm clasa premium
+        if (e.scroll > 20) {
+            headerElement.classList.add('scrolled');
+        } else {
+            headerElement.classList.remove('scrolled');
+        }
+    });
+}

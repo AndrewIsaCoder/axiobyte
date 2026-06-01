@@ -38,6 +38,13 @@ body {
     background-color: var(--bg-black);
     color: var(--text-white);
     margin: 0;
+    overflow-x: hidden;
+}
+
+/* Adăugăm accelerare hardware pe tot site-ul pentru mișcarea fluidă a mouse-ului */
+.parallax-element {
+    will-change: transform;
+    transition: transform 0.1s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* ==========================================================================
@@ -61,19 +68,39 @@ body {
 }
 
 /* ==========================================================================
-   3. NAVIGATION HEADER
+   3. NAVIGATION HEADER (GLASSMORPHISM WITH SCROLL DETECT)
    ========================================================================== */
-header{
+header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 100;
   padding: 35px 60px;
-  background: transparent;
+  background: rgba(5, 5, 5, 0); /* Complet transparent la început */
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  
+  /* Tranziție ultra-smooth pentru toate proprietățile când prinde textura */
+  transition: padding 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.nav-links{
+/* Clasa activată din JS în momentul în care utilizatorul dă scroll în jos */
+header.scrolled {
+  padding: 20px 60px; /* Coboară fin înălțimea pentru un aer mai compact */
+  background-color: rgba(5, 5, 5, 0.65); /* Fundal închis semi-transparent */
+  backdrop-filter: blur(20px) saturate(160%); /* Efectul premium de sticlă mată */
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06); /* Linie fină chirurgicală */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Umbră discretă de adâncime */
+}
+
+.nav-links {
   font-family: 'Space Grotesk', sans-serif;
   display: flex;
   color: var(--text-white);
@@ -83,7 +110,7 @@ header{
   align-items: center;
 }
 
-.nav-links > li{
+.nav-links > li {
   margin-right: 40px;
 }
 
@@ -121,17 +148,17 @@ header{
   transform: scaleX(1);
 }
 
-.nav-links a:hover{
+.nav-links a:hover {
   color: var(--accent-orange-acid);
 }
 
-.contact-information{
+.contact-information {
   margin-left: auto;
   margin-right: auto;
   font-weight: 400;
 }
 
-.contact-information ul{
+.contact-information ul {
   display: flex;
   gap: 40px;
   list-style: none;
@@ -144,7 +171,7 @@ header{
   color: var(--text-white);
 }
 
-.contact-info{
+.contact-info {
   margin-left: auto;
 }
 
@@ -161,7 +188,7 @@ header{
   padding-bottom: 2px;
 }
 
-.contact-info a::after{
+.contact-info a::after {
   content: '';
   position: absolute;
   left: 0;
@@ -169,6 +196,10 @@ header{
   width: 100%;
   height: 1px;
   background-color: var(--text-white);
+}
+
+#gallery {
+    overflow-X: hidden; 
 }
 
 /* ==========================================================================
@@ -476,175 +507,141 @@ header{
 }
 
 /* ==========================================================================
-   8. GALLERY SECTION (ASIMMETRIC KINETIC GRID)
+   8. GALLERY SECTION (KINETIC CAROUSEL INFINITE TICKER)
    ========================================================================== */
-
 #gallery {
     width: 100%;
     min-height: 100vh;
     background-color: #000000;
-    padding: 140px 80px;
+    padding: 140px 0; /* Scoatere padding lateral pentru a rula din ecran în ecran */
     position: relative;
+    overflow: hidden;
 }
 
 .gallery-container {
     width: 100%;
-    max-width: 1600px;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    gap: 80px;
 }
 
-.gallery-header {
+.gallery-header-main {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding-bottom: 24px;
+    padding: 0 60px; /* Păstrăm padding doar pentru titlu */
 }
 
-.gallery-branding {
+.gallery-mini-tag {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 14px;
     font-weight: 400;
-    letter-spacing: -0.01em;
     color: var(--text-white);
     opacity: 0.8;
+    letter-spacing: -0.01em;
+    flex: 1;
 }
 
-.gallery-tag {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    color: var(--accent-orange-acid);
-    position: relative;
-    padding-left: 30px;
-    text-transform: uppercase;
-}
-
-.gallery-tag::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 16px;
-    height: 1px;
-    background-color: var(--accent-orange-acid);
-}
-
-/* Grila asimetrică complexă pe 3 coloane */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 40px;
-    width: 100%;
-}
-
-/* Proprietățile comune ale fiecărui card de proiect */
-.gallery-item {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    cursor: pointer;
-}
-
-/* Forțăm containerul imaginii să blocheze overflow-ul pentru zoom fluid */
-.gallery-image-wrapper {
-    width: 100%;
-    overflow: hidden;
-    background-color: #0b0b0b;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: border-color 0.4s ease;
-}
-
-.gallery-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    filter: grayscale(20%) brightness(0.9);
-    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
-}
-
-/* Ierarhia dimensiunilor pe baza gridului */
-.item-tall {
-    grid-column: 1 / 2;
-    grid-row: 1 / span 2;
-}
-
-.item-tall .gallery-image-wrapper {
-    height: 800px;
-}
-
-.item-standard {
-    grid-column: 2 / span 2;
-    grid-row: 1 / 2;
-}
-
-.item-standard .gallery-image-wrapper {
-    height: 380px;
-}
-
-.item-small {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-}
-
-.item-small .gallery-image-wrapper {
-    height: 380px;
-}
-
-.item-medium {
-    grid-column: 3 / 4;
-    grid-row: 2 / 3;
-}
-
-.item-medium .gallery-image-wrapper {
-    height: 380px;
-}
-
-/* Tipografia detaliilor de proiect */
-.project-info {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.project-category {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.4);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-}
-
-.project-name {
+.gallery-main-title {
     font-family: 'Oswald', sans-serif;
-    font-size: 24px;
-    font-weight: 500;
+    font-size: clamp(54px, 6vw, 85px);
+    font-weight: 700;
     color: var(--text-white);
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    transition: color 0.3s ease;
+    text-align: center;
+    line-height: 1;
+    flex: 2;
 }
 
-/* ==========================================================================
-   HOVER INTERACTIONS (CINEMATIC FOCUS)
-   ========================================================================== */
-
-.gallery-item:hover .gallery-image-wrapper {
-    border-color: rgba(255, 255, 255, 0.2);
+.header-space-filler {
+    flex: 1;
 }
 
-.gallery-item:hover .gallery-image-wrapper img {
-    transform: scale(1.04);
-    filter: grayscale(0%) brightness(1);
+/* Mecanica de Ticker Orizontal */
+.gallery-ticker-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
 }
 
-.gallery-item:hover .project-name {
+.gallery-ticker-track {
+    display: flex;
+    gap: 40px;
+    width: max-content;
+    animation: tickerRun 28s linear infinite; /* Rulare continuă non-stop */
+}
+
+/* Modificăm track-ul la hover ca să încetinească, oferind rafinament */
+.gallery-ticker-wrapper:hover .gallery-ticker-track {
+    animation-play-state: paused;
+}
+
+.gallery-card {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    cursor: pointer;
+    width: 420px; /* Lățime fixă uniformă pentru carusel */
+}
+
+.card-image-box {
+    width: 100%;
+    height: 480px; 
+    overflow: hidden;
+    background-color: #080808;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+}
+
+.card-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+    filter: brightness(0.8) grayscale(10%);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+}
+
+.card-meta-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0 4px;
+}
+
+.card-project-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-white);
+    letter-spacing: -0.01em;
+}
+
+.card-project-desc {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: -0.01em;
+}
+
+.gallery-card:hover .card-image-box img {
+    transform: scale(1.03);
+    filter: brightness(1) grayscale(0%);
+}
+
+.gallery-card:hover .card-project-title {
     color: var(--accent-orange-acid);
+}
+
+/* Animația CSS pură pentru mișcare infinită perfectă */
+@keyframes tickerRun {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(calc(-50% - 20px), 0, 0); /* Mutare exactă la jumătatea setului duplicat */
+    }
 }
