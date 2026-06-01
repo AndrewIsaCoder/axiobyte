@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Space+Grotesk:wght@300..700&display=swap');
 
 /* ==========================================================================
-   RESET & GLOBAL STYLES
+   1. GLOBAL RESET & LENIS INTERNALS
    ========================================================================== */
 *{
     margin: 0;
@@ -9,8 +9,20 @@
     box-sizing: border-box;
 }
 
-html{
-  scroll-behavior: smooth;
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  scroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 :root {
@@ -29,7 +41,7 @@ body {
 }
 
 /* ==========================================================================
-   HERO SECTION LAYOUT
+   2. HERO LAYOUT SECTION
    ========================================================================== */
 #hero {
     width: 100%;
@@ -49,7 +61,7 @@ body {
 }
 
 /* ==========================================================================
-   NAVIGATION HEADER
+   3. NAVIGATION HEADER
    ========================================================================== */
 header{
   position: fixed;
@@ -160,7 +172,7 @@ header{
 }
 
 /* ==========================================================================
-   SIDE SERVICES INDEX
+   4. HERO SERVICES INDEX
    ========================================================================== */
 .hero-services-index{
   position: absolute;
@@ -223,7 +235,7 @@ header{
 }
 
 /* ==========================================================================
-   HERO TYPOGRAPHY MAIN TITLE
+   5. HERO CENTER MAIN TYPOGRAPHY
    ========================================================================== */
 .hero-center-title {
   position: absolute;
@@ -302,7 +314,7 @@ header{
 }
 
 /* ==========================================================================
-   HERO PARAGRAPH DESCRIPTION
+   6. HERO PARAGRAPH DESCRIPTION
    ========================================================================== */
 .hero-description {
   position: absolute;
@@ -336,14 +348,13 @@ header{
 }
 
 /* ==========================================================================
-   7. MANIFEST SECTION (RECONSTRUCȚIE EDITORIALĂ PREMIUM)
+   7. MANIFEST SECTION EDITORIAL LAYOUT
    ========================================================================== */
-
 #manifest {
     width: 100%;
     min-height: 100vh;
     background-color: #000000; 
-    padding: 180px 80px; /* Am mărit padding-ul lateral pentru mai multă respirație */
+    padding: 180px 80px; 
     display: flex;
     align-items: center;
     position: relative;
@@ -351,11 +362,30 @@ header{
 
 .manifest-container {
     width: 100%;
-    max-width: 1600px; /* Deschidem containerul ca să muște din margini */
+    max-width: 1600px; 
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 80px;
+}
+
+.manifest-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 24px;
+    margin-bottom: 20px;
+}
+
+.manifest-branding {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text-white);
+    opacity: 0.8;
 }
 
 .manifest-tag {
@@ -366,7 +396,6 @@ header{
     color: var(--accent-orange-acid);
     position: relative;
     padding-left: 30px;
-    text-transform: uppercase;
 }
 
 .manifest-tag::before {
@@ -383,7 +412,7 @@ header{
     font-family: 'Oswald', sans-serif;
     font-size: clamp(54px, 6.5vw, 100px); 
     font-weight: 700;
-    line-height: 1.15; /* REPARAT: Am dat aer textului ca să respire brutal */
+    line-height: 1.15; 
     letter-spacing: -0.01em;
     color: var(--text-white);
     text-transform: uppercase;
@@ -400,7 +429,6 @@ header{
     -webkit-text-stroke: 1px var(--accent-orange-acid);
 }
 
-
 .manifest-footer-grid {
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr; 
@@ -415,12 +443,19 @@ header{
     gap: 10px;
 }
 
+.manifest-meta-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end; 
+    text-align: right;
+}
+
 .meta-label {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 11px;
     color: rgba(255, 255, 255, 0.3);
     letter-spacing: 0.1em;
-    text-transform: uppercase;
 }
 
 .meta-value {
@@ -441,24 +476,175 @@ header{
 }
 
 /* ==========================================================================
-   LENIS SMOOTH SCROLL CORE STYLES
+   8. GALLERY SECTION (ASIMMETRIC KINETIC GRID)
    ========================================================================== */
-html.lenis, html.lenis body {
-  height: auto;
+
+#gallery {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #000000;
+    padding: 140px 80px;
+    position: relative;
 }
 
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
+.gallery-container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
 }
 
-.lenis.lenis-smooth [data-lenis-prevent] {
-  scroll-behavior: contain;
+.gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 24px;
 }
 
-.lenis.lenis-stopped {
-  overflow: hidden;
+.gallery-branding {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text-white);
+    opacity: 0.8;
 }
 
-.lenis.lenis-scrolling iframe {
-  pointer-events: none;
+.gallery-tag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    color: var(--accent-orange-acid);
+    position: relative;
+    padding-left: 30px;
+    text-transform: uppercase;
+}
+
+.gallery-tag::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 16px;
+    height: 1px;
+    background-color: var(--accent-orange-acid);
+}
+
+/* Grila asimetrică complexă pe 3 coloane */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 40px;
+    width: 100%;
+}
+
+/* Proprietățile comune ale fiecărui card de proiect */
+.gallery-item {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    cursor: pointer;
+}
+
+/* Forțăm containerul imaginii să blocheze overflow-ul pentru zoom fluid */
+.gallery-image-wrapper {
+    width: 100%;
+    overflow: hidden;
+    background-color: #0b0b0b;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: border-color 0.4s ease;
+}
+
+.gallery-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(20%) brightness(0.9);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+}
+
+/* Ierarhia dimensiunilor pe baza gridului */
+.item-tall {
+    grid-column: 1 / 2;
+    grid-row: 1 / span 2;
+}
+
+.item-tall .gallery-image-wrapper {
+    height: 800px;
+}
+
+.item-standard {
+    grid-column: 2 / span 2;
+    grid-row: 1 / 2;
+}
+
+.item-standard .gallery-image-wrapper {
+    height: 380px;
+}
+
+.item-small {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+.item-small .gallery-image-wrapper {
+    height: 380px;
+}
+
+.item-medium {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+}
+
+.item-medium .gallery-image-wrapper {
+    height: 380px;
+}
+
+/* Tipografia detaliilor de proiect */
+.project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.project-category {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.project-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text-white);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    transition: color 0.3s ease;
+}
+
+/* ==========================================================================
+   HOVER INTERACTIONS (CINEMATIC FOCUS)
+   ========================================================================== */
+
+.gallery-item:hover .gallery-image-wrapper {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.gallery-item:hover .gallery-image-wrapper img {
+    transform: scale(1.04);
+    filter: grayscale(0%) brightness(1);
+}
+
+.gallery-item:hover .project-name {
+    color: var(--accent-orange-acid);
 }

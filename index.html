@@ -16,7 +16,7 @@
       <nav>
         <ul class="nav-links">
           <li><a href="#manifest">Studio</a></li>
-          <li><a href="">Work</a></li>
+          <li><a href="#gallery">Work</a></li>
           <li><a href="">Services</a></li>
           <li><a href="">Reviews</a></li>
           <div class="contact-information">
@@ -83,9 +83,11 @@
           </p>
         </div>
       </section>
+
       <section id="manifest">
         <div class="manifest-container">
           <div class="manifest-header">
+            <span class="manifest-branding">[Studio]</span>
             <span class="manifest-tag">ABOUT OUR CORE</span>
           </div>
 
@@ -111,11 +113,7 @@
                 </p>
               </div>
 
-              <!-- A treia coloană care echilibrează perfect colțul din dreapta ecranului -->
-              <div
-                class="manifest-meta"
-                style="align-items: flex-end; text-align: right"
-              >
+              <div class="manifest-meta-right">
                 <span class="meta-label">ORIGIN //</span>
                 <span class="meta-value"
                   >BUCHAREST, RO <br />
@@ -126,7 +124,72 @@
           </div>
         </div>
       </section>
+      <section id="gallery">
+        <div class="gallery-container">
+          <div class="gallery-header">
+            <span class="gallery-branding">[Selected Work]</span>
+            <span class="gallery-tag">CREATIVE ARCHIVE</span>
+          </div>
+
+          <div class="gallery-grid">
+            <div class="gallery-item item-tall">
+              <div class="gallery-image-wrapper">
+                <img
+                  src="./assets/marketing-ads-photos/chair-nature-ad.png"
+                  alt="Organic Form Chair"
+                />
+              </div>
+              <div class="project-info">
+                <span class="project-category">Visual Identity / Product</span>
+                <h3 class="project-name">Organic Forms</h3>
+              </div>
+            </div>
+
+            <div class="gallery-item item-standard">
+              <div class="gallery-image-wrapper">
+                <img
+                  src="./assets/marketing-ads-photos/notebook-ad.png"
+                  alt="Digital Minimalism Notebook"
+                />
+              </div>
+              <div class="project-info">
+                <span class="project-category"
+                  >Web Experience / Architecture</span
+                >
+                <h3 class="project-name">Digital Canvas</h3>
+              </div>
+            </div>
+
+            <div class="gallery-item item-small">
+              <div class="gallery-image-wrapper">
+                <img
+                  src="./assets/marketing-ads-photos/package-ad.png"
+                  alt="Premium Packaging"
+                />
+              </div>
+              <div class="project-info">
+                <span class="project-category">Packaging / Brand Strategy</span>
+                <h3 class="project-name">Tactile Lux</h3>
+              </div>
+            </div>
+
+            <div class="gallery-item item-medium">
+              <div class="gallery-image-wrapper">
+                <img
+                  src="./assets/marketing-ads-photos/girl-running-ad.png"
+                  alt="Kinetic Motion Campaign"
+                />
+              </div>
+              <div class="project-info">
+                <span class="project-category">Digital Campaign / Motion</span>
+                <h3 class="project-name">Kinetic Energy</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
+
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
     <script src="./js/main.js"></script>
   </body>

@@ -83,20 +83,10 @@ requestAnimationFrame(raf);
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-
         const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
-
         if (targetElement) {
-            // Dacă folosești Lenis, apelăm funcția sa nativă pentru scroll smooth
-            if (typeof lenis !== 'undefined') {
-                lenis.scrollTo(targetElement);
-            } else {
-                // Alternativă clasică dacă librăria nu este încărcată
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
+            lenis.scrollTo(targetElement);
         }
     });
 });
