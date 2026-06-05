@@ -905,14 +905,14 @@ header.scrolled {
 }
 
 /* ==========================================================================
-   12. TESTIMONIALS SECTION (DYNAMIC STACK DESIGN)
+   12. TESTIMONIALS SECTION (PREMIUM SYMMETRIC FINISH)
    ========================================================================== */
 
 #testimonials {
     width: 100%;
     min-height: 100vh;
     background-color: #050505;
-    padding: 160px 100px;
+    padding: 180px 100px; /* Aliniere master cu marginile din restul site-ului */
     display: flex;
     align-items: center;
     position: relative;
@@ -929,6 +929,7 @@ header.scrolled {
 
 .testimonials-sidebar {
     width: 120px;
+    flex-shrink: 0;
 }
 
 .testimonials-side-tag {
@@ -942,12 +943,15 @@ header.scrolled {
     display: block;
 }
 
-.testimonials-content {
+/* REPARAT: Container master central care controlează geometria rândurilor */
+.testimonials-main-content {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centralizare completă conform imaginii tale */
+    align-items: center;
     width: 100%;
-    text-align: center;
+    max-width: 950px; /* Strângem layout-ul ca să eliminăm spațiul mort pe monitoare mari */
+    margin: 0 auto;
+    padding-right: 120px; /* Compensează optic lățimea sidebar-ului din stânga pentru centrare perfectă */
 }
 
 .testimonials-main-title {
@@ -957,29 +961,29 @@ header.scrolled {
     color: var(--text-white);
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
     line-height: 1;
 }
 
-/* Flexbox pentru avatarele suprapuse stil Stripe */
 .testimonials-avatars-group {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 60px;
-    padding-left: 20px; /* Compensează marginile negative din stânga */
+    padding-left: 25px;
 }
 
+/* REPARAT: Am mărit dimensiunea cercurilor de la 70px la 80px pentru autoritate visuală */
 .avatar-item {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     overflow: hidden;
-    margin-left: -20px; /* Suprapunerea geometrică a cercurilor */
-    border: 3px solid #050505; /* Izolează avatarele între ele */
+    margin-left: -25px; /* Suprapunere mai strânsă, de revistă */
+    border: 4px solid #050505; 
     cursor: pointer;
-    background-color: #111;
-    filter: grayscale(100%) brightness(0.6); /* Inactiv element */
+    background-color: #0b0b0b;
+    filter: grayscale(100%) brightness(0.5);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
                 filter 0.3s ease, 
                 border-color 0.3s ease;
@@ -991,27 +995,25 @@ header.scrolled {
     object-fit: cover;
 }
 
-/* Starea activă a avatarului selectat */
 .avatar-item.active {
     filter: grayscale(0%) brightness(1);
-    transform: scale(1.15); /* Crește discret în relief */
-    border-color: var(--accent-orange-acid); /* Muchia portocalie acid */
-    z-index: 5; /* Îl scoate deasupra celorlalte */
+    transform: scale(1.15);
+    border-color: var(--accent-orange-acid);
+    z-index: 5;
 }
 
 .avatar-item:hover:not(.active) {
-    filter: grayscale(50%) brightness(0.8);
-    transform: translateY(-5px) scale(1.05);
+    filter: grayscale(30%) brightness(0.8);
+    transform: translateY(-4px) scale(1.05);
 }
 
-/* Cercul portocaliu cu +35 */
 .avatar-counter-badge {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background-color: var(--accent-orange-acid);
-    border: 3px solid #050505;
-    margin-left: -15px;
+    border: 4px solid #050505;
+    margin-left: -20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1026,36 +1028,35 @@ header.scrolled {
     letter-spacing: -0.01em;
 }
 
-/* Caseta textului editorial */
 .testimonial-display-box {
-    max-width: 750px;
+    width: 100%;
+    max-width: 800px; /* Blocăm textul citatului să nu se mai lățească obositor */
     display: flex;
     flex-direction: column;
-    gap: 35px;
-    min-height: 220px; /* Previne mișcarea bruscă a layout-ului la texte scurte/lungi */
+    gap: 40px;
+    min-height: 200px;
+    text-align: center;
 }
 
 .testimonial-quote-text {
-    font-family: 'Courier New', Courier, monospace; /* Tipografia brutalistă din poza ta */
-    font-size: 19px;
-    line-height: 1.65;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px; /* Mărit pentru impact editorial greu */
+    line-height: 1.7;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
-    will-change: transform, opacity;
     transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
 .testimonial-author-meta {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    will-change: transform, opacity;
-    transition: transform 0.4s ease, opacity 0.4s ease;
+    gap: 8px;
+    align-items: center;
 }
 
 .author-name {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 18px;
+    font-size: 19px;
     font-weight: 500;
     color: var(--text-white);
 }
@@ -1067,7 +1068,6 @@ header.scrolled {
     letter-spacing: -0.01em;
 }
 
-/* Clasa de animație trântită din JS la schimbare */
 .testimonial-fade-out {
     opacity: 0;
     transform: translateY(10px);
