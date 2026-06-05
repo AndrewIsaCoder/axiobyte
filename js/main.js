@@ -344,3 +344,33 @@ if (leadForm) {
         }
     });
 }
+
+/* ==========================================================================
+   9. INTERACTIVE INTERFACE: PROJECT PLANNER CHIPS ENGINE
+   ========================================================================== */
+const projectChips = document.querySelectorAll('.chip-item');
+const projectTypeInput = document.getElementById('selected-project-type');
+const budgetInput = document.getElementById('selected-budget');
+
+if (projectChips.length > 0) {
+    projectChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            const isBudget = chip.classList.contains('budget-chip');
+
+            if (isBudget) {
+                const siblingBudgetChips = document.querySelectorAll('.budget-chip');
+                siblingBudgetChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                
+                if (budgetInput) budgetInput.value = chip.getAttribute('data-value');
+            } else {
+                chip.classList.toggle('active');
+                
+
+                const activeProjectTypes = Array.from(document.querySelectorAll('.chip-item[data-type="project-type"].active'))
+                                                .map(c => c.getAttribute('data-value'));
+                if (projectTypeInput) projectTypeInput.value = activeProjectTypes.join(', ');
+            }
+        });
+    });
+}

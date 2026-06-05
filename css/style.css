@@ -1559,3 +1559,45 @@ header.scrolled {
     transform: translateY(-3px);
     box-shadow: 0 15px 40px rgba(255, 114, 55, 0.3);
 }
+
+/* --- STRUCTURA GRILĂ PENTRU CHIPS (BUTOANE DE SELECȚIE) --- */
+.project-chips-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+.chip-item {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 14px 24px;
+    border-radius: 30px; /* Formă perfectă de pastilă fluidă */
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover discret pe butoanele neselectate */
+.chip-item:hover:not(.active) {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
+}
+
+/* STAREA ACTIVĂ: Când clientul apasă pe opțiune, se aprinde Axiobyte-style */
+.chip-item.active {
+    background-color: rgba(255, 114, 55, 0.08); /* Glow interior portocaliu */
+    border-color: var(--accent-orange-acid); /* Muchia portocalie intensă */
+    color: var(--accent-orange-acid); /* Textul devine acid */
+    transform: scale(1.02);
+}
