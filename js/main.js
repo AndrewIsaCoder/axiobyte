@@ -199,3 +199,65 @@ accordionItems.forEach(item => {
         });
     }
 });
+
+/* ==========================================================================
+   7. DYNAMIC TESTIMONIALS ENGINE (STRIPE-STYLE)
+   ========================================================================== */
+const testimonialsData = [
+    {
+        quote: `"Our collaboration was smooth from start to finish. The team took time to understand our business goals, offered thoughtful creative solutions, and delivered a strong visual identity that truly reflects who we are."`,
+        name: "Daniel Moore",
+        role: "[Product Lead, Axis]"
+    },
+    {
+        quote: `"Axiobyte transformed our legacy web structure into an elite interactive app. Performance skyrocketed by 40%, and their attention to minimalist details is simply unmatched in eastern Europe."`,
+        name: "Marcus Vance",
+        role: "[CTO, Vellum Infratech]"
+    },
+    {
+        quote: `"Raw code combined with pure artistic direction. They do not work with basic templates—they build bulletproof custom software that positions your company as an elite premium leader."`,
+        name: "Elena Rostova",
+        role: "[Founder, Aurelia Lux]"
+    },
+    {
+        quote: `"From strategy to deployment, the execution was laser-focused on metrics and user retention. Axiobyte is not just a digital agency; they are your tech co-founders."`,
+        name: "Vasilică Gălușcă",
+        role: "[Managing Director, Apex Digital]"
+    }
+];
+
+const avatars = document.querySelectorAll('.avatar-item');
+const quoteText = document.querySelector('.testimonial-quote-text');
+const authorName = document.querySelector('.author-name');
+const authorRole = document.querySelector('.author-role');
+
+if (avatars.length > 0 && quoteText) {
+    avatars.forEach(avatar => {
+        avatar.addEventListener('click', () => {
+            if (avatar.classList.contains('active')) return;
+
+            const index = parseInt(avatar.getAttribute('data-index'));
+            const data = testimonialsData[index];
+
+            // Pasul 1: Trântim animația de retragere (fade-out)
+            quoteText.classList.add('testimonial-fade-out');
+            authorName.parentElement.classList.add('testimonial-fade-out');
+
+            // Pasul 2: După 300ms schimbăm datele în fundal și facem fade-in înapoi
+            setTimeout(() => {
+                // Schimbăm clasa activă pe avatare
+                avatars.forEach(av => av.classList.remove('active'));
+                avatar.classList.add('active');
+
+                // Înlocuim conținutul
+                quoteText.textContent = data.quote;
+                authorName.textContent = data.name;
+                authorRole.textContent = data.role;
+
+                // Eliminăm clasa ca textul să gliseze înapoi curat
+                quoteText.classList.remove('testimonial-fade-out');
+                authorName.parentElement.classList.remove('testimonial-fade-out');
+            }, 300);
+        });
+    });
+}
