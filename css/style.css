@@ -1388,3 +1388,174 @@ header.scrolled {
         transform: translate3d(-33.3333%, 0, 0); 
     }
 }
+
+/* ==========================================================================
+   13. TRANSFORM YOUR BRAND (PERFECT GRID ALIGNMENT)
+   ========================================================================== */
+
+#contact-sales {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #050505;
+    padding: 160px 100px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.contact-sales-container {
+    width: 100%;
+    max-width: 1500px; /* Grila ta master */
+    margin: 0 auto;
+    display: flex;
+    gap: 80px; /* Același spațiu structural inter-secțiuni */
+}
+
+/* Sidebar fix pentru etichetă */
+.contact-sales-sidebar {
+    width: 140px;
+    flex-shrink: 0;
+}
+
+.sales-side-tag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: -0.01em;
+    position: sticky;
+    top: 140px;
+    display: block;
+    white-space: nowrap;
+}
+
+/* Zona centrală de conținut a formularului */
+.contact-sales-main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-right: 140px; /* Compensează optic sidebar-ul pentru o centrare pură */
+}
+
+.contact-sales-header {
+    width: 100%;
+    max-width: 650px;
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+.sales-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(44px, 5vw, 68px);
+    font-weight: 700;
+    color: var(--text-white);
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+}
+
+.sales-subtitle {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+/* Formularul propriu-zis */
+.contact-form-wrapper {
+    width: 100%;
+    max-width: 650px;
+    position: relative;
+    z-index: 2;
+}
+
+.sales-radial-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 750px;
+    height: 750px;
+    background: radial-gradient(circle, rgba(255, 114, 55, 0.12) 0%, rgba(255, 114, 55, 0.02) 50%, rgba(255, 114, 55, 0) 75%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.sales-form {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.form-group label {
+    font-family: 'Courier New', Courier, monospace !important;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.sales-form input,
+.sales-form textarea {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    padding: 20px 24px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: var(--text-white);
+    outline: none;
+    transition: border-color 0.4s ease, background-color 0.4s ease;
+}
+
+.sales-form input:focus,
+.sales-form textarea:focus {
+    border-color: rgba(255, 114, 55, 0.5);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.sales-form textarea {
+    resize: none;
+}
+
+.btn-submit-sales {
+    width: 100%;
+    background-color: var(--accent-orange-acid);
+    border: none;
+    border-radius: 30px;
+    padding: 22px 0;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    margin-top: 10px;
+}
+
+.btn-submit-sales .btn-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: #050505;
+    letter-spacing: 0.02em;
+}
+
+.btn-submit-sales:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(255, 114, 55, 0.3);
+}

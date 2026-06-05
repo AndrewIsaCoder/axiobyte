@@ -302,3 +302,45 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 
 textElementsToReveal.forEach(el => revealObserver.observe(el));
+
+/* ==========================================================================
+   8. INTERACTIVE SALES FORM ENGINE & PULSE GLOW
+   ========================================================================== */
+const formInputs = document.querySelectorAll('.sales-form input, .sales-form textarea');
+const radialGlow = document.querySelector('.sales-radial-glow');
+const leadForm = document.getElementById('axiobyte-lead-form');
+
+if (formInputs.length > 0 && radialGlow) {
+    formInputs.forEach(input => {
+        // Când dă click să scrie, mărim glow-ul din spate ca o reacție chimică
+        input.addEventListener('focus', () => {
+            radialGlow.style.background = 'radial-gradient(circle, rgba(255, 114, 55, 0.14) 0%, rgba(255, 114, 55, 0) 65%)';
+        });
+
+        // Când iese din input, revenim la glow-ul discret de bază
+        input.addEventListener('blur', () => {
+            radialGlow.style.background = 'radial-gradient(circle, rgba(255, 114, 55, 0.08) 0%, rgba(255, 114, 55, 0) 65%)';
+        });
+    });
+}
+
+// Micro-interacțiune la trimiterea cu succes a mesajului
+if (leadForm) {
+    leadForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const submitBtn = leadForm.querySelector('.btn-submit-sales');
+        const btnText = submitBtn.querySelector('.btn-text');
+        
+        if (btnText) {
+            btnText.textContent = "Transmission successful.";
+            submitBtn.style.backgroundColor = "#ffffff";
+            btnText.style.color = "#050505";
+            leadForm.reset();
+            
+            setTimeout(() => {
+                btnText.textContent = "Send message";
+                submitBtn.style.backgroundColor = "var(--accent-orange-acid)";
+            }, 3000);
+        }
+    });
+}
