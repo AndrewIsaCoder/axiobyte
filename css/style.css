@@ -1601,3 +1601,420 @@ header.scrolled {
     color: var(--accent-orange-acid); /* Textul devine acid */
     transform: scale(1.02);
 }
+
+/* ==========================================================================
+   15. AXIOBYTE GLOBAL RESPONSIVE ENGINE (MOBILE-FIRST ADAPTATION)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   LAPTOPURI MICI ȘI TABLETE MARI (max-width: 1200px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1200px) {
+    /* Reducem padding-urile uriașe ca să dăm spațiu elementelor */
+    section {
+        padding: 120px 60px !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   TABLETE ȘI ECRANE MEDII (max-width: 1024px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    section {
+        padding: 100px 40px !important;
+    }
+
+    /* --- GLOBAL: SPARGEM GRILA SPLIT --- */
+    /* Toate secțiunile care aveau sidebar în stânga și conținut în dreapta trec pe o singură coloană */
+    .contact-sales-container,
+    .services-wrapper,
+    .hero-container { 
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    /* Sidebar-urile (cu tag-urile [Contact us], [Services]) se mută deasupra */
+    .contact-sales-sidebar,
+    .services-sidebar {
+        width: 100%;
+        position: relative;
+        top: 0;
+    }
+
+    .sales-side-tag,
+    .services-side-tag {
+        position: relative;
+        top: 0;
+        margin-bottom: 10px;
+        color: var(--accent-orange-acid); /* Accentuăm pe ecrane mici */
+    }
+
+    .contact-sales-main-content,
+    .services-main-content {
+        padding-right: 0;
+        max-width: 100%;
+    }
+
+    /* --- HERO SECTION REPAIR --- */
+    #hero {
+        align-items: center;
+        text-align: center; /* Centrăm totul pe tabletă/mobil pentru eleganță */
+    }
+
+    /* Ascundem temporar lista laterală de servicii pe mobil ca să nu aglomereze vizual */
+    .hero-services-index {
+        display: none; 
+    }
+
+    .hero-center-title {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-description {
+        width: 100%;
+        text-align: center;
+        padding-top: 30px;
+    }
+    
+    /* Adaptăm Glow-ul din fundal */
+    .sales-radial-glow {
+        width: 100vw;
+        height: 100vw;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   TELEFOANE MOBILE (max-width: 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    /* Aerisim site-ul extrem de bine pe laterale pentru degetele utilizatorilor */
+    section {
+        padding: 80px 20px !important;
+    }
+
+    /* --- TIPOGRAFIE: Ajustare Fluidă --- */
+    /* Titlurile nu mai au mărime fixă, ci depind de lățimea ecranului (vw) */
+    .title-line1, 
+    .title-line2 {
+        font-size: 13vw !important; 
+        display: block;
+        line-height: 1.1;
+    }
+
+    .sales-title {
+        font-size: 11vw !important;
+    }
+
+    .sales-subtitle,
+    .hero-description p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* --- BUTOANE ȘI CALL TO ACTION --- */
+    .hero-cta {
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .btn-session,
+    .btn-submit-sales {
+        width: 100%;
+        padding: 20px 0;
+        text-align: center;
+        display: block;
+    }
+
+    /* --- SERVICII (ACCORDION) --- */
+    .services-accordion-item {
+        padding: 20px 0;
+    }
+
+    /* Reducem distanța de hover pe mobil ca să nu pară un glitch la atingere */
+    .services-accordion-item:hover {
+        padding-left: 10px; 
+    }
+
+    /* --- CONFIGURATOR BUGET (CHIPS) PENTRU TOUCH --- */
+    .project-chips-grid {
+        gap: 10px;
+        justify-content: space-between; 
+    }
+
+    .chip-item {
+        padding: 14px 10px;
+        font-size: 12px;
+        flex-grow: 1; /* Se întind automat să umple spațiul */
+        text-align: center;
+        width: calc(50% - 10px); /* Punem câte două pastile pe rând */
+    }
+
+    /* --- FORMULAR CONTACT --- */
+    .sales-form {
+        gap: 20px;
+    }
+
+    .sales-form input,
+    .sales-form textarea {
+        padding: 16px 20px;
+        font-size: 14px;
+    }
+
+    /* --- DEZACTIVARE PARALLAX PE MOBIL PENTRU PERFORMANȚĂ --- */
+    /* Telefoanele se pot bloca la efecte complexe de scroll, așa că le oprim elegant */
+    .parallax-element {
+        transform: none !important;
+        transition: none !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   TELEFOANE FOARTE MICI (max-width: 480px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+    /* Forțăm opțiunile de buget să stea una sub alta pentru a nu strivi textul */
+    .chip-item {
+        width: 100%; 
+    }
+    
+    .title-line1, 
+    .title-line2 {
+        font-size: 15vw !important; 
+    }
+}
+
+/* ==========================================================================
+   15. AXIOBYTE MASTER RESPONSIVE ENGINE (MOBILE-FIRST ADAPTATION)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   TABLETE ȘI ECRANE MEDII (max-width: 1024px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    section { padding: 100px 40px !important; }
+
+    /* SPARGEM GRILA SPLIT: Sidebar-ul trece sus, conținutul dedesubt */
+    .services-wrapper, .testimonials-container, .contact-sales-container { 
+        flex-direction: column; 
+        gap: 40px; 
+    }
+
+    .services-sidebar, .testimonials-sidebar, .contact-sales-sidebar { width: 100%; }
+    .services-side-tag, .testimonials-side-tag, .sales-side-tag { 
+        position: relative; 
+        top: 0; 
+        color: var(--accent-orange-acid); 
+    }
+    
+    .testimonials-main-content, .contact-sales-main-content { padding-right: 0; }
+    .gallery-container { flex-direction: column; }
+    .gallery-header-main { padding: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   TELEFOANE MOBILE (max-width: 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    section { padding: 80px 20px !important; }
+
+    /* --- 1. HEADER & NAVIGAȚIE --- */
+    header { padding: 20px !important; }
+    .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px; }
+    .nav-links > li { margin-right: 0 !important; }
+    /* Ascundem detaliile de contact pe mobil pentru a face loc meniului */
+    .contact-information { display: none; } 
+
+    /* --- 2. HERO SECTION --- */
+    .hero-services-index { display: none; /* Prea aglomerat pentru mobil */ }
+    .hero-center-title { width: 100%; text-align: center; }
+    
+    /* Anulăm transform-urile de pe desktop și centrăm titlul */
+    .title-line1, .title-line2 { 
+        transform: none !important; 
+        font-size: 16vw !important; 
+        display: block; 
+    }
+    .hero-cta { transform: none !important; align-self: center; margin-top: 30px; }
+    
+    /* Mutăm descrierea central */
+    .hero-description { 
+        position: relative; 
+        bottom: auto; left: auto; 
+        margin: 50px auto 0; 
+        text-align: center; 
+        max-width: 100%; 
+    }
+
+    /* --- 3. MANIFEST --- */
+    .manifest-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .manifest-title { font-size: 10vw !important; }
+    .manifest-footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .manifest-meta-right { align-items: flex-start; text-align: left; }
+
+    /* --- 4. GALLERY --- */
+    .gallery-main-title { font-size: 12vw !important; text-align: left; }
+    .gallery-card { width: 280px; } /* Micșorăm cardurile din carusel */
+    .card-image-box { height: 320px; }
+
+    /* --- 5. CLIENTS TICKER --- */
+    .client-logo-card { width: 160px; height: 70px; padding: 10px 20px; }
+
+    /* --- 6. SERVICES ACCORDION --- */
+    .accordion-trigger h2 { font-size: 10vw !important; }
+    .accordion-inner-layout { padding-left: 0; gap: 30px; }
+    .services-accordion-item:hover { padding-left: 0; } /* Scoatem hover-ul de mișcare pe touch */
+    .mock-img-box { height: 220px; transform: none !important; }
+    .mockup-glide-carousel { flex-direction: column; } /* Pozele curg vertical */
+
+    /* --- 7. TESTIMONIALS --- */
+    .testimonials-main-title { font-size: 12vw !important; }
+    .testimonial-quote-text { font-size: 16px; line-height: 1.5; }
+    .avatar-item { width: 60px; height: 60px; }
+    .avatar-counter-badge { width: 60px; height: 60px; }
+
+    /* --- 8. CONTACT FORM & CHIPS --- */
+    .sales-title { font-size: 12vw !important; }
+    .sales-radial-glow { width: 100vw; height: 100vw; }
+    
+    /* Reorganizăm configuratorul să încapă degetele perfect pe pastile */
+    .project-chips-grid { gap: 8px; justify-content: center; }
+    .chip-item { 
+        width: calc(50% - 4px); /* 2 pastile pe rând */
+        padding: 12px 10px; 
+        font-size: 12px; 
+        text-align: center; 
+    }
+
+    .sales-form input, .sales-form textarea { padding: 16px; font-size: 14px; }
+    
+    /* OPRIRE PARALLAX PE MOBIL PENTRU PERFORMANȚĂ */
+    .parallax-element { transform: none !important; transition: none !important; }
+}
+
+/* --------------------------------------------------------------------------
+   TELEFOANE FOARTE MICI (max-width: 480px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+    .chip-item { width: 100%; } /* O singură pastilă pe rând dacă ecranul e super mic */
+    .nav-links > li { margin-bottom: 10px; }
+}
+
+/* ==========================================================================
+   15. AXIOBYTE MASTER RESPONSIVE ENGINE (MOBILE-FIRST ADAPTATION)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   TABLETE ȘI ECRANE MEDII (max-width: 1024px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    section { padding: 100px 40px !important; }
+
+    /* SPARGEM GRILA SPLIT: Sidebar-ul trece sus, conținutul dedesubt */
+    .services-wrapper, .testimonials-container, .contact-sales-container { 
+        flex-direction: column; 
+        gap: 40px; 
+    }
+
+    .services-sidebar, .testimonials-sidebar, .contact-sales-sidebar { width: 100%; }
+    .services-side-tag, .testimonials-side-tag, .sales-side-tag { 
+        position: relative; 
+        top: 0; 
+        color: var(--accent-orange-acid); 
+    }
+    
+    .testimonials-main-content, .contact-sales-main-content { padding-right: 0; }
+    .gallery-container { flex-direction: column; }
+    .gallery-header-main { padding: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   TELEFOANE MOBILE (max-width: 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    section { padding: 80px 20px !important; }
+
+    /* --- 1. HEADER & NAVIGAȚIE --- */
+    header { padding: 20px !important; }
+    .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px; }
+    .nav-links > li { margin-right: 0 !important; }
+    /* Ascundem detaliile de contact pe mobil pentru a face loc meniului */
+    .contact-information { display: none; } 
+
+    /* --- 2. HERO SECTION --- */
+    .hero-services-index { display: none; /* Prea aglomerat pentru mobil */ }
+    .hero-center-title { width: 100%; text-align: center; }
+    
+    /* Anulăm transform-urile de pe desktop și centrăm titlul */
+    .title-line1, .title-line2 { 
+        transform: none !important; 
+        font-size: 16vw !important; 
+        display: block; 
+    }
+    .hero-cta { transform: none !important; align-self: center; margin-top: 30px; }
+    
+    /* Mutăm descrierea central */
+    .hero-description { 
+        position: relative; 
+        bottom: auto; left: auto; 
+        margin: 50px auto 0; 
+        text-align: center; 
+        max-width: 100%; 
+    }
+
+    /* --- 3. MANIFEST --- */
+    .manifest-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .manifest-title { font-size: 10vw !important; }
+    .manifest-footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .manifest-meta-right { align-items: flex-start; text-align: left; }
+
+    /* --- 4. GALLERY --- */
+    .gallery-main-title { font-size: 12vw !important; text-align: left; }
+    .gallery-card { width: 280px; } /* Micșorăm cardurile din carusel */
+    .card-image-box { height: 320px; }
+
+    /* --- 5. CLIENTS TICKER --- */
+    .client-logo-card { width: 160px; height: 70px; padding: 10px 20px; }
+
+    /* --- 6. SERVICES ACCORDION --- */
+    .accordion-trigger h2 { font-size: 10vw !important; }
+    .accordion-inner-layout { padding-left: 0; gap: 30px; }
+    .services-accordion-item:hover { padding-left: 0; } /* Scoatem hover-ul de mișcare pe touch */
+    .mock-img-box { height: 220px; transform: none !important; }
+    .mockup-glide-carousel { flex-direction: column; } /* Pozele curg vertical */
+
+    /* --- 7. TESTIMONIALS --- */
+    .testimonials-main-title { font-size: 12vw !important; }
+    .testimonial-quote-text { font-size: 16px; line-height: 1.5; }
+    .avatar-item { width: 60px; height: 60px; }
+    .avatar-counter-badge { width: 60px; height: 60px; }
+
+    /* --- 8. CONTACT FORM & CHIPS --- */
+    .sales-title { font-size: 12vw !important; }
+    .sales-radial-glow { width: 100vw; height: 100vw; }
+    
+    /* Reorganizăm configuratorul să încapă degetele perfect pe pastile */
+    .project-chips-grid { gap: 8px; justify-content: center; }
+    .chip-item { 
+        width: calc(50% - 4px); /* 2 pastile pe rând */
+        padding: 12px 10px; 
+        font-size: 12px; 
+        text-align: center; 
+    }
+
+    .sales-form input, .sales-form textarea { padding: 16px; font-size: 14px; }
+    
+    /* OPRIRE PARALLAX PE MOBIL PENTRU PERFORMANȚĂ */
+    .parallax-element { transform: none !important; transition: none !important; }
+}
+
+/* --------------------------------------------------------------------------
+   TELEFOANE FOARTE MICI (max-width: 480px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+    .chip-item { width: 100%; } /* O singură pastilă pe rând dacă ecranul e super mic */
+    .nav-links > li { margin-bottom: 10px; }
+}
