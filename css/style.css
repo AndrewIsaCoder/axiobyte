@@ -1072,3 +1072,319 @@ header.scrolled {
     opacity: 0;
     transform: translateY(10px);
 }
+
+/* ==========================================================================
+   MASTER EDITORIAL GRID SYSTEM (LINIE VERTICALĂ RIGIDĂ 100% PERFECTĂ)
+   ========================================================================== */
+
+/* --- TOATE CONTAINERELE MASTER SUNT STRUCTURATE IDENTIC --- */
+.gallery-container,
+.services-wrapper,
+.testimonials-container {
+    width: 100%;
+    max-width: 1500px; /* Am stabilit o lățime master fixă unificată pentru tot site-ul */
+    margin: 0 auto;
+    display: flex;
+    gap: 60px; /* Distanța dintre etichetă și conținut este fix aceeași */
+}
+
+/* Modificăm structura gallery ca să folosească același layout pe două coloane */
+.gallery-container {
+    flex-direction: row; /* Trece în mod flex-row ca restul secțiunilor */
+}
+
+
+/* --- TOATE ETICHETELE/SIDEBAR-URILE DIN STÂNGA AU ACEEAȘI LĂȚIME FIXĂ --- */
+.gallery-header-main, /* În HTML, acest container ține tag-ul [Our works] */
+.services-sidebar,
+.testimonials-sidebar {
+    width: 140px; /* Lățime fixă generoasă ca să nu se spargă textul */
+    flex-shrink: 0;
+    display: block;
+}
+
+/* Forțăm tag-ul din interiorul galeriei să nu mai facă layout separat */
+.gallery-header-main {
+    margin-bottom: 0; /* Scoatem margin-bottom ca să nu decaleze rândurile */
+}
+
+
+/* --- TOATE TAG-URILE PROPRIU-ZISE ÎȘI PĂSTREAZĂ STYLING-UL DISCRET --- */
+.gallery-mini-tag,
+.services-side-tag,
+.testimonials-side-tag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: -0.01em;
+    position: sticky;
+    top: 140px;
+    display: block;
+    white-space: nowrap; /* Previne ruperea textului pe două rânduri */
+}
+
+
+/* --- TOATE ZONELE DE CONȚINUT DIN DREAPTA REZISTĂ PE ACEEAȘI LINIE MASTER --- */
+.gallery-ticker-wrapper,
+.services-accordion-list,
+.testimonials-main-content {
+    flex-grow: 1;
+    width: 100%;
+}
+
+/* --- REPARAT CHIRURGICAL TESTIMONIALS (FĂRĂ PADDING ASIMETRIC) --- */
+#testimonials {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #050505;
+    padding: 160px 80px; /* Padding global identic cu restul secțiunilor */
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.testimonials-main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 900px; /* Centrare curată a textului fără să afecteze structura din stânga */
+    margin: 0 auto;
+    padding-right: 0; /* ELIMINAT COMPLEMENT! Asta îți strica alinierea verticală! */
+}
+
+/* ==========================================================================
+   MASTER EDITORIAL GRID SYSTEM (REPARAT - CAROUSEL FIX)
+   ========================================================================== */
+
+/* --- TOATE CONTAINERELE MASTER REVIN LA STRUCTURA LOR CORECTĂ --- */
+.services-wrapper,
+.testimonials-container {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    display: flex;
+    gap: 80px; /* Gap constant */
+}
+
+/* REPARAT: Galeria revine la layout vertical ca să lase ticker-ul să ocupe 100% lățime screen */
+.gallery-container {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column; /* Forțează conținutul pe verticală */
+    gap: 50px;
+}
+
+/* REPARAT: Headerul galeriei folosește exact aceeași logică de aliniere pentru tag-ul din stânga */
+.gallery-header-main {
+    display: flex;
+    gap: 80px; /* Identic cu gap-ul de la servicii și testimoniale */
+    width: 100%;
+    align-items: flex-start;
+}
+
+
+/* --- ETICHETELE/SIDEBAR-URILE DIN STÂNGA AU ACEEAȘI LĂȚIME FIXĂ --- */
+.gallery-mini-tag,
+.services-sidebar,
+.testimonials-sidebar {
+    width: 140px; /* Aceeași lățime fixă chirurgicală peste tot */
+    flex-shrink: 0;
+}
+
+/* --- ALINIEREA TEXTELOR DE PROPRIU-ZISE DIN STÂNGA --- */
+.gallery-mini-tag,
+.services-side-tag,
+.testimonials-side-tag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: -0.01em;
+    position: sticky;
+    top: 140px;
+    display: block;
+    white-space: nowrap;
+}
+
+
+/* --- TITLUL DIN GALERIE ȘI RESTUL CONȚINUTULUI SE ALINIAZĂ DUPĂ TAG --- */
+.gallery-main-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(54px, 6vw, 85px);
+    font-weight: 700;
+    color: var(--text-white);
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1;
+}
+
+/* REPARAT: Ticker-ul se întinde acum pe tot ecranul, ignorând constrângerile de coloană flex */
+.gallery-ticker-wrapper {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+}
+
+/* --- ZONELE DE CONȚINUT DIN CELELALTE SECȚIUNI --- */
+.services-accordion-list,
+.testimonials-main-content {
+    flex-grow: 1;
+    width: 100%;
+}
+
+.testimonials-main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-right: 0;
+}
+
+.nav-links a {
+    position: relative;
+    padding: 6px 0;
+    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-links li:not(.contact-information):not(.contact-info) a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--accent-orange-acid);
+    transform: scaleX(0);
+    transform-origin: right; /* Pleacă spre dreapta */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-links li:not(.contact-information):not(.contact-info) a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left; /* Vine din stânga */
+}
+
+/* Starea ascunsă a textelor editoriale */
+.reveal-text-dynamic {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+    will-change: transform, opacity;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
+}
+
+/* Clasa aplicată din JS când textul intră în viewport */
+.reveal-text-dynamic.revealed {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+/* ==========================================================================
+   8.5 LAB TICKER SECTION (SINGLE ROW INFINITE DRAG)
+   ========================================================================== */
+
+#clients-ticker {
+    width: 100%;
+    background-color: #ececec; 
+    padding: 85px 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.clients-ticker-header {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 100px;
+    text-align: center;
+}
+
+.clients-ticker-header h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #111111;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.ticker-header-tag {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 400;
+    color: #666666;
+    margin-left: 10px;
+}
+
+.clients-marquee-container {
+    display: flex;
+    width: 100%;
+}
+
+.clients-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 30px; /* Am mărit spațiul dintre proiecte ca să respire frumos */
+}
+
+.client-logo-card {
+    width: 260px; /* Un pic mai late ca să încadreze perfect brandingul tău custom */
+    height: 100px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 35px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.client-logo-card img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%) brightness(0.2); 
+    opacity: 0.85;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.client-logo-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+}
+
+.client-logo-card:hover img {
+    opacity: 1;
+    filter: grayscale(0%) brightness(0); /* Rămâne un negru intens de branding industrial */
+}
+
+/* Animație fluidă de viteză medie, optimizată pentru citire */
+.row-left {
+    animation: marqueeLeftRun 45s linear infinite;
+}
+
+.clients-marquee-container:hover .clients-marquee-track {
+    animation-play-state: paused;
+}
+
+@keyframes marqueeLeftRun {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        /* Se mută la fix 1/3 din lungime deoarece avem 3 seturi identice de câte 3 proiecte */
+        transform: translate3d(-33.3333%, 0, 0); 
+    }
+}

@@ -261,3 +261,44 @@ if (avatars.length > 0 && quoteText) {
         });
     });
 }
+
+/* ==========================================================================
+   MAGNETIC BUTTONS ENGINE (PREMIUM TACTILE FEEDBACK)
+   ========================================================================== */
+const magneticButtons = document.querySelectorAll('.btn-session, .avatar-item');
+
+magneticButtons.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        // Împingem elementul discret cu 30% din distanța cursorului
+        btn.style.transform = `translate3d(${x * 0.3}px, ${y * 0.3}px, 0) scale(1.05)`;
+    });
+
+    btn.addEventListener('mouseleave', () => {
+        // Resetăm poziția când mouse-ul pleacă
+        btn.style.transform = `translate3d(0, 0, 0) scale(1)`;
+    });
+});
+
+/* ==========================================================================
+   INTERSECTION OBSERVER FOR TYPOGRAPHY REVEAL
+   ========================================================================== */
+const textElementsToReveal = document.querySelectorAll('.manifest-title, .services-title-main, .testimonials-main-title');
+
+textElementsToReveal.forEach(el => {
+    el.classList.add('reveal-text-dynamic');
+});
+
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target); // Animăm o singură dată pentru eleganță
+        }
+    });
+}, { threshold: 0.15 });
+
+textElementsToReveal.forEach(el => revealObserver.observe(el));
