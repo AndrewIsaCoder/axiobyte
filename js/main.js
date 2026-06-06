@@ -3,12 +3,15 @@
    ========================================================================== */
 const servicesContainer = document.querySelector('.hero-services-index ul');
 const serviceItems = document.querySelectorAll('.hero-services-index li');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+const isDesktopScreen = window.matchMedia('(min-width: 1024px)').matches;
 
 let currentIndex = 2; 
 let autoHoverInterval = null;
 
 function startAutoHover() {
-    if (autoHoverInterval) return;
+    if (autoHoverInterval || isTouchDevice || serviceItems.length === 0) return;
 
     autoHoverInterval = setInterval(() => {
         serviceItems[currentIndex].classList.remove('active');
@@ -41,7 +44,7 @@ if (servicesContainer) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    startAutoHover();
+    if (!isTouchDevice) startAutoHover();
 });
 
 /* ==========================================================================
@@ -51,43 +54,51 @@ const descElement = document.querySelector('.hero-description p');
 
 if (descElement) {
     const fullText = descElement.textContent.trim();
-    descElement.textContent = '';
-    descElement.classList.add('typing-cursor');
-
-    let charIndex = 0;
-    const typingSpeed = 40; 
-
-    function typeWriterEffect() {
-        if (charIndex < fullText.length) {
-            descElement.textContent += fullText.charAt(charIndex);
-            charIndex++;
-            setTimeout(typeWriterEffect, typingSpeed);
-        }
-    }
     
-    setTimeout(typeWriterEffect, 1000);
+    if (prefersReducedMotion || isTouchDevice) {
+        descElement.textContent = fullText;
+    } else {
+        descElement.textContent = '';
+        descElement.classList.add('typing-cursor');
+
+        let charIndex = 0;
+        const typingSpeed = 40; 
+
+        function typeWriterEffect() {
+            if (charIndex < fullText.length) {
+                descElement.textContent += fullText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriterEffect, typingSpeed);
+            }
+        }
+        
+        setTimeout(typeWriterEffect, 1000);
+    }
 }
 
 /* ==========================================================================
    3. INIȚIALIZARE LENIS (SMOOTH SCROLL CU INERȚIE)
    ========================================================================== */
-const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    orientation: 'vertical',
-    gestureOrientation: 'vertical',
-    smoothWheel: true,
-    wheelMultiplier: 1,
-    touchMultiplier: 2,
-    infinite: false,
-});
+const lenis = typeof Lenis === 'function'
+    ? new Lenis({
+        duration: prefersReducedMotion ? 0 : 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: !isTouchDevice && !prefersReducedMotion,
+        wheelMultiplier: 1,
+        touchMultiplier: 1.1,
+        infinite: false,
+    })
+    : null;
 
 function raf(time) {
+    if (!lenis) return;
     lenis.raf(time);
     requestAnimationFrame(raf);
 }
 
-requestAnimationFrame(raf);
+if (lenis) requestAnimationFrame(raf);
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -95,7 +106,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
-            lenis.scrollTo(targetElement);
+            if (lenis) {
+                lenis.scrollTo(targetElement);
+            } else {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
     });
 });
@@ -140,7 +155,7 @@ function animateParallax() {
     requestAnimationFrame(animateParallax);
 }
 
-if (window.matchMedia('(min-width: 1024px)').matches) {
+if (isDesktopScreen && !isTouchDevice && !prefersReducedMotion) {
     animateParallax();
 }
 
@@ -149,7 +164,7 @@ if (window.matchMedia('(min-width: 1024px)').matches) {
    ========================================================================== */
 const headerElement = document.querySelector('header');
 
-if (headerElement && typeof lenis !== 'undefined') {
+if (headerElement && lenis) {
     lenis.on('scroll', (e) => {
         // Dacă scroll-ul trece de 20 de pixeli în jos, adăugăm clasa premium
         if (e.scroll > 20) {
@@ -193,7 +208,7 @@ accordionItems.forEach(item => {
             content.style.height = content.scrollHeight + 'px';
             
             // Notificăm motorul Lenis că structura paginii s-a extins pentru a recalcula scroll-ul cu inerție
-            if (typeof lenis !== 'undefined') {
+            if (lenis) {
                 setTimeout(() => { lenis.resize(); }, 150);
             }
         });
@@ -267,21 +282,23 @@ if (avatars.length > 0 && quoteText) {
    ========================================================================== */
 const magneticButtons = document.querySelectorAll('.btn-session, .avatar-item');
 
-magneticButtons.forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
+if (!isTouchDevice && !prefersReducedMotion) {
+    magneticButtons.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
 
-        // Împingem elementul discret cu 30% din distanța cursorului
-        btn.style.transform = `translate3d(${x * 0.3}px, ${y * 0.3}px, 0) scale(1.05)`;
-    });
+            // Împingem elementul discret cu 30% din distanța cursorului
+            btn.style.transform = `translate3d(${x * 0.3}px, ${y * 0.3}px, 0) scale(1.05)`;
+        });
 
-    btn.addEventListener('mouseleave', () => {
-        // Resetăm poziția când mouse-ul pleacă
-        btn.style.transform = `translate3d(0, 0, 0) scale(1)`;
+        btn.addEventListener('mouseleave', () => {
+            // Resetăm poziția când mouse-ul pleacă
+            btn.style.transform = `translate3d(0, 0, 0) scale(1)`;
+        });
     });
-});
+}
 
 /* ==========================================================================
    INTERSECTION OBSERVER FOR TYPOGRAPHY REVEAL
@@ -292,16 +309,20 @@ textElementsToReveal.forEach(el => {
     el.classList.add('reveal-text-dynamic');
 });
 
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            revealObserver.unobserve(entry.target); // Animăm o singură dată pentru eleganță
-        }
-    });
-}, { threshold: 0.15 });
+if (prefersReducedMotion) {
+    textElementsToReveal.forEach(el => el.classList.add('revealed'));
+} else {
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                revealObserver.unobserve(entry.target); // Animăm o singură dată pentru eleganță
+            }
+        });
+    }, { threshold: 0.15 });
 
-textElementsToReveal.forEach(el => revealObserver.observe(el));
+    textElementsToReveal.forEach(el => revealObserver.observe(el));
+}
 
 /* ==========================================================================
    8. INTERACTIVE SALES FORM ENGINE & PULSE GLOW
