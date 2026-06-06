@@ -374,3 +374,35 @@ if (projectChips.length > 0) {
         });
     });
 }
+
+/* ==========================================================================
+   10. MOBILE HAMBURGER MENU ENGINE
+   ========================================================================== */
+const hamburgerBtn = document.getElementById('hamburger-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+if (hamburgerBtn && mobileMenu) {
+    hamburgerBtn.addEventListener('click', () => {
+        hamburgerBtn.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close menu when a link is clicked
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            hamburgerBtn.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+            
+            if (targetElement && typeof lenis !== 'undefined') {
+                setTimeout(() => { lenis.scrollTo(targetElement); }, 300);
+            }
+        });
+    });
+}
