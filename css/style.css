@@ -2672,3 +2672,29 @@ header.scrolled {
     0%, 100% { transform: translateY(-3px); opacity: 0.4; }
     50% { transform: translateY(3px); opacity: 1; }
 }
+
+/* ==========================================================================
+   NUKE ANTI-BUG: ELIMINĂ COMPLET ORICE URMĂ DE PREVIEW VECHI
+   ========================================================================== */
+img[alt*="Service Preview"], 
+.hero-services-image-preview,
+[class*="image-preview"] {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* ==========================================================================
+   ANIMAȚIE INTERACTIVĂ: MAGNETIC AVATARS GRID (TESTIMONIALS COMPONENT)
+   ========================================================================== */
+.avatar-item {
+    display: inline-block; /* */
+    will-change: transform;
+    /* Tranziție elastică pe transformare când mouse-ul părăsește avatarul */
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+}
+
+.avatar-item img {
+    pointer-events: none; /* Mouse-ul trebuie să detecteze div-ul părinte, nu imaginea din el */
+}
