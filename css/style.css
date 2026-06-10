@@ -2732,3 +2732,42 @@ img[alt*="Service Preview"],
 .reveal-type.animated .reveal-word-inner {
     transform: translate3d(0, 0, 0); /* Tragem textul în sus la poziția lui nativă */
 }
+
+/* ==========================================================================
+   AXIOBYTE SCROLL REVEAL ENGINE // PRODUCTION SPEC
+   ========================================================================== */
+
+/* Regula de bază: ascunde elementul și activează memoria GPU */
+.scroll-reveal {
+    opacity: 0;
+    will-change: transform, opacity;
+    /* Tranziție lungă, catifelată și extrem de fluidă */
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Varianta A: Ridicare lină din podea (Perfect pentru texte și blocuri) */
+.reveal-up {
+    transform: translate3d(0, 50px, 0);
+}
+
+/* Varianta B: Pop-in fluid cu scalare (Perfect pentru imagini, carduri, mockup-uri) */
+.reveal-scale {
+    transform: scale(0.94) translate3d(0, 20px, 0);
+}
+
+/* Varianta C: Intrare glisată din stânga */
+.reveal-left {
+    transform: translate3d(-40px, 0, 0);
+}
+
+/* Varianta D: Intrare glisată din dreapta */
+.reveal-right {
+    transform: translate3d(40px, 0, 0);
+}
+
+/* STAREA ACTIVATĂ DIGITAL: Elementul revine perfect la coordonatele native 1:1 */
+.scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+}

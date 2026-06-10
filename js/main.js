@@ -895,3 +895,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 })();
+
+/* ==========================================================================
+   ENGINE: AUTOMATED INTERSECTION OBSERVER FOR SCROLL REVEAL
+   ========================================================================== */
+(function() {
+    document.addEventListener('DOMContentLoaded', () => {
+        const revealElements = document.querySelectorAll('.scroll-reveal');
+        
+        if (revealElements.length === 0) return;
+
+        // Configurăm marginea de declanșare (-80px în podea ca să nu apară chiar pe buza ecranului)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -80px 0px',
+            threshold: 0.1
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    
+                    // Citim dacă elementul are setat un delay custom în HTML
+                    const customDelay = element.getAttribute('data-delay') || 0;
+
+                    // Declanșăm animația cu micro-decalajul setat
+                    setTimeout(() => {
+                        element.classList.add('is-revealed');
+                    }, parseInt(customDelay));
+
+                    // Oprim monitorizarea pentru acest element (rămâne fixat pe ecran)
+                    observer.unobserve(element);
+                }
+            });
+        }, observerOptions);
+
+        // Mapăm motorul pe toate elementele selectate
+        revealElements.forEach(el => revealObserver.observe(el));
+    });
+})();
