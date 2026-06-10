@@ -12,6 +12,19 @@
     />
   </head>
   <body>
+    <div id="axiobyte-preloader">
+      <div class="preloader-content">
+        <div class="preloader-brand">AXIOBYTE®</div>
+        <div class="preloader-counter">
+          <span id="loader-percentage">00</span>%
+        </div>
+      </div>
+      <div class="preloader-bar"></div>
+    </div>
+
+    <div class="custom-cursor-dot"></div>
+    <div class="custom-cursor-outline"></div>
+
     <header>
       <nav>
         <ul class="nav-links">
@@ -61,32 +74,42 @@
         <div class="hero-services-index parallax-element" data-speed="0.04">
           <ul>
             <li>
-              <a href="#strategy"><span class="num">01</span> Brand Strategy</a>
+              <a href="#service-strategy" data-image="./assets/marketing-ads-photos/package-ad.png">
+                <span class="num">01</span> Brand Strategy
+              </a>
             </li>
             <li>
-              <a href="#identity"
-                ><span class="num">02</span> Visual Identity</a
-              >
+              <a href="#service-identity" data-image="./assets/marketing-ads-photos/notebook-ad.png">
+                <span class="num">02</span> Visual Identity
+              </a>
             </li>
             <li class="active">
-              <a href="#manifest"
-                ><span class="num">03</span> Web Experiences</a
-              >
+              <a href="#service-web" data-image="./assets/marketing-ads-photos/chair-nature-ad.png">
+                <span class="num">03</span> Web Experiences
+              </a>
             </li>
             <li>
-              <a href="#uiux"><span class="num">04</span> UI/UX Design</a>
+              <a href="#service-uiux" data-image="./assets/marketing-ads-photos/girl-running-ad.png">
+                <span class="num">04</span> UI/UX Design
+              </a>
             </li>
             <li>
-              <a href="#campaigns"
-                ><span class="num">05</span> Digital Campaigns</a
-              >
+              <a href="#service-campaigns" data-image="./assets/marketing-ads-photos/package-ad.png">
+                <span class="num">05</span> Digital Campaigns
+              </a>
             </li>
             <li>
-              <a href="#native"
-                ><span class="num">06</span> Native App Development</a
-              >
+              <a href="#service-native" data-image="./assets/marketing-ads-photos/notebook-ad.png">
+                <span class="num">06</span> Native App Development
+              </a>
             </li>
           </ul>
+        </div>
+</section>
+
+          <div class="hero-services-image-preview">
+            <img src="" alt="Service Preview" />
+          </div>
         </div>
 
         <div class="hero-center-title parallax-element" data-speed="0.08">
@@ -95,7 +118,7 @@
             <span class="title-line2">STUDIO</span>
           </h1>
           <div class="hero-cta">
-            <a href="" class="btn-session">Request a session</a>
+            <a href="#contact-sales" class="btn-session">Request a session</a>
           </div>
         </div>
 
@@ -106,6 +129,17 @@
             we help companies stand out, communicate their values, and grow with
             confidence in a fast-changing world.
           </p>
+        </div>
+        <div class="axiobyte-scroll-stamp">
+          <div class="stamp-pointer">↓</div>
+          <svg viewBox="0 0 100 100" class="stamp-svg">
+            <path id="circlePath" d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" />
+            <text class="stamp-text">
+              <textPath href="#circlePath">
+                • AXIOBYTE STUDIO • SCROLL TO EXPLORE •
+              </textPath>
+            </text>
+          </svg>
         </div>
       </section>
 
@@ -360,8 +394,7 @@
           </div>
 
           <div class="services-accordion-list">
-            <!-- SERVICIUL 01: BRAND STRATEGY -->
-            <div class="services-accordion-item">
+            <div id="service-strategy" class="services-accordion-item">
               <div class="accordion-trigger">
                 <div class="trigger-headline">
                   <h2><span class="acc-num">01</span> BRAND STRATEGY</h2>
@@ -434,8 +467,7 @@
               </div>
             </div>
 
-            <!-- SERVICIUL 02: VISUAL IDENTITY -->
-            <div class="services-accordion-item">
+            <div id="service-identity" class="services-accordion-item">
               <div class="accordion-trigger">
                 <div class="trigger-headline">
                   <h2><span class="acc-num">02</span> VISUAL IDENTITY</h2>
@@ -508,8 +540,7 @@
               </div>
             </div>
 
-            <!-- SERVICIUL 03: WEB EXPERIENCES (Activ implicit) -->
-            <div class="services-accordion-item active">
+            <div id="service-web" class="services-accordion-item active">
               <div class="accordion-trigger">
                 <div class="trigger-headline">
                   <h2><span class="acc-num">03</span> WEB EXPERIENCES</h2>
@@ -584,8 +615,7 @@
               </div>
             </div>
 
-            <!-- SERVICIUL 04: UI/UX DESIGN -->
-            <div class="services-accordion-item">
+            <div id="service-uiux" class="services-accordion-item">
               <div class="accordion-trigger">
                 <div class="trigger-headline">
                   <h2><span class="acc-num">04</span> UI/UX DESIGN</h2>
@@ -659,8 +689,7 @@
               </div>
             </div>
 
-            <!-- SERVICIUL 05: DIGITAL CAMPAIGNS -->
-            <div class="services-accordion-item">
+            <div id="service-campaigns" class="services-accordion-item">
               <div class="accordion-trigger">
                 <div class="trigger-headline">
                   <h2><span class="acc-num">05</span> DIGITAL CAMPAIGNS</h2>
@@ -733,8 +762,7 @@
               </div>
             </div>
 
-            <!-- SERVICIUL 06: NATIVE APP DEVELOPMENT -->
-            <div class="services-accordion-item">
+            <div id="service-native" class="services-accordion-item">
               <div class="accordion-trigger">
                 <div class="trigger-headline">
                   <h2>

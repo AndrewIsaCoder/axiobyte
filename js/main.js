@@ -1,4 +1,73 @@
 /* ==========================================================================
+   ANIMAȚIE INTERACTIVĂ: CUSTOM CURSOR ENGINE (HOVER & CLICK DETECT)
+   ========================================================================== */
+const cursorDot = document.querySelector('.custom-cursor-dot');
+const cursorOutline = document.querySelector('.custom-cursor-outline');
+
+if (cursorDot && cursorOutline) {
+    // 1. Urmărirea poziției mouse-ului în timp real
+    window.addEventListener('mousemove', (e) => {
+        cursorDot.style.left = e.clientX + 'px';
+        cursorDot.style.top = e.clientY + 'px';
+        
+        cursorOutline.style.left = e.clientX + 'px';
+        cursorOutline.style.top = e.clientY + 'px';
+    });
+
+    // 2. Efectul de CLICK pe toată pagina
+    window.addEventListener('mousedown', () => {
+        cursorOutline.classList.add('cursor-click');
+    });
+    
+    window.addEventListener('mouseup', () => {
+        cursorOutline.classList.remove('cursor-click');
+    });
+
+
+    const refreshHoverTargets = () => {
+        const targets = document.querySelectorAll('a, button, .chip-item, .avatar-item, .accordion-trigger, input, textarea');
+        
+        targets.forEach(target => {
+
+            target.removeEventListener('mouseenter', addHover);
+            target.removeEventListener('mouseleave', removeHover);
+            
+            target.addEventListener('mouseenter', addHover);
+            target.addEventListener('mouseleave', removeHover);
+        });
+    };
+
+    function addHover() {
+        cursorOutline.classList.add('cursor-hover');
+        cursorDot.classList.add('cursor-hover');
+    }
+
+    function removeHover() {
+        cursorOutline.classList.remove('cursor-hover');
+        cursorDot.classList.remove('cursor-hover');
+    }
+
+
+    refreshHoverTargets();
+    
+
+}
+
+    const refreshHoverTargets = () => {
+        const targets = document.querySelectorAll(
+            'a, button, .chip-item, .avatar-item, .accordion-trigger, .gallery-card, .client-logo-card, input, textarea'
+        );
+        
+        targets.forEach(target => {
+            target.removeEventListener('mouseenter', addHover);
+            target.removeEventListener('mouseleave', removeHover);
+            
+            target.addEventListener('mouseenter', addHover);
+            target.addEventListener('mouseleave', removeHover);
+        });
+    };
+
+/* ==========================================================================
    1. SISTEM AUTO-HOVER MEMORABIL (SERVICES INDEX)
    ========================================================================== */
 const servicesContainer = document.querySelector('.hero-services-index ul');
@@ -389,7 +458,6 @@ if (hamburgerBtn && mobileMenu) {
         document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
     });
 
-    // Close menu when a link is clicked
     mobileMenuLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -406,3 +474,234 @@ if (hamburgerBtn && mobileMenu) {
         });
     });
 }
+
+/* ==========================================================================
+   AXIOBYTE CINEMATIC PRELOADER ENGINE // SECURED & ISOLATED
+   ========================================================================== */
+(function() {
+    // Forțăm oprirea scroll-ului instantaneu, chiar înainte de citirea completă a paginii
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const preloader = document.getElementById('axiobyte-preloader');
+        const percentText = document.getElementById('loader-percentage');
+        const progressBar = document.querySelector('.preloader-bar');
+        
+        if (!preloader || !percentText) {
+            // FAILING SAFE: Dacă elementele nu există în HTML, dăm drumul la scroll direct
+            document.documentElement.style.overflow = '';
+            document.body.style.overflow = '';
+            return;
+        }
+
+        let currentPercent = 0;
+
+        // FUNCȚIA MASTER DE RIDICARE A CORTINEI
+        const removePreloader = () => {
+            preloader.classList.add('loaded');
+            // Redăm scroll-ul înapoi pe tot site-ul
+            document.documentElement.style.overflow = '';
+            document.body.style.overflow = '';
+        };
+
+        // MOTORUL RECURSIV DE NUMĂRARE
+        const runCounter = () => {
+            // Pas de incrementare rapid și organic
+            let increment = Math.floor(Math.random() * 6) + 2; 
+            currentPercent += increment;
+
+            if (currentPercent >= 100) {
+                currentPercent = 100;
+                percentText.textContent = "100";
+                if (progressBar) progressBar.style.width = "100%";
+                
+                // Scurtă pauză dramatică la 100% înainte de deschidere
+                setTimeout(removePreloader, 500);
+            } else {
+                percentText.textContent = currentPercent < 10 ? "0" + currentPercent : currentPercent;
+                if (progressBar) progressBar.style.width = currentPercent + "%";
+                
+                // Delay variabil fluid pentru viteză cinematică
+                let adaptiveDelay = Math.floor(Math.random() * 30) + 15;
+                setTimeout(runCounter, adaptiveDelay);
+            }
+        };
+
+        // Pornim numărătoarea imediat
+        runCounter();
+
+        // REZERVĂ CRITICĂ DE SIGURANȚĂ (FAILSAFE SYSTEM):
+        // Dacă din cauza unui script extern sau a unei erori contorul se blochează,
+        // forțăm deschiderea site-ului după exact 3 secunde, ca să nu piardă niciun client interfața.
+        setTimeout(() => {
+            if (!preloader.classList.contains('loaded')) {
+                console.warn("Axiobyte Failsafe triggered: Preloader forced close.");
+                percentText.textContent = "100";
+                if (progressBar) progressBar.style.width = "100%";
+                removePreloader();
+            }
+        }, 3000);
+    });
+})();
+
+/* ==========================================================================
+   ANIMAȚIE 3: UNIFIED LENIS SMOOTH SCROLL & KINETIC SKEW DISTORTION
+   ========================================================================== */
+(function() {
+    // Verificăm dacă biblioteca externă Lenis a fost încărcată corect din scriptul tău de sus
+    if (typeof Lenis !== 'undefined') {
+        
+        // 1. Inițializăm instanța master globală de scroll fluid
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Curbă fluidă premium
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+            wheelMultiplier: 1
+        });
+
+        // O salvăm pe fereastră pentru a putea fi accesată de alte scripturi dacă e nevoie
+        window.lenis = lenis;
+
+        // 2. Selectăm cardurile din galerie pe care vrem să le deformăm elastic
+        const galleryCards = document.querySelectorAll('.gallery-card');
+
+        if (galleryCards.length > 0) {
+            // Ascultăm evenimentul de scroll în timp real din motorul Lenis
+            lenis.on('scroll', (attributes) => {
+                // Extragere viteză curentă
+                let currentSpeed = attributes.velocity;
+                
+                // Limităm viteza (clamp) ca să nu strâmbăm imaginile exagerat la un scroll violent
+                let clampedSpeed = Math.min(Math.max(currentSpeed, -12), 12);
+                
+                // Împărțim la 45 pentru a obține un unghi de înclinare fin și extrem de luxos
+                let finalAngle = clampedSpeed * 0.3;
+
+                // Aplicăm deformarea geometrică pe fiecare card din carusel
+                galleryCards.forEach(card => {
+                    card.style.transform = `skewY(${finalAngle}deg)`;
+                });
+            });
+
+            // Când utilizatorul ridică degetul de pe mouse și scroll-ul se oprește complet,
+            // forțăm cardurile să facă snap-back la unghiuri drepte perfecte
+            lenis.on('scrollEnd', () => {
+                galleryCards.forEach(card => {
+                    card.style.transform = 'skewY(0deg)';
+                });
+            });
+        }
+
+        // 3. Bucla obligatorie de animație RequestAnimationFrame (RAF) pentru randare continuă
+        function updateScroll(time) {
+            lenis.raf(time);
+            requestAnimationFrame(updateScroll);
+        }
+        requestAnimationFrame(updateScroll);
+    } else {
+        console.warn("Axiobyte Warning: Lenis library was not detected globaly.");
+    }
+})();
+
+/* ==========================================================================
+   ANIMAȚIE INTERACTIVĂ: FLOATING MAGNETIC BUTTON ENGINE (AXIOBYTE SPEC)
+   ========================================================================== */
+(function() {
+    const magneticButton = document.querySelector('.btn-session');
+
+    if (magneticButton) {
+        window.addEventListener('mousemove', (e) => {
+            // Luăm coordonatele exacte ale butonului pe ecran
+            const rect = magneticButton.getBoundingClientRect();
+            
+            // Calculăm punctul central exact al butonului (X, Y)
+            const btnCenterX = rect.left + rect.width / 2;
+            const btnCenterY = rect.top + rect.height / 2;
+
+            // Calculăm distanța pe axe dintre mouse și centrul butonului
+            const deltaX = e.clientX - btnCenterX;
+            const deltaY = e.clientY - btnCenterY;
+
+            // Teorema lui Pitagora pentru a afla raza absolută de distanță
+            const distance = Math.hypot(deltaX, deltaY);
+
+            // Zona de atracție magnetică: 90 de pixeli
+            if (distance < 90) {
+                // Diminuăm puterea mișcării (0.35) ca butonul să nu sară agresiv direct pe mouse,
+                // ci să plutească elegant, tras de el
+                const targetX = deltaX * 0.35;
+                const targetY = deltaY * 0.35;
+
+                // Anulăm temporar tranziția din CSS pentru ca mișcarea să fie instantanee și fluidă cu mouse-ul
+                magneticButton.style.transition = 'none';
+                magneticButton.style.transform = `translate3d(${targetX}px, ${targetY}px, 0)`;
+                magneticButton.style.color = 'var(--accent-orange-acid)';
+            } else {
+                // Când mouse-ul iese din raza de acțiune, repunem tranziția mecanică
+                // pentru un efect elastic de snap-back acasă
+                magneticButton.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease';
+                magneticButton.style.transform = 'translate3d(0, 0, 0)';
+                magneticButton.style.color = '';
+            }
+        });
+    }
+})();
+
+/* ==========================================================================
+   ANIMAȚIE SCROLL INDICATOR: KINETIC ROTATING STAMP MOTOR
+   ========================================================================== */
+(function() {
+    document.addEventListener('DOMContentLoaded', () => {
+        const stamp = document.querySelector('.axiobyte-scroll-stamp');
+        const stampSvg = document.querySelector('.stamp-svg');
+        
+        if (stamp && stampSvg) {
+            let currentRotation = 0;
+            let baseVelocity = 0.5; // Viteza constantă de rotație când utilizatorul stă pe loc
+
+            // 1. MOTORUL DE ROTAȚIE CONTINUĂ CU INERȚIE DIN LENIS
+            const rotateStamp = () => {
+                // Dacă Lenis este activ, prindem viteza lui în timp real, altfel rămânem la zero
+                let scrollVelocity = (window.lenis) ? window.lenis.velocity : 0;
+                
+                // Calculăm o viteză adaptivă (cu cât dai scroll mai rapid, cu atât se învârte mai tare)
+                let targetVelocity = baseVelocity + Math.abs(scrollVelocity) * 0.8;
+                
+                // Incrementăm rotația curentă
+                currentRotation += targetVelocity;
+                
+                // Aplicăm transformarea 3D pentru randare fluidă pe GPU
+                stampSvg.style.transform = `rotate3d(0, 0, 1, ${currentRotation}deg)`;
+                
+                requestAnimationFrame(rotateStamp);
+            };
+            
+            // Pornim bucla de animație
+            requestAnimationFrame(rotateStamp);
+
+            // 2. DISPARIȚIA FILTRATĂ LA SCROLL
+            // Când utilizatorul coboară mai mult de 150px pe pagină, ștampila dispare elegant
+            if (window.lenis) {
+                window.lenis.on('scroll', (e) => {
+                    if (e.scroll > 150) {
+                        stamp.classList.add('fade-out');
+                    } else {
+                        stamp.classList.remove('fade-out');
+                    }
+                });
+            } else {
+                // Failsafe pentru scroll nativ în caz că Lenis dă o micro-eroare
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 150) {
+                        stamp.classList.add('fade-out');
+                    } else {
+                        stamp.classList.remove('fade-out');
+                    }
+                });
+            }
+        }
+    });
+})();

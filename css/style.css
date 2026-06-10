@@ -1,15 +1,88 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Space+Grotesk:wght@300..700&display=swap');
-
+﻿@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Space+Grotesk:wght@300..700&display=swap");
+@media (min-width: 1025px) {
+  body,
+  body *,
+  a,
+  button,
+  input,
+  textarea,
+  .chip-item,
+  .avatar-item,
+  .gallery-card,
+  .card-image-box,
+  .card-image-box img,
+  .gallery-ticker-track,
+  .accordion-trigger,
+  .accordion-trigger * {
+    cursor: none !important;
+  }
+}
 /* ==========================================================================
    1. GLOBAL RESET & LENIS INTERNALS
    ========================================================================== */
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html.lenis, html.lenis body {
+.custom-cursor-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-orange-acid);
+  position: fixed;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 9999;
+  pointer-events: none; /* Elementul e fantomă, nu blochează click-urile */
+  transition:
+    width 0.2s ease,
+    height 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.custom-cursor-outline {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 114, 55, 0.4);
+  position: fixed;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 9998;
+  pointer-events: none;
+  will-change: transform;
+  /* Mișcare fluidă, amortizată (inertia) */
+  transition:
+    transform 0.08s cubic-bezier(0.25, 1, 0.5, 1),
+    width 0.2s ease,
+    height 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* --- STARE DE HOVER: Cercul se mărește și devine un ochi transparent --- */
+.custom-cursor-outline.cursor-hover {
+  width: 55px;
+  height: 55px;
+  background-color: rgba(255, 114, 55, 0.04);
+  border-color: var(--accent-orange-acid);
+}
+
+.custom-cursor-dot.cursor-hover {
+  width: 4px;
+  height: 4px;
+}
+
+/* --- STARE DE CLICK: Cercul se strânge violent la apăsare --- */
+.custom-cursor-outline.cursor-click {
+  width: 25px;
+  height: 25px;
+  border-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -26,45 +99,41 @@ html.lenis, html.lenis body {
 }
 
 :root {
-    --bg-black: #050505;
-    --accent-orange-acid: #e36b2c; 
-    --text-white: #ffffff;
-    --text-gray: #94a3b8;
-    --border-dark: #1e293b;
-    --index-inactive:#ffffff5d;
+  --bg-black: #050505;
+  --accent-orange-acid: #e36b2c;
+  --text-white: #ffffff;
+  --text-gray: #94a3b8;
+  --border-dark: #1e293b;
+  --index-inactive: #ffffff5d;
 }
 
 body {
-    background-color: var(--bg-black);
-    color: var(--text-white);
-    margin: 0;
-    overflow-x: hidden;
+  background-color: var(--bg-black);
+  color: var(--text-white);
+  margin: 0;
+  overflow-x: hidden;
 }
 
 /* Adăugăm accelerare hardware pe tot site-ul pentru mișcarea fluidă a mouse-ului */
-.parallax-element {
-    will-change: transform;
-    transition: transform 0.1s cubic-bezier(0.25, 1, 0.5, 1);
-}
 
 /* ==========================================================================
    2. HERO LAYOUT SECTION
    ========================================================================== */
 #hero {
-    width: 100%;
-    height: 100vh;
-    scroll-snap-align: start;
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(
-        180deg,
-        #050505 0%,    
-        #1c0e0a 25%,   
-        #401b10 50%,   
-        #7d3419 75%,   
-        #b54f24 90%,   
-        #e36b2c 100%   
-    );
+  width: 100%;
+  height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    #050505 0%,
+    #1c0e0a 25%,
+    #401b10 50%,
+    #7d3419 75%,
+    #b54f24 90%,
+    #e36b2c 100%
+  );
 }
 
 /* ==========================================================================
@@ -81,13 +150,14 @@ header {
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
   border-bottom: 1px solid rgba(255, 255, 255, 0);
-  
+
   /* Tranziție ultra-smooth pentru toate proprietățile când prinde textura */
-  transition: padding 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    padding 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Clasa activată din JS în momentul în care utilizatorul dă scroll în jos */
@@ -101,7 +171,7 @@ header.scrolled {
 }
 
 .nav-links {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   display: flex;
   color: var(--text-white);
   list-style: none;
@@ -115,7 +185,7 @@ header.scrolled {
 }
 
 .nav-links a {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 18px;
   color: var(--text-white);
   text-decoration: none;
@@ -124,11 +194,11 @@ header.scrolled {
 
 .nav-links > li:not(.contact-information):not(.contact-info) {
   margin-right: 40px;
-  position: relative; 
+  position: relative;
 }
 
 .nav-links > li:not(.contact-information):not(.contact-info) a::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -137,7 +207,7 @@ header.scrolled {
   background-color: var(--text-white);
   transform: scaleX(0);
   transform-origin: center;
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .nav-links > li:not(.contact-information):not(.contact-info) a:hover {
@@ -165,8 +235,9 @@ header.scrolled {
   align-items: center;
 }
 
-.contact-information li, .contact-information a {
-  font-family: 'Space Grotesk', sans-serif;
+.contact-information li,
+.contact-information a {
+  font-family: "Space Grotesk", sans-serif;
   font-size: 18px;
   color: var(--text-white);
 }
@@ -180,7 +251,7 @@ header.scrolled {
 }
 
 .contact-info a {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 18px;
   color: var(--text-white);
   font-weight: 400;
@@ -189,7 +260,7 @@ header.scrolled {
 }
 
 .contact-info a::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -199,13 +270,13 @@ header.scrolled {
 }
 
 #gallery {
-    overflow-X: hidden; 
+  overflow-x: hidden;
 }
 
 /* ==========================================================================
    4. HERO SERVICES INDEX
    ========================================================================== */
-.hero-services-index{
+.hero-services-index {
   position: absolute;
   top: 180px;
   left: 60px;
@@ -220,27 +291,33 @@ header.scrolled {
 }
 
 .hero-services-index li a {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: var(--index-inactive);
   text-decoration: none;
   letter-spacing: 0.02em;
   transform-origin: left center;
-  transition: color 0.3s ease, transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition:
+    color 0.3s ease,
+    transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
 }
 
-.hero-services-index li a .num{
+.hero-services-index li a .num {
   margin-right: 15px;
   font-size: 16px;
 }
 
-.hero-services-index li a:hover{
+.hero-services-index li a:hover {
   color: var(--text-white);
   transform: scale(1.06) translateX(4px);
 }
 
-.hero-services-index li.active a{
+.hero-services-index li.active a {
   color: var(--text-white) !important;
   font-weight: 500;
   transform: scale(1.06);
@@ -252,17 +329,17 @@ header.scrolled {
 }
 
 .hero-services-index ul li a:hover {
-    color: #ffffff !important;
-    font-weight: 500 !important; 
-    transform: scale(1.08) translateX(6px) !important;
-    opacity: 1 !important;   
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  transform: scale(1.08) translateX(6px) !important;
+  opacity: 1 !important;
 }
 
 .hero-services-index li.active a {
-    color: #ffffff !important;
-    font-weight: 500 !important; 
-    transform: scale(1.08) translateX(6px);
-    opacity: 1 !important;
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  transform: scale(1.08) translateX(6px);
+  opacity: 1 !important;
 }
 
 /* ==========================================================================
@@ -273,17 +350,17 @@ header.scrolled {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: max-content; 
+  width: max-content;
   z-index: 5;
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   pointer-events: auto;
 }
 
 .hero-center-title h1 {
-  font-family: 'Oswald', sans-serif;
-  font-size: 120px; 
+  font-family: "Oswald", sans-serif;
+  font-size: 120px;
   font-weight: 700;
   line-height: 0.9;
   letter-spacing: -0.01em;
@@ -291,28 +368,28 @@ header.scrolled {
   text-transform: uppercase;
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   width: 100%;
   margin: 0;
 }
 
 .title-line1 {
-  transform: translateX(-80px); 
+  transform: translateX(-80px);
 }
 
 .title-line2 {
-  transform: translateX(109px); 
+  transform: translateX(109px);
   color: var(--text-white);
 }
 
 .hero-cta {
   align-self: flex-start;
-  margin-top: 40px; 
-  transform: translateX(-75px); 
+  margin-top: 40px;
+  transform: translateX(-75px);
 }
 
 .btn-session {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 18px;
   font-weight: 400;
   color: var(--text-white);
@@ -323,7 +400,7 @@ header.scrolled {
 }
 
 .btn-session::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -331,8 +408,10 @@ header.scrolled {
   height: 1px;
   background-color: var(--text-white);
   transform: scaleX(1);
-  transform-origin: right; 
-  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+  transform-origin: right;
+  transition:
+    transform 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+    background-color 0.3s ease;
 }
 
 .btn-session:hover {
@@ -340,7 +419,7 @@ header.scrolled {
 }
 
 .btn-session:hover::after {
-  transform: scaleX(0); 
+  transform: scaleX(0);
   background-color: var(--accent-orange-acid);
 }
 
@@ -349,559 +428,607 @@ header.scrolled {
    ========================================================================== */
 .hero-description {
   position: absolute;
-  bottom: 60px; 
-  left: 60px;   
-  max-width: 420px; 
+  bottom: 60px;
+  left: 60px;
+  max-width: 420px;
   z-index: 10;
 }
 
 .hero-description p {
-  font-family: 'Space Grotesk', sans-serif; 
-  font-size: 16px; 
-  font-weight: 500; 
-  line-height: 1.6; 
-  letter-spacing: 0.01em; 
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
   color: var(--text-white);
-  opacity: 1; 
+  opacity: 1;
   margin: 0;
 }
 
 .typing-cursor::after {
-  content: '|';
-  color: var(--text-white); 
+  content: "|";
+  color: var(--text-white);
   margin-left: 4px;
   animation: blinkCursor 0.8s step-end infinite;
 }
 
 @keyframes blinkCursor {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 /* ==========================================================================
    7. MANIFEST SECTION EDITORIAL LAYOUT
    ========================================================================== */
 #manifest {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #000000; 
-    padding: 180px 80px; 
-    display: flex;
-    align-items: center;
-    position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000000;
+  padding: 180px 80px;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .manifest-container {
-    width: 100%;
-    max-width: 1600px; 
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 80px;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
 }
 
 .manifest-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding-bottom: 24px;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .manifest-branding {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    color: var(--text-white);
-    opacity: 0.8;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--text-white);
+  opacity: 0.8;
 }
 
 .manifest-tag {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    color: var(--accent-orange-acid);
-    position: relative;
-    padding-left: 30px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--accent-orange-acid);
+  position: relative;
+  padding-left: 30px;
 }
 
 .manifest-tag::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 16px;
-    height: 1px;
-    background-color: var(--accent-orange-acid);
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 16px;
+  height: 1px;
+  background-color: var(--accent-orange-acid);
 }
 
 .manifest-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(54px, 6.5vw, 100px); 
-    font-weight: 700;
-    line-height: 1.15; 
-    letter-spacing: -0.01em;
-    color: var(--text-white);
-    text-transform: uppercase;
-    margin-bottom: 40px;
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(54px, 6.5vw, 100px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--text-white);
+  text-transform: uppercase;
+  margin-bottom: 40px;
 }
 
 .text-stroke {
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.25);
-    transition: -webkit-text-stroke 0.4s ease;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.25);
+  transition: -webkit-text-stroke 0.4s ease;
 }
 
 .manifest-title:hover .text-stroke {
-    -webkit-text-stroke: 1px var(--accent-orange-acid);
+  -webkit-text-stroke: 1px var(--accent-orange-acid);
 }
 
 .manifest-footer-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr 1fr; 
-    gap: 60px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    padding-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 60px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 50px;
 }
 
 .manifest-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .manifest-meta-right {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-end; 
-    text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+  text-align: right;
 }
 
 .meta-label {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.3);
-    letter-spacing: 0.1em;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.1em;
 }
 
 .meta-value {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-white);
-    letter-spacing: 0.05em;
-    line-height: 1.4;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-white);
+  letter-spacing: 0.05em;
+  line-height: 1.4;
 }
 
 .manifest-detail p {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 17px; 
-    line-height: 1.65;
-    color: rgba(255, 255, 255, 0.65);
-    margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
 }
 
 /* ==========================================================================
    8. GALLERY SECTION (KINETIC CAROUSEL INFINITE TICKER)
    ========================================================================== */
 #gallery {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #000000;
-    padding: 140px 0; /* Scoatere padding lateral pentru a rula din ecran în ecran */
-    position: relative;
-    overflow: hidden;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000000;
+  padding: 140px 0; /* Scoatere padding lateral pentru a rula din ecran în ecran */
+  position: relative;
+  overflow: hidden;
 }
 
 .gallery-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 80px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
 }
 
 .gallery-header-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-    padding: 0 60px; /* Păstrăm padding doar pentru titlu */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0 60px; /* Păstrăm padding doar pentru titlu */
 }
 
 .gallery-mini-tag {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--text-white);
-    opacity: 0.8;
-    letter-spacing: -0.01em;
-    flex: 1;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-white);
+  opacity: 0.8;
+  letter-spacing: -0.01em;
+  flex: 1;
 }
 
 .gallery-main-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(54px, 6vw, 85px);
-    font-weight: 700;
-    color: var(--text-white);
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    text-align: center;
-    line-height: 1;
-    flex: 2;
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(54px, 6vw, 85px);
+  font-weight: 700;
+  color: var(--text-white);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-align: center;
+  line-height: 1;
+  flex: 2;
 }
 
 .header-space-filler {
-    flex: 1;
+  flex: 1;
 }
 
 /* Mecanica de Ticker Orizontal */
 .gallery-ticker-wrapper {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    padding: 20px 0;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 20px 0;
 }
 
 .gallery-ticker-track {
-    display: flex;
-    gap: 40px;
-    width: max-content;
-    animation: tickerRun 28s linear infinite; /* Rulare continuă non-stop */
+  display: flex;
+  gap: 40px;
+  width: max-content;
+  animation: tickerRun 28s linear infinite; /* Rulare continuă non-stop */
 }
 
 /* Modificăm track-ul la hover ca să încetinească, oferind rafinament */
 .gallery-ticker-wrapper:hover .gallery-ticker-track {
-    animation-play-state: paused;
+  animation-play-state: paused;
 }
 
 .gallery-card {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    cursor: pointer;
-    width: 420px; /* Lățime fixă uniformă pentru carusel */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  cursor: pointer;
+  width: 420px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  cursor: pointer;
+  width: 420px; /* Lățimea ta neschimbată */
+
+  /* ACCELERARE CONFIGURATĂ COREKT PENTRU SCHIMBĂRI DE UNGHI */
+  will-change: transform;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+
+  /* Efect de elasticitate la revenirea pe starea de repaus */
+  transition:
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.4s ease;
 }
 
 .card-image-box {
-    width: 100%;
-    height: 480px; 
-    overflow: hidden;
-    background-color: #080808;
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    border-radius: 4px;
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  background-color: #080808;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
 }
 
 .card-image-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    display: block;
-    filter: brightness(0.8) grayscale(10%);
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.8) grayscale(10%);
+  transition:
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.4s ease;
 }
 
 .card-meta-info {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding: 0 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 4px;
 }
 
 .card-project-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--text-white);
-    letter-spacing: -0.01em;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-white);
+  letter-spacing: -0.01em;
 }
 
 .card-project-desc {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.4);
-    letter-spacing: -0.01em;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: -0.01em;
 }
 
 .gallery-card:hover .card-image-box img {
-    transform: scale(1.03);
-    filter: brightness(1) grayscale(0%);
+  transform: scale(1.03);
+  filter: brightness(1) grayscale(0%);
 }
 
 .gallery-card:hover .card-project-title {
-    color: var(--accent-orange-acid);
+  color: var(--accent-orange-acid);
 }
 
 /* Animația CSS pură pentru mișcare infinită perfectă */
 @keyframes tickerRun {
-    0% {
-        transform: translate3d(0, 0, 0);
-    }
-    100% {
-        transform: translate3d(calc(-50% - 20px), 0, 0); /* Mutare exactă la jumătatea setului duplicat */
-    }
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(
+      calc(-50% - 20px),
+      0,
+      0
+    ); /* Mutare exactă la jumătatea setului duplicat */
+  }
 }
-
 
 /* ==========================================================================
    9. SERVICES SECTION (EDITORIAL KINETIC ACCORDION - MASTER FINISHED)
    ========================================================================== */
 
 #services {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #050505;
-    padding: 180px 100px;
-    position: relative;
-    overflow: hidden;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #050505;
+  padding: 180px 100px;
+  position: relative;
+  overflow: hidden;
 }
 
 .services-wrapper {
-    width: 100%;
-    max-width: 1600px;
-    margin: 0 auto;
-    display: flex;
-    gap: 80px;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  gap: 80px;
 }
 
 .services-sidebar {
-    width: 120px;
+  width: 120px;
 }
 
 .services-side-tag {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.4);
-    letter-spacing: -0.01em;
-    position: sticky;
-    top: 140px;
-    display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: -0.01em;
+  position: sticky;
+  top: 140px;
+  display: block;
 }
 
 .services-accordion-list {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .services-accordion-item {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 55px 0;
-    transition: border-color 0.5s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 55px 0;
+  transition: border-color 0.5s ease;
 }
 
 .accordion-trigger {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 /* Alinierea titlului cu iconița plus din capătul din dreapta */
 .trigger-headline {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .accordion-trigger h2 {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(48px, 5.5vw, 76px);
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.25); /* Stare inactivă implicită */
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-    line-height: 1;
-    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(48px, 5.5vw, 76px);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.25); /* Stare inactivă implicită */
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .acc-num {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 24px;
-    font-weight: 300;
-    margin-right: 30px;
-    vertical-align: middle;
-    opacity: 0.5;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  margin-right: 30px;
+  vertical-align: middle;
+  opacity: 0.5;
 }
 
 /* Iconița plus tehnică */
 .accordion-icon {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 32px;
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.25);
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
-    will-change: transform;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 32px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.25);
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.4s ease;
+  will-change: transform;
 }
 
 .accordion-trigger .short-desc {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.2);
-    letter-spacing: -0.01em;
-    padding-left: 65px;
-    transition: color 0.5s ease;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: -0.01em;
+  padding-left: 65px;
+  transition: color 0.5s ease;
 }
 
 /* --- REPARAT GLOBAL: HOVER PE ELEMENTELE INACTIVE --- */
 .services-accordion-item:not(.active):hover .accordion-trigger h2 {
-    color: rgba(255, 255, 255, 0.85); /* Devine alb pur strălucitor la hover, indicând interacțiune */
+  color: rgba(
+    255,
+    255,
+    255,
+    0.85
+  ); /* Devine alb pur strălucitor la hover, indicând interacțiune */
 }
 
 .services-accordion-item:not(.active):hover .accordion-icon {
-    color: rgba(255, 255, 255, 0.85);
-    transform: scale(1.1);
+  color: rgba(255, 255, 255, 0.85);
+  transform: scale(1.1);
 }
 
 .services-accordion-item:not(.active):hover .short-desc {
-    color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 /* CONTAINERUL DINAMIC FLUID */
 .accordion-content {
-    height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: height 0.65s cubic-bezier(0.16, 1, 0.3, 1), 
-                opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    height 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* --- INTERACȚIUNI ELEMENT ACTIV --- */
 .services-accordion-item.active {
-    border-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .services-accordion-item.active .accordion-trigger h2 {
-    color: var(--accent-orange-acid); 
+  color: var(--accent-orange-acid);
 }
 
 /* Rotirea plusului la 45 grade pentru a deveni un 'x' chirurgical */
 .services-accordion-item.active .accordion-icon {
-    color: var(--accent-orange-acid);
-    transform: rotate(45deg) scale(1.05);
+  color: var(--accent-orange-acid);
+  transform: rotate(45deg) scale(1.05);
 }
 
 .services-accordion-item.active .accordion-trigger .short-desc {
-    color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .services-accordion-item.active .accordion-content {
-    opacity: 1;
+  opacity: 1;
 }
 
 .accordion-inner-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    width: 100%;
-    padding-top: 40px;
-    padding-left: 65px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  width: 100%;
+  padding-top: 40px;
+  padding-left: 65px;
 }
 
 .accordion-text-side {
-    max-width: 850px;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    opacity: 0;
-    transform: translateY(15px);
-    will-change: transform, opacity;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+  max-width: 850px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  opacity: 0;
+  transform: translateY(15px);
+  will-change: transform, opacity;
+  transition:
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.6s ease;
 }
 
 .services-accordion-item.active .animate-text {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .accordion-text-side .main-pitch {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 17px;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.75);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .capabilities-list h4 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: #ffffff;
-    margin-bottom: 16px;
-    letter-spacing: 0.02em;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
 }
 
 .capabilities-list ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .capabilities-list li {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.55);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 /* Săgețile listei devin portocalii acid */
 .bullet {
-    color: var(--accent-orange-acid);
-    margin-right: 10px;
-    font-weight: bold;
+  color: var(--accent-orange-acid);
+  margin-right: 10px;
+  font-weight: bold;
 }
 
 /* CAROUSEL MOCKUPS WITH INTERNAL PARALLAX */
 .accordion-visual-side {
-    width: 100%;
-    overflow: hidden;
+  width: 100%;
+  overflow: hidden;
 }
 
 .mockup-glide-carousel {
-    display: flex;
-    gap: 24px;
-    width: 100%;
+  display: flex;
+  gap: 24px;
+  width: 100%;
 }
 
 .mock-img-box {
-    flex: 1;
-    height: 360px;
-    overflow: hidden;
-    background-color: #0d0d0d;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    opacity: 0;
-    transform: translate3d(50px, 0, 0);
-    will-change: transform, opacity;
-    transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+  flex: 1;
+  height: 360px;
+  overflow: hidden;
+  background-color: #0d0d0d;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transform: translate3d(50px, 0, 0);
+  will-change: transform, opacity;
+  transition:
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.6s ease;
 }
 
 .mock-img-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transform: scale(1.15); /* Spațiu masiv pentru mișcarea de parallax reactivă */
-    filter: brightness(0.85);
-    will-change: transform;
-    transition: filter 0.4s ease, transform 0.1s cubic-bezier(0.25, 1, 0.5, 1);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(
+    1.15
+  ); /* Spațiu masiv pentru mișcarea de parallax reactivă */
+  filter: brightness(0.85);
+  will-change: transform;
+  transition:
+    filter 0.4s ease,
+    transform 0.1s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .services-accordion-item.active .animate-glide {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 
-.services-accordion-item.active .animate-glide:nth-child(1) { transition-delay: 0.08s; }
-.services-accordion-item.active .animate-glide:nth-child(2) { transition-delay: 0.16s; }
-.services-accordion-item.active .animate-glide:nth-child(3) { transition-delay: 0.24s; }
+.services-accordion-item.active .animate-glide:nth-child(1) {
+  transition-delay: 0.08s;
+}
+.services-accordion-item.active .animate-glide:nth-child(2) {
+  transition-delay: 0.16s;
+}
+.services-accordion-item.active .animate-glide:nth-child(3) {
+  transition-delay: 0.24s;
+}
 
 .mock-img-box:hover img {
-    filter: brightness(1);
+  filter: brightness(1);
 }
 
 /* ==========================================================================
@@ -909,168 +1036,171 @@ header.scrolled {
    ========================================================================== */
 
 #testimonials {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #050505;
-    padding: 180px 100px; /* Aliniere master cu marginile din restul site-ului */
-    display: flex;
-    align-items: center;
-    position: relative;
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
+  width: 100%;
+  min-height: 100vh;
+  background-color: #050505;
+  padding: 180px 100px; /* Aliniere master cu marginile din restul site-ului */
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .testimonials-container {
-    width: 100%;
-    max-width: 1600px;
-    margin: 0 auto;
-    display: flex;
-    gap: 80px;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  gap: 80px;
 }
 
 .testimonials-sidebar {
-    width: 120px;
-    flex-shrink: 0;
+  width: 120px;
+  flex-shrink: 0;
 }
 
 .testimonials-side-tag {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.4);
-    letter-spacing: -0.01em;
-    position: sticky;
-    top: 140px;
-    display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: -0.01em;
+  position: sticky;
+  top: 140px;
+  display: block;
 }
 
 /* REPARAT: Container master central care controlează geometria rândurilor */
 .testimonials-main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 950px; /* Strângem layout-ul ca să eliminăm spațiul mort pe monitoare mari */
-    margin: 0 auto;
-    padding-right: 120px; /* Compensează optic lățimea sidebar-ului din stânga pentru centrare perfectă */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 950px; /* Strângem layout-ul ca să eliminăm spațiul mort pe monitoare mari */
+  margin: 0 auto;
+  padding-right: 120px; /* Compensează optic lățimea sidebar-ului din stânga pentru centrare perfectă */
 }
 
 .testimonials-main-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(54px, 6vw, 85px);
-    font-weight: 700;
-    color: var(--text-white);
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    margin-bottom: 60px;
-    line-height: 1;
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(54px, 6vw, 85px);
+  font-weight: 700;
+  color: var(--text-white);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 60px;
+  line-height: 1;
 }
 
 .testimonials-avatars-group {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 60px;
-    padding-left: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 60px;
+  padding-left: 25px;
 }
 
 /* REPARAT: Am mărit dimensiunea cercurilor de la 70px la 80px pentru autoritate visuală */
 .avatar-item {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-left: -25px; /* Suprapunere mai strânsă, de revistă */
-    border: 4px solid #050505; 
-    cursor: pointer;
-    background-color: #0b0b0b;
-    filter: grayscale(100%) brightness(0.5);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                filter 0.3s ease, 
-                border-color 0.3s ease;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: -25px; /* Suprapunere mai strânsă, de revistă */
+  border: 4px solid #050505;
+  cursor: pointer;
+  background-color: #0b0b0b;
+  filter: grayscale(100%) brightness(0.5);
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .avatar-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .avatar-item.active {
-    filter: grayscale(0%) brightness(1);
-    transform: scale(1.15);
-    border-color: var(--accent-orange-acid);
-    z-index: 5;
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.15);
+  border-color: var(--accent-orange-acid);
+  z-index: 5;
 }
 
 .avatar-item:hover:not(.active) {
-    filter: grayscale(30%) brightness(0.8);
-    transform: translateY(-4px) scale(1.05);
+  filter: grayscale(30%) brightness(0.8);
+  transform: translateY(-4px) scale(1.05);
 }
 
 .avatar-counter-badge {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background-color: var(--accent-orange-acid);
-    border: 4px solid #050505;
-    margin-left: -20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 4;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: var(--accent-orange-acid);
+  border: 4px solid #050505;
+  margin-left: -20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
 }
 
 .avatar-counter-badge span {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-white);
-    letter-spacing: -0.01em;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-white);
+  letter-spacing: -0.01em;
 }
 
 .testimonial-display-box {
-    width: 100%;
-    max-width: 800px; /* Blocăm textul citatului să nu se mai lățească obositor */
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    min-height: 200px;
-    text-align: center;
+  width: 100%;
+  max-width: 800px; /* Blocăm textul citatului să nu se mai lățească obositor */
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  min-height: 200px;
+  text-align: center;
 }
 
 .testimonial-quote-text {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 20px; /* Mărit pentru impact editorial greu */
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
-    transition: transform 0.4s ease, opacity 0.4s ease;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 20px; /* Mărit pentru impact editorial greu */
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  transition:
+    transform 0.4s ease,
+    opacity 0.4s ease;
 }
 
 .testimonial-author-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
 }
 
 .author-name {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 19px;
-    font-weight: 500;
-    color: var(--text-white);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--text-white);
 }
 
 .author-role {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.4);
-    letter-spacing: -0.01em;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: -0.01em;
 }
 
 .testimonial-fade-out {
-    opacity: 0;
-    transform: translateY(10px);
+  opacity: 0;
+  transform: translateY(10px);
 }
 
 /* ==========================================================================
@@ -1081,77 +1211,74 @@ header.scrolled {
 .gallery-container,
 .services-wrapper,
 .testimonials-container {
-    width: 100%;
-    max-width: 1500px; /* Am stabilit o lățime master fixă unificată pentru tot site-ul */
-    margin: 0 auto;
-    display: flex;
-    gap: 60px; /* Distanța dintre etichetă și conținut este fix aceeași */
+  width: 100%;
+  max-width: 1500px; /* Am stabilit o lățime master fixă unificată pentru tot site-ul */
+  margin: 0 auto;
+  display: flex;
+  gap: 60px; /* Distanța dintre etichetă și conținut este fix aceeași */
 }
 
 /* Modificăm structura gallery ca să folosească același layout pe două coloane */
 .gallery-container {
-    flex-direction: row; /* Trece în mod flex-row ca restul secțiunilor */
+  flex-direction: row; /* Trece în mod flex-row ca restul secțiunilor */
 }
-
 
 /* --- TOATE ETICHETELE/SIDEBAR-URILE DIN STÂNGA AU ACEEAȘI LĂȚIME FIXĂ --- */
 .gallery-header-main, /* În HTML, acest container ține tag-ul [Our works] */
 .services-sidebar,
 .testimonials-sidebar {
-    width: 140px; /* Lățime fixă generoasă ca să nu se spargă textul */
-    flex-shrink: 0;
-    display: block;
+  width: 140px; /* Lățime fixă generoasă ca să nu se spargă textul */
+  flex-shrink: 0;
+  display: block;
 }
 
 /* Forțăm tag-ul din interiorul galeriei să nu mai facă layout separat */
 .gallery-header-main {
-    margin-bottom: 0; /* Scoatem margin-bottom ca să nu decaleze rândurile */
+  margin-bottom: 0; /* Scoatem margin-bottom ca să nu decaleze rândurile */
 }
-
 
 /* --- TOATE TAG-URILE PROPRIU-ZISE ÎȘI PĂSTREAZĂ STYLING-UL DISCRET --- */
 .gallery-mini-tag,
 .services-side-tag,
 .testimonials-side-tag {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.4);
-    letter-spacing: -0.01em;
-    position: sticky;
-    top: 140px;
-    display: block;
-    white-space: nowrap; /* Previne ruperea textului pe două rânduri */
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: -0.01em;
+  position: sticky;
+  top: 140px;
+  display: block;
+  white-space: nowrap; /* Previne ruperea textului pe două rânduri */
 }
-
 
 /* --- TOATE ZONELE DE CONȚINUT DIN DREAPTA REZISTĂ PE ACEEAȘI LINIE MASTER --- */
 .gallery-ticker-wrapper,
 .services-accordion-list,
 .testimonials-main-content {
-    flex-grow: 1;
-    width: 100%;
+  flex-grow: 1;
+  width: 100%;
 }
 
 /* --- REPARAT CHIRURGICAL TESTIMONIALS (FĂRĂ PADDING ASIMETRIC) --- */
 #testimonials {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #050505;
-    padding: 160px 80px; /* Padding global identic cu restul secțiunilor */
-    display: flex;
-    align-items: center;
-    position: relative;
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
+  width: 100%;
+  min-height: 100vh;
+  background-color: #050505;
+  padding: 160px 80px; /* Padding global identic cu restul secțiunilor */
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .testimonials-main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 900px; /* Centrare curată a textului fără să afecteze structura din stânga */
-    margin: 0 auto;
-    padding-right: 0; /* ELIMINAT COMPLEMENT! Asta îți strica alinierea verticală! */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 900px; /* Centrare curată a textului fără să afecteze structura din stânga */
+  margin: 0 auto;
+  padding-right: 0; /* ELIMINAT COMPLEMENT! Asta îți strica alinierea verticală! */
 }
 
 /* ==========================================================================
@@ -1161,130 +1288,130 @@ header.scrolled {
 /* --- TOATE CONTAINERELE MASTER REVIN LA STRUCTURA LOR CORECTĂ --- */
 .services-wrapper,
 .testimonials-container {
-    width: 100%;
-    max-width: 1500px;
-    margin: 0 auto;
-    display: flex;
-    gap: 80px; /* Gap constant */
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  gap: 80px; /* Gap constant */
 }
 
 /* REPARAT: Galeria revine la layout vertical ca să lase ticker-ul să ocupe 100% lățime screen */
 .gallery-container {
-    width: 100%;
-    max-width: 1500px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column; /* Forțează conținutul pe verticală */
-    gap: 50px;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column; /* Forțează conținutul pe verticală */
+  gap: 50px;
 }
 
 /* REPARAT: Headerul galeriei folosește exact aceeași logică de aliniere pentru tag-ul din stânga */
 .gallery-header-main {
-    display: flex;
-    gap: 80px; /* Identic cu gap-ul de la servicii și testimoniale */
-    width: 100%;
-    align-items: flex-start;
+  display: flex;
+  gap: 80px; /* Identic cu gap-ul de la servicii și testimoniale */
+  width: 100%;
+  align-items: flex-start;
 }
-
 
 /* --- ETICHETELE/SIDEBAR-URILE DIN STÂNGA AU ACEEAȘI LĂȚIME FIXĂ --- */
 .gallery-mini-tag,
 .services-sidebar,
 .testimonials-sidebar {
-    width: 140px; /* Aceeași lățime fixă chirurgicală peste tot */
-    flex-shrink: 0;
+  width: 140px; /* Aceeași lățime fixă chirurgicală peste tot */
+  flex-shrink: 0;
 }
 
 /* --- ALINIEREA TEXTELOR DE PROPRIU-ZISE DIN STÂNGA --- */
 .gallery-mini-tag,
 .services-side-tag,
 .testimonials-side-tag {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.4);
-    letter-spacing: -0.01em;
-    position: sticky;
-    top: 140px;
-    display: block;
-    white-space: nowrap;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: -0.01em;
+  position: sticky;
+  top: 140px;
+  display: block;
+  white-space: nowrap;
 }
-
 
 /* --- TITLUL DIN GALERIE ȘI RESTUL CONȚINUTULUI SE ALINIAZĂ DUPĂ TAG --- */
 .gallery-main-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(54px, 6vw, 85px);
-    font-weight: 700;
-    color: var(--text-white);
-    text-transform: uppercase;
-    margin: 0;
-    line-height: 1;
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(54px, 6vw, 85px);
+  font-weight: 700;
+  color: var(--text-white);
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1;
 }
 
 /* REPARAT: Ticker-ul se întinde acum pe tot ecranul, ignorând constrângerile de coloană flex */
 .gallery-ticker-wrapper {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    overflow: hidden;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
 }
 
 /* --- ZONELE DE CONȚINUT DIN CELELALTE SECȚIUNI --- */
 .services-accordion-list,
 .testimonials-main-content {
-    flex-grow: 1;
-    width: 100%;
+  flex-grow: 1;
+  width: 100%;
 }
 
 .testimonials-main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 900px;
-    margin: 0 auto;
-    padding-right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-right: 0;
 }
 
 .nav-links a {
-    position: relative;
-    padding: 6px 0;
-    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  padding: 6px 0;
+  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-links li:not(.contact-information):not(.contact-info) a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: var(--accent-orange-acid);
-    transform: scaleX(0);
-    transform-origin: right; /* Pleacă spre dreapta */
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--accent-orange-acid);
+  transform: scaleX(0);
+  transform-origin: right; /* Pleacă spre dreapta */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-links li:not(.contact-information):not(.contact-info) a:hover::after {
-    transform: scaleX(1);
-    transform-origin: left; /* Vine din stânga */
+  transform: scaleX(1);
+  transform-origin: left; /* Vine din stânga */
 }
 
 /* Starea ascunsă a textelor editoriale */
 .reveal-text-dynamic {
-    opacity: 0;
-    transform: translate3d(0, 40px, 0);
-    will-change: transform, opacity;
-    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
+  opacity: 0;
+  transform: translate3d(0, 40px, 0);
+  will-change: transform, opacity;
+  transition:
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1s ease;
 }
 
 /* Clasa aplicată din JS când textul intră în viewport */
 .reveal-text-dynamic.revealed {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 
 /* ==========================================================================
@@ -1292,101 +1419,105 @@ header.scrolled {
    ========================================================================== */
 
 #clients-ticker {
-    width: 100%;
-    background-color: #ececec; 
-    padding: 85px 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 35px;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  width: 100%;
+  background-color: #ececec;
+  padding: 85px 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .clients-ticker-header {
-    width: 100%;
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 0 100px;
-    text-align: center;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 100px;
+  text-align: center;
 }
 
 .clients-ticker-header h3 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: #111111;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111111;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .ticker-header-tag {
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: 400;
-    color: #666666;
-    margin-left: 10px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 400;
+  color: #666666;
+  margin-left: 10px;
 }
 
 .clients-marquee-container {
-    display: flex;
-    width: 100%;
+  display: flex;
+  width: 100%;
 }
 
 .clients-marquee-track {
-    display: flex;
-    width: max-content;
-    gap: 30px; /* Am mărit spațiul dintre proiecte ca să respire frumos */
+  display: flex;
+  width: max-content;
+  gap: 30px; /* Am mărit spațiul dintre proiecte ca să respire frumos */
 }
 
 .client-logo-card {
-    width: 260px; /* Un pic mai late ca să încadreze perfect brandingul tău custom */
-    height: 100px;
-    background-color: #ffffff;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 35px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  width: 260px; /* Un pic mai late ca să încadreze perfect brandingul tău custom */
+  height: 100px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 35px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease;
 }
 
 .client-logo-card img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    filter: grayscale(100%) brightness(0.2); 
-    opacity: 0.85;
-    transition: opacity 0.3s ease, filter 0.3s ease;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(0.2);
+  opacity: 0.85;
+  transition:
+    opacity 0.3s ease,
+    filter 0.3s ease;
 }
 
 .client-logo-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
 }
 
 .client-logo-card:hover img {
-    opacity: 1;
-    filter: grayscale(0%) brightness(0); /* Rămâne un negru intens de branding industrial */
+  opacity: 1;
+  filter: grayscale(0%) brightness(0); /* Rămâne un negru intens de branding industrial */
 }
 
 /* Animație fluidă de viteză medie, optimizată pentru citire */
 .row-left {
-    animation: marqueeLeftRun 45s linear infinite;
+  animation: marqueeLeftRun 45s linear infinite;
 }
 
 .clients-marquee-container:hover .clients-marquee-track {
-    animation-play-state: paused;
+  animation-play-state: paused;
 }
 
 @keyframes marqueeLeftRun {
-    0% {
-        transform: translate3d(0, 0, 0);
-    }
-    100% {
-        /* Se mută la fix 1/3 din lungime deoarece avem 3 seturi identice de câte 3 proiecte */
-        transform: translate3d(-33.3333%, 0, 0); 
-    }
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    /* Se mută la fix 1/3 din lungime deoarece avem 3 seturi identice de câte 3 proiecte */
+    transform: translate3d(-33.3333%, 0, 0);
+  }
 }
 
 /* ==========================================================================
@@ -1394,215 +1525,223 @@ header.scrolled {
    ========================================================================== */
 
 #contact-sales {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #050505;
-    padding: 160px 100px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
+  width: 100%;
+  min-height: 100vh;
+  background-color: #050505;
+  padding: 160px 100px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .contact-sales-container {
-    width: 100%;
-    max-width: 1500px; /* Grila ta master */
-    margin: 0 auto;
-    display: flex;
-    gap: 80px; /* Același spațiu structural inter-secțiuni */
+  width: 100%;
+  max-width: 1500px; /* Grila ta master */
+  margin: 0 auto;
+  display: flex;
+  gap: 80px; /* Același spațiu structural inter-secțiuni */
 }
 
 /* Sidebar fix pentru etichetă */
 .contact-sales-sidebar {
-    width: 140px;
-    flex-shrink: 0;
+  width: 140px;
+  flex-shrink: 0;
 }
 
 .sales-side-tag {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.3);
-    letter-spacing: -0.01em;
-    position: sticky;
-    top: 140px;
-    display: block;
-    white-space: nowrap;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: -0.01em;
+  position: sticky;
+  top: 140px;
+  display: block;
+  white-space: nowrap;
 }
 
 /* Zona centrală de conținut a formularului */
 .contact-sales-main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    padding-right: 140px; /* Compensează optic sidebar-ul pentru o centrare pură */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-right: 140px; /* Compensează optic sidebar-ul pentru o centrare pură */
 }
 
 .contact-sales-header {
-    width: 100%;
-    max-width: 650px;
-    text-align: left;
-    margin-bottom: 50px;
+  width: 100%;
+  max-width: 650px;
+  text-align: left;
+  margin-bottom: 50px;
 }
 
 .sales-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(44px, 5vw, 68px);
-    font-weight: 700;
-    color: var(--text-white);
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-    line-height: 1.1;
-    margin-bottom: 16px;
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(44px, 5vw, 68px);
+  font-weight: 700;
+  color: var(--text-white);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  margin-bottom: 16px;
 }
 
 .sales-subtitle {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.5);
-    letter-spacing: -0.01em;
-    margin: 0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: -0.01em;
+  margin: 0;
 }
 
 /* Formularul propriu-zis */
 .contact-form-wrapper {
-    width: 100%;
-    max-width: 650px;
-    position: relative;
-    z-index: 2;
+  width: 100%;
+  max-width: 650px;
+  position: relative;
+  z-index: 2;
 }
 
 .sales-radial-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 750px;
-    height: 750px;
-    background: radial-gradient(circle, rgba(255, 114, 55, 0.12) 0%, rgba(255, 114, 55, 0.02) 50%, rgba(255, 114, 55, 0) 75%);
-    z-index: -1;
-    pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 750px;
+  height: 750px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 114, 55, 0.12) 0%,
+    rgba(255, 114, 55, 0.02) 50%,
+    rgba(255, 114, 55, 0) 75%
+  );
+  z-index: -1;
+  pointer-events: none;
 }
 
 .sales-form {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 100%;
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
 }
 
 .form-group label {
-    font-family: 'Courier New', Courier, monospace !important;
-    font-size: 13px;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.5);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-align: left;
+  font-family: "Courier New", Courier, monospace !important;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: left;
 }
 
 .sales-form input,
 .sales-form textarea {
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 6px;
-    padding: 20px 24px;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 15px;
-    color: var(--text-white);
-    outline: none;
-    transition: border-color 0.4s ease, background-color 0.4s ease;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 20px 24px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 15px;
+  color: var(--text-white);
+  outline: none;
+  transition:
+    border-color 0.4s ease,
+    background-color 0.4s ease;
 }
 
 .sales-form input:focus,
 .sales-form textarea:focus {
-    border-color: rgba(255, 114, 55, 0.5);
-    background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 114, 55, 0.5);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .sales-form textarea {
-    resize: none;
+  resize: none;
 }
 
 .btn-submit-sales {
-    width: 100%;
-    background-color: var(--accent-orange-acid);
-    border: none;
-    border-radius: 30px;
-    padding: 22px 0;
-    cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-    margin-top: 10px;
+  width: 100%;
+  background-color: var(--accent-orange-acid);
+  border: none;
+  border-radius: 30px;
+  padding: 22px 0;
+  cursor: pointer;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease;
+  margin-top: 10px;
 }
 
 .btn-submit-sales .btn-text {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 15px;
-    font-weight: 700;
-    color: #050505;
-    letter-spacing: 0.02em;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 15px;
+  font-weight: 700;
+  color: #050505;
+  letter-spacing: 0.02em;
 }
 
 .btn-submit-sales:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(255, 114, 55, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(255, 114, 55, 0.3);
 }
 
 /* --- STRUCTURA GRILĂ PENTRU CHIPS (BUTOANE DE SELECȚIE) --- */
 .project-chips-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    width: 100%;
-    margin-top: 4px;
-    margin-bottom: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 8px;
 }
 
 .chip-item {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
-    font-weight: bold;
-    color: rgba(255, 255, 255, 0.4);
-    background-color: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 14px 24px;
-    border-radius: 30px; /* Formă perfectă de pastilă fluidă */
-    cursor: pointer;
-    user-select: none;
-    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 14px 24px;
+  border-radius: 30px; /* Formă perfectă de pastilă fluidă */
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Hover discret pe butoanele neselectate */
 .chip-item:hover:not(.active) {
-    border-color: rgba(255, 255, 255, 0.2);
-    color: rgba(255, 255, 255, 0.8);
-    transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
 }
 
 /* STAREA ACTIVĂ: Când clientul apasă pe opțiune, se aprinde Axiobyte-style */
 .chip-item.active {
-    background-color: rgba(255, 114, 55, 0.08); /* Glow interior portocaliu */
-    border-color: var(--accent-orange-acid); /* Muchia portocalie intensă */
-    color: var(--accent-orange-acid); /* Textul devine acid */
-    transform: scale(1.02);
+  background-color: rgba(255, 114, 55, 0.08); /* Glow interior portocaliu */
+  border-color: var(--accent-orange-acid); /* Muchia portocalie intensă */
+  color: var(--accent-orange-acid); /* Textul devine acid */
+  transform: scale(1.02);
 }
-
-
 
 /* ==========================================================================
    15. AXIOBYTE ULTRA RESPONSIVE ENGINE
@@ -1612,498 +1751,924 @@ header.scrolled {
 
 /* --- HAMBURGER BUTTON (hidden on desktop, visible on mobile) --- */
 .hamburger-btn {
-    display: none;
-    position: fixed;
-    top: 24px;
-    right: 24px;
-    z-index: 200;
-    width: 48px;
-    height: 48px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
+  display: none;
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 200;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
 }
 
 .hamburger-line {
-    display: block;
-    width: 28px;
-    height: 2px;
-    background-color: var(--text-white);
-    border-radius: 2px;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                opacity 0.3s ease,
-                background-color 0.3s ease;
-    transform-origin: center;
+  display: block;
+  width: 28px;
+  height: 2px;
+  background-color: var(--text-white);
+  border-radius: 2px;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s ease,
+    background-color 0.3s ease;
+  transform-origin: center;
 }
 
 /* Hamburger → X animation */
 .hamburger-btn.active .hamburger-line:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+  transform: translateY(8px) rotate(45deg);
 }
 .hamburger-btn.active .hamburger-line:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
+  opacity: 0;
+  transform: scaleX(0);
 }
 .hamburger-btn.active .hamburger-line:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 /* --- FULLSCREEN MOBILE MENU OVERLAY --- */
 .mobile-menu-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 150;
-    background: rgba(5, 5, 5, 0.92);
-    backdrop-filter: blur(30px) saturate(150%);
-    -webkit-backdrop-filter: blur(30px) saturate(150%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                visibility 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: rgba(5, 5, 5, 0.92);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .mobile-menu-overlay.active {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 .mobile-menu-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 28px;
-    transform: translateY(30px);
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  transform: translateY(30px);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .mobile-menu-overlay.active .mobile-menu-content {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .mobile-menu-link {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(32px, 8vw, 52px);
-    font-weight: 700;
-    color: var(--text-white);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(32px, 8vw, 52px);
+  font-weight: 700;
+  color: var(--text-white);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.3s ease;
 }
 
 .mobile-menu-overlay.active .mobile-menu-link {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Staggered link entrance */
-.mobile-menu-overlay.active .mobile-menu-link:nth-child(1) { transition-delay: 0.05s; }
-.mobile-menu-overlay.active .mobile-menu-link:nth-child(2) { transition-delay: 0.10s; }
-.mobile-menu-overlay.active .mobile-menu-link:nth-child(3) { transition-delay: 0.15s; }
-.mobile-menu-overlay.active .mobile-menu-link:nth-child(4) { transition-delay: 0.20s; }
-.mobile-menu-overlay.active .mobile-menu-link:nth-child(5) { transition-delay: 0.25s; }
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(3) {
+  transition-delay: 0.15s;
+}
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(4) {
+  transition-delay: 0.2s;
+}
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(5) {
+  transition-delay: 0.25s;
+}
 
 .mobile-menu-link:hover,
 .mobile-menu-link:active {
-    color: var(--accent-orange-acid);
+  color: var(--accent-orange-acid);
 }
 
 .mobile-menu-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    margin-top: 30px;
-    padding-top: 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .mobile-menu-footer span {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.35);
-    letter-spacing: 0.02em;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.02em;
 }
 
 /* --------------------------------------------------------------------------
    BREAKPOINT 1: LARGE LAPTOPS (max-width: 1440px)
    -------------------------------------------------------------------------- */
 @media (max-width: 1440px) {
-    .manifest-container,
-    .services-wrapper,
-    .testimonials-container,
-    .contact-sales-container,
-    .gallery-container {
-        max-width: 1300px;
-    }
+  .manifest-container,
+  .services-wrapper,
+  .testimonials-container,
+  .contact-sales-container,
+  .gallery-container {
+    max-width: 1300px;
+  }
 
-    #manifest { padding: 140px 60px; }
-    #services { padding: 140px 80px; }
-    #testimonials { padding: 140px 80px; }
-    #contact-sales { padding: 140px 80px; }
+  #manifest {
+    padding: 140px 60px;
+  }
+  #services {
+    padding: 140px 80px;
+  }
+  #testimonials {
+    padding: 140px 80px;
+  }
+  #contact-sales {
+    padding: 140px 80px;
+  }
 
-    .gallery-card { width: 380px; }
-    .card-image-box { height: 440px; }
+  .gallery-card {
+    width: 380px;
+  }
+  .card-image-box {
+    height: 440px;
+  }
 
-    .services-wrapper,
-    .testimonials-container,
-    .contact-sales-container {
-        gap: 60px;
-    }
+  .services-wrapper,
+  .testimonials-container,
+  .contact-sales-container {
+    gap: 60px;
+  }
 }
 
 /* --------------------------------------------------------------------------
    BREAKPOINT 2: STANDARD LAPTOPS (max-width: 1200px)
    -------------------------------------------------------------------------- */
 @media (max-width: 1200px) {
-    .manifest-container,
-    .services-wrapper,
-    .testimonials-container,
-    .contact-sales-container,
-    .gallery-container {
-        max-width: 1100px;
-    }
+  .manifest-container,
+  .services-wrapper,
+  .testimonials-container,
+  .contact-sales-container,
+  .gallery-container {
+    max-width: 1100px;
+  }
 
-    #manifest { padding: 120px 50px; }
-    #services { padding: 120px 60px; }
-    #testimonials { padding: 120px 60px; }
-    #contact-sales { padding: 120px 60px; }
-    #gallery { padding: 100px 0; }
+  #manifest {
+    padding: 120px 50px;
+  }
+  #services {
+    padding: 120px 60px;
+  }
+  #testimonials {
+    padding: 120px 60px;
+  }
+  #contact-sales {
+    padding: 120px 60px;
+  }
+  #gallery {
+    padding: 100px 0;
+  }
 
-    header { padding: 25px 40px; }
-    header.scrolled { padding: 16px 40px; }
+  header {
+    padding: 25px 40px;
+  }
+  header.scrolled {
+    padding: 16px 40px;
+  }
 
-    .hero-center-title h1 { font-size: 100px; }
-    .hero-services-index { left: 40px; }
-    .hero-description { left: 40px; max-width: 360px; }
+  .hero-center-title h1 {
+    font-size: 100px;
+  }
+  .hero-services-index {
+    left: 40px;
+  }
+  .hero-description {
+    left: 40px;
+    max-width: 360px;
+  }
 
-    .gallery-card { width: 340px; }
-    .card-image-box { height: 400px; }
-    .mock-img-box { height: 300px; }
+  .gallery-card {
+    width: 340px;
+  }
+  .card-image-box {
+    height: 400px;
+  }
+  .mock-img-box {
+    height: 300px;
+  }
 
-    .nav-links a { font-size: 16px; }
-    .contact-information li, .contact-information a { font-size: 16px; }
-    .contact-info a { font-size: 16px; }
-    .nav-links > li { margin-right: 25px; }
+  .nav-links a {
+    font-size: 16px;
+  }
+  .contact-information li,
+  .contact-information a {
+    font-size: 16px;
+  }
+  .contact-info a {
+    font-size: 16px;
+  }
+  .nav-links > li {
+    margin-right: 25px;
+  }
 }
 
 /* --------------------------------------------------------------------------
    BREAKPOINT 3: TABLET LANDSCAPE (max-width: 1024px)
    -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
-    #manifest { padding: 100px 40px; }
-    #services { padding: 100px 40px; }
-    #testimonials { padding: 100px 40px; }
-    #contact-sales { padding: 100px 40px; }
-    #gallery { padding: 80px 0; }
-    #clients-ticker { padding: 60px 0; }
+  #manifest {
+    padding: 100px 40px;
+  }
+  #services {
+    padding: 100px 40px;
+  }
+  #testimonials {
+    padding: 100px 40px;
+  }
+  #contact-sales {
+    padding: 100px 40px;
+  }
+  #gallery {
+    padding: 80px 0;
+  }
+  #clients-ticker {
+    padding: 60px 0;
+  }
 
-    /* Break all sidebar + content splits into single column */
-    .services-wrapper,
-    .testimonials-container,
-    .contact-sales-container {
-        flex-direction: column;
-        gap: 40px;
-    }
+  /* Break all sidebar + content splits into single column */
+  .services-wrapper,
+  .testimonials-container,
+  .contact-sales-container {
+    flex-direction: column;
+    gap: 40px;
+  }
 
-    .services-sidebar,
-    .testimonials-sidebar,
-    .contact-sales-sidebar {
-        width: 100%;
-        position: relative;
-    }
+  .services-sidebar,
+  .testimonials-sidebar,
+  .contact-sales-sidebar {
+    width: 100%;
+    position: relative;
+  }
 
-    .services-side-tag,
-    .testimonials-side-tag,
-    .sales-side-tag {
-        position: relative;
-        top: 0;
-        color: var(--accent-orange-acid);
-        margin-bottom: 10px;
-    }
+  .services-side-tag,
+  .testimonials-side-tag,
+  .sales-side-tag {
+    position: relative;
+    top: 0;
+    color: var(--accent-orange-acid);
+    margin-bottom: 10px;
+  }
 
-    .testimonials-main-content,
-    .contact-sales-main-content {
-        padding-right: 0;
-        max-width: 100%;
-    }
+  .testimonials-main-content,
+  .contact-sales-main-content {
+    padding-right: 0;
+    max-width: 100%;
+  }
 
-    .gallery-container { flex-direction: column; }
-    .gallery-header-main { padding: 0 40px; gap: 40px; }
+  .gallery-container {
+    flex-direction: column;
+  }
+  .gallery-header-main {
+    padding: 0 40px;
+    gap: 40px;
+  }
 
-    .hero-services-index { display: none; }
-    #hero { align-items: center; text-align: center; }
-    .hero-center-title {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .hero-center-title h1 { font-size: 90px; }
-    .hero-description {
-        width: 100%;
-        text-align: center;
-        left: auto; right: auto;
-        max-width: 480px;
-        margin: 0 auto;
-    }
+  .hero-services-index {
+    display: none;
+  }
+  #hero {
+    align-items: center;
+    text-align: center;
+  }
+  .hero-center-title {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-center-title h1 {
+    font-size: 90px;
+  }
+  .hero-description {
+    width: 100%;
+    text-align: center;
+    left: auto;
+    right: auto;
+    max-width: 480px;
+    margin: 0 auto;
+  }
 
-    .manifest-footer-grid { gap: 40px; }
-    .accordion-inner-layout { padding-left: 30px; }
-    .mock-img-box { height: 260px; }
-    .sales-radial-glow { width: 100vw; height: 100vw; }
+  .manifest-footer-grid {
+    gap: 40px;
+  }
+  .accordion-inner-layout {
+    padding-left: 30px;
+  }
+  .mock-img-box {
+    height: 260px;
+  }
+  .sales-radial-glow {
+    width: 100vw;
+    height: 100vw;
+  }
 }
 
 /* --------------------------------------------------------------------------
    BREAKPOINT 4: TABLET PORTRAIT / LARGE PHONES (max-width: 768px)
    -------------------------------------------------------------------------- */
 @media (max-width: 768px) {
-    /* Navigation: hamburger activation */
-    .nav-links { display: none !important; }
-    .hamburger-btn { display: flex; }
-    .contact-information { display: none; }
+  /* Navigation: hamburger activation */
+  .nav-links {
+    display: none !important;
+  }
+  .hamburger-btn {
+    display: flex;
+  }
+  .contact-information {
+    display: none;
+  }
 
-    header {
-        padding: 16px 20px !important;
-        background: rgba(5, 5, 5, 0.5);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-    }
-    header.scrolled { padding: 14px 20px !important; }
+  header {
+    padding: 16px 20px !important;
+    background: rgba(5, 5, 5, 0.5);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+  header.scrolled {
+    padding: 14px 20px !important;
+  }
 
-    /* Hero: complete restructure for mobile */
-    #hero {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 100px 20px 60px !important;
-        height: auto;
-        min-height: 100vh;
-    }
+  /* Hero: complete restructure for mobile */
+  #hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px 60px !important;
+    height: auto;
+    min-height: 100vh;
+  }
 
-    .hero-center-title {
-        position: relative;
-        top: auto;
-        left: auto;
-        transform: none;
-        width: 100%;
-        text-align: center;
-        align-items: center;
-    }
+  .hero-center-title {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+  }
 
-    .hero-center-title h1 {
-        font-size: clamp(48px, 14vw, 90px);
-        align-items: center;
-    }
+  .hero-center-title h1 {
+    font-size: clamp(48px, 14vw, 90px);
+    align-items: center;
+  }
 
-    .title-line1,
-    .title-line2 {
-        transform: none !important;
-        display: block;
-    }
+  .title-line1,
+  .title-line2 {
+    transform: none !important;
+    display: block;
+  }
 
-    .hero-cta {
-        transform: none !important;
-        align-self: center;
-        margin-top: 30px;
-        width: 100%;
-        text-align: center;
-    }
+  .hero-cta {
+    transform: none !important;
+    align-self: center;
+    margin-top: 30px;
+    width: 100%;
+    text-align: center;
+  }
 
-    .btn-session {
-        display: inline-block;
-        width: auto;
-        padding: 16px 40px;
-        font-size: 16px;
-    }
+  .btn-session {
+    display: inline-block;
+    width: auto;
+    padding: 16px 40px;
+    font-size: 16px;
+  }
 
-    .hero-description {
-        position: relative;
-        bottom: auto; left: auto;
-        margin: 40px auto 0;
-        text-align: center;
-        max-width: 100%;
-        padding: 0 10px;
-    }
+  .hero-description {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin: 40px auto 0;
+    text-align: center;
+    max-width: 100%;
+    padding: 0 10px;
+  }
 
-    /* Manifest */
-    #manifest { padding: 80px 20px !important; }
-    .manifest-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-    .manifest-title { font-size: clamp(36px, 10vw, 100px) !important; }
-    .manifest-footer-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    .manifest-meta-right {
-        align-items: flex-start;
-        text-align: left;
-    }
-    .manifest-detail p { font-size: 15px; }
+  /* Manifest */
+  #manifest {
+    padding: 80px 20px !important;
+  }
+  .manifest-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .manifest-title {
+    font-size: clamp(36px, 10vw, 100px) !important;
+  }
+  .manifest-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .manifest-meta-right {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .manifest-detail p {
+    font-size: 15px;
+  }
 
-    /* Gallery */
-    #gallery { padding: 60px 0 !important; }
-    .gallery-header-main { padding: 0 20px; }
-    .gallery-main-title {
-        font-size: clamp(36px, 10vw, 85px) !important;
-        text-align: left;
-    }
-    .gallery-card { width: 260px; }
-    .card-image-box { height: 300px; }
-    .gallery-ticker-track { animation-duration: 35s; }
+  /* Gallery */
+  #gallery {
+    padding: 60px 0 !important;
+  }
+  .gallery-header-main {
+    padding: 0 20px;
+  }
+  .gallery-main-title {
+    font-size: clamp(36px, 10vw, 85px) !important;
+    text-align: left;
+  }
+  .gallery-card {
+    width: 260px;
+  }
+  .card-image-box {
+    height: 300px;
+  }
+  .gallery-ticker-track {
+    animation-duration: 35s;
+  }
 
-    /* Clients Ticker */
-    #clients-ticker { padding: 50px 0; gap: 25px; }
-    .clients-ticker-header { padding: 0 20px; }
-    .clients-ticker-header h3 { font-size: 11px; }
-    .client-logo-card { width: 150px; height: 65px; padding: 10px 15px; }
+  /* Clients Ticker */
+  #clients-ticker {
+    padding: 50px 0;
+    gap: 25px;
+  }
+  .clients-ticker-header {
+    padding: 0 20px;
+  }
+  .clients-ticker-header h3 {
+    font-size: 11px;
+  }
+  .client-logo-card {
+    width: 150px;
+    height: 65px;
+    padding: 10px 15px;
+  }
 
-    /* Services Accordion */
-    #services { padding: 80px 20px !important; }
-    .services-accordion-item { padding: 25px 0; }
-    .accordion-trigger h2 {
-        font-size: clamp(28px, 8vw, 76px) !important;
-    }
-    .acc-num { font-size: 18px; margin-right: 15px; }
-    .accordion-trigger .short-desc { padding-left: 0; font-size: 12px; }
-    .accordion-inner-layout { padding-left: 0; gap: 30px; }
-    .accordion-text-side .main-pitch { font-size: 15px; }
+  /* Services Accordion */
+  #services {
+    padding: 80px 20px !important;
+  }
+  .services-accordion-item {
+    padding: 25px 0;
+  }
+  .accordion-trigger h2 {
+    font-size: clamp(28px, 8vw, 76px) !important;
+  }
+  .acc-num {
+    font-size: 18px;
+    margin-right: 15px;
+  }
+  .accordion-trigger .short-desc {
+    padding-left: 0;
+    font-size: 12px;
+  }
+  .accordion-inner-layout {
+    padding-left: 0;
+    gap: 30px;
+  }
+  .accordion-text-side .main-pitch {
+    font-size: 15px;
+  }
 
-    .mockup-glide-carousel { flex-direction: column; }
-    .mock-img-box {
-        height: 200px;
-        width: 100%;
-        transform: none !important;
-    }
-    .services-accordion-item.active .animate-glide {
-        transform: none;
-    }
-    .services-accordion-item:hover { padding-left: 0; }
+  .mockup-glide-carousel {
+    flex-direction: column;
+  }
+  .mock-img-box {
+    height: 200px;
+    width: 100%;
+    transform: none !important;
+  }
+  .services-accordion-item.active .animate-glide {
+    transform: none;
+  }
+  .services-accordion-item:hover {
+    padding-left: 0;
+  }
 
-    /* Testimonials */
-    #testimonials { padding: 80px 20px !important; }
-    .testimonials-main-title {
-        font-size: clamp(36px, 10vw, 85px) !important;
-        margin-bottom: 40px;
-    }
-    .avatar-item { width: 55px; height: 55px; }
-    .avatar-counter-badge { width: 55px; height: 55px; }
-    .avatar-counter-badge span { font-size: 14px; }
-    .testimonial-quote-text { font-size: 15px; line-height: 1.6; }
-    .testimonials-avatars-group { margin-bottom: 40px; }
-    .author-name { font-size: 16px; }
+  /* Testimonials */
+  #testimonials {
+    padding: 80px 20px !important;
+  }
+  .testimonials-main-title {
+    font-size: clamp(36px, 10vw, 85px) !important;
+    margin-bottom: 40px;
+  }
+  .avatar-item {
+    width: 55px;
+    height: 55px;
+  }
+  .avatar-counter-badge {
+    width: 55px;
+    height: 55px;
+  }
+  .avatar-counter-badge span {
+    font-size: 14px;
+  }
+  .testimonial-quote-text {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .testimonials-avatars-group {
+    margin-bottom: 40px;
+  }
+  .author-name {
+    font-size: 16px;
+  }
 
-    /* Contact Form */
-    #contact-sales { padding: 80px 20px !important; }
-    .sales-title { font-size: clamp(32px, 10vw, 68px) !important; }
-    .contact-sales-main-content { padding-right: 0; }
-    .contact-form-wrapper { max-width: 100%; }
-    .contact-sales-header { max-width: 100%; }
+  /* Contact Form */
+  #contact-sales {
+    padding: 80px 20px !important;
+  }
+  .sales-title {
+    font-size: clamp(32px, 10vw, 68px) !important;
+  }
+  .contact-sales-main-content {
+    padding-right: 0;
+  }
+  .contact-form-wrapper {
+    max-width: 100%;
+  }
+  .contact-sales-header {
+    max-width: 100%;
+  }
 
-    .project-chips-grid { gap: 8px; justify-content: center; }
-    .chip-item {
-        width: calc(50% - 4px);
-        padding: 12px 10px;
-        font-size: 12px;
-        text-align: center;
-        min-height: 44px;
-    }
+  .project-chips-grid {
+    gap: 8px;
+    justify-content: center;
+  }
+  .chip-item {
+    width: calc(50% - 4px);
+    padding: 12px 10px;
+    font-size: 12px;
+    text-align: center;
+    min-height: 44px;
+  }
 
-    .sales-form input,
-    .sales-form textarea {
-        padding: 16px;
-        font-size: 14px;
-        min-height: 44px;
-    }
+  .sales-form input,
+  .sales-form textarea {
+    padding: 16px;
+    font-size: 14px;
+    min-height: 44px;
+  }
 
-    .btn-submit-sales {
-        padding: 18px 0;
-        min-height: 48px;
-    }
+  .btn-submit-sales {
+    padding: 18px 0;
+    min-height: 48px;
+  }
 
-    /* Global mobile rules */
-    .parallax-element {
-        transform: none !important;
-        transition: none !important;
-    }
+  /* Global mobile rules */
+  .parallax-element {
+    transform: none !important;
+    transition: none !important;
+  }
 
-    img { max-width: 100%; }
+  img {
+    max-width: 100%;
+  }
 }
 
 /* --------------------------------------------------------------------------
    BREAKPOINT 5: SMALL PHONES (max-width: 480px)
    -------------------------------------------------------------------------- */
 @media (max-width: 480px) {
-    #hero { padding: 80px 16px 50px !important; }
-    #manifest { padding: 60px 16px !important; }
-    #services { padding: 60px 16px !important; }
-    #testimonials { padding: 60px 16px !important; }
-    #contact-sales { padding: 60px 16px !important; }
+  #hero {
+    padding: 80px 16px 50px !important;
+  }
+  #manifest {
+    padding: 60px 16px !important;
+  }
+  #services {
+    padding: 60px 16px !important;
+  }
+  #testimonials {
+    padding: 60px 16px !important;
+  }
+  #contact-sales {
+    padding: 60px 16px !important;
+  }
 
-    .hero-center-title h1 { font-size: clamp(40px, 15vw, 70px); }
-    .hero-description p { font-size: 13px; }
+  .hero-center-title h1 {
+    font-size: clamp(40px, 15vw, 70px);
+  }
+  .hero-description p {
+    font-size: 13px;
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+  }
 
-    .gallery-card { width: 200px; }
-    .card-image-box { height: 220px; }
-    .card-project-title { font-size: 14px; }
-    .card-project-desc { font-size: 12px; }
+  .gallery-card {
+    width: 200px;
+  }
+  .card-image-box {
+    height: 220px;
+  }
+  .card-project-title {
+    font-size: 14px;
+  }
+  .card-project-desc {
+    font-size: 12px;
+  }
 
-    .client-logo-card { width: 120px; height: 55px; padding: 8px 12px; }
+  .client-logo-card {
+    width: 120px;
+    height: 55px;
+    padding: 8px 12px;
+  }
 
-    .accordion-trigger h2 { font-size: clamp(24px, 8vw, 50px) !important; }
-    .acc-num { font-size: 14px; margin-right: 10px; }
-    .mock-img-box { height: 180px; }
-    .capabilities-list li { font-size: 12px; }
+  .accordion-trigger h2 {
+    font-size: clamp(24px, 8vw, 50px) !important;
+  }
+  .acc-num {
+    font-size: 14px;
+    margin-right: 10px;
+  }
+  .mock-img-box {
+    height: 180px;
+  }
+  .capabilities-list li {
+    font-size: 12px;
+  }
 
-    .avatar-item { width: 48px; height: 48px; }
-    .avatar-counter-badge { width: 48px; height: 48px; }
-    .avatar-counter-badge span { font-size: 12px; }
-    .testimonial-quote-text { font-size: 14px; }
+  .avatar-item {
+    width: 48px;
+    height: 48px;
+  }
+  .avatar-counter-badge {
+    width: 48px;
+    height: 48px;
+  }
+  .avatar-counter-badge span {
+    font-size: 12px;
+  }
+  .testimonial-quote-text {
+    font-size: 14px;
+  }
 
-    .chip-item { width: 100%; }
+  .chip-item {
+    width: 100%;
+  }
 
-    .mobile-menu-link { font-size: clamp(28px, 7vw, 42px); }
-    .mobile-menu-content { gap: 22px; }
+  .mobile-menu-link {
+    font-size: clamp(28px, 7vw, 42px);
+  }
+  .mobile-menu-content {
+    gap: 22px;
+  }
 
-    .manifest-title { font-size: clamp(30px, 10vw, 60px) !important; }
-    .manifest-detail p { font-size: 14px; }
-    .meta-value { font-size: 12px; }
+  .manifest-title {
+    font-size: clamp(30px, 10vw, 60px) !important;
+  }
+  .manifest-detail p {
+    font-size: 14px;
+  }
+  .meta-value {
+    font-size: 12px;
+  }
 }
 
 /* --------------------------------------------------------------------------
    BREAKPOINT 6: VERY SMALL SCREENS (max-width: 360px)
    -------------------------------------------------------------------------- */
 @media (max-width: 360px) {
-    #hero { padding: 70px 12px 40px !important; }
+  #hero {
+    padding: 70px 12px 40px !important;
+  }
 
-    .hero-center-title h1 { font-size: clamp(32px, 16vw, 55px); }
-    .btn-session { padding: 14px 24px; font-size: 14px; }
+  .hero-center-title h1 {
+    font-size: clamp(32px, 16vw, 55px);
+  }
+  .btn-session {
+    padding: 14px 24px;
+    font-size: 14px;
+  }
 
-    .accordion-trigger h2 { font-size: clamp(22px, 7vw, 40px) !important; }
+  .accordion-trigger h2 {
+    font-size: clamp(22px, 7vw, 40px) !important;
+  }
 
-    .gallery-card { width: 180px; }
-    .card-image-box { height: 200px; }
+  .gallery-card {
+    width: 180px;
+  }
+  .card-image-box {
+    height: 200px;
+  }
 
-    .avatar-item { width: 42px; height: 42px; }
-    .avatar-counter-badge { width: 42px; height: 42px; }
+  .avatar-item {
+    width: 42px;
+    height: 42px;
+  }
+  .avatar-counter-badge {
+    width: 42px;
+    height: 42px;
+  }
 
-    .mobile-menu-link { font-size: 26px; }
+  .mobile-menu-link {
+    font-size: 26px;
+  }
 
-    .sales-title { font-size: clamp(28px, 10vw, 48px) !important; }
-    .contact-form-wrapper,
-    .contact-sales-header { max-width: 100%; }
+  .sales-title {
+    font-size: clamp(28px, 10vw, 48px) !important;
+  }
+  .contact-form-wrapper,
+  .contact-sales-header {
+    max-width: 100%;
+  }
+}
+
+/* ==========================================================================
+   14. CINEMATIC PRELOADER SETUP (BRUTALIST TECH LUXURY)
+   ========================================================================== */
+#axiobyte-preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #050505; /* Întuneric total la boot */
+  z-index: 10000; /* Stă deasupra navigației și a cursorului */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* Tranziție ultra-smooth cubic-bezier pentru ridicarea cortinei */
+  transition:
+    transform 1.2s cubic-bezier(0.85, 0, 0.15, 1),
+    opacity 1s ease;
+  will-change: transform;
+}
+
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.preloader-brand {
+  font-family: "Oswald", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-white);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: preloaderFadeIn 0.6s ease forwards 0.2s;
+}
+
+.preloader-counter {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(
+    --accent-orange-acid
+  ); /* Procentul se aprinde în portocaliu acid */
+  letter-spacing: -0.02em;
+}
+
+.preloader-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--accent-orange-acid);
+  transition: width 0.1s linear;
+}
+
+/* Când scriptul declară încărcarea gata, aruncăm preloader-ul în sus în afara ecranului */
+#axiobyte-preloader.loaded {
+  transform: translate3d(0, -100%, 0);
+  pointer-events: none;
+}
+
+@keyframes preloaderFadeIn {
+  to {
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+}
+
+.btn-session {
+    font-family: 'Space Grotesk', sans-serif; /* Proprietățile tale existente */
+    font-size: 18px; /* */
+    font-weight: 400; /* */
+    color: var(--text-white); /* */
+    text-decoration: none; /* */
+    position: relative; /* */
+    padding-bottom: 6px; /* */
+    
+    /* ADĂUGĂRI STRATEGICE PENTRU MAGNETISM */
+    display: inline-block;
+    will-change: transform;
+    /* Tranziție fină doar când mouse-ul pleacă, restul e controlat din JS */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease; 
+}
+
+/* ==========================================================================
+   CONCEPT 3: INFINITE ROTATING TECH STAMP // SCROLL INDICATOR
+   ========================================================================== */
+.axiobyte-scroll-stamp {
+    position: absolute;
+    bottom: 40px;
+    right: 60px; /* Aliniat perfect în colțul dreapta-jos al Hero-ului */
+    width: 130px;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 15;
+    pointer-events: none; /* Mouse-ul trece prin el ca să nu blocheze alte elemente */
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+/* Săgeata minimalistă din centrul cercului */
+.stamp-pointer {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    color: var(--accent-orange-acid);
+    font-weight: 300;
+    transform: translateY(-1px);
+    animation: stampArrowPulse 2s infinite ease-in-out;
+}
+
+/* SVG-ul care se va roti din JS */
+.stamp-svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* Ascundem calea cercului, vrem să vedem doar textul */
+#circlePath {
+    fill: none;
+    stroke: none;
+}
+
+/* Textul Monospace circular */
+.stamp-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 7.5px; /* Dimensiune micro, ultra-elegantă */
+    font-weight: 700;
+    fill: rgba(255, 255, 255, 0.4); /* Alb discret ca să nu distragă atenția de la titlu */
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+
+/* Când utilizatorul dă scroll masiv, ascundem ștampila fluid în sus */
+.axiobyte-scroll-stamp.fade-out {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+}
+
+/* Animația de respirație a săgeții din centru */
+@keyframes stampArrowPulse {
+    0%, 100% { transform: translateY(-3px); opacity: 0.4; }
+    50% { transform: translateY(3px); opacity: 1; }
 }
