@@ -2698,3 +2698,37 @@ img[alt*="Service Preview"],
 .avatar-item img {
     pointer-events: none; /* Mouse-ul trebuie să detecteze div-ul părinte, nu imaginea din el */
 }
+
+/* ==========================================================================
+   VARIANTA 2: CINEMATIC SPLIT-TEXT REVEAL ENGINE (LOCOMOTIVE STYLE)
+   ========================================================================== */
+
+/* Clasa globală pentru titlurile care vor folosi acest efect */
+.reveal-type {
+    overflow: hidden; /* Ascunde cuvintele când sunt în podea */
+    line-height: 1.2;
+    display: block;
+}
+
+/* Containerul fiecărui cuvânt izolat din JavaScript */
+.reveal-word {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    vertical-align: top;
+    margin-right: 0.22em; /* Păstrează spațiul natural dintre cuvinte */
+}
+
+/* Textul fizic din interiorul măștii */
+.reveal-word-inner {
+    display: inline-block;
+    transform: translate3d(0, 100%, 0); /* Îl coborâm complet în podea, invizibil */
+    will-change: transform;
+    /* Curbă cubic-bezier grea, de elită, pentru o accelerare catifelată */
+    transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Starea activată mecanic din JS în momentul în care elementul intră pe ecran */
+.reveal-type.animated .reveal-word-inner {
+    transform: translate3d(0, 0, 0); /* Tragem textul în sus la poziția lui nativă */
+}

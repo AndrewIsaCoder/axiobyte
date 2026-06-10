@@ -832,3 +832,66 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 })();
+
+/* ==========================================================================
+   ANIMAȚIE INTERACTIVĂ: TIPOGRAPHY SPLIT-TEXT REVEAL (ENGINE 2)
+   ========================================================================== */
+(function() {
+    document.addEventListener('DOMContentLoaded', () => {
+        const revealElements = document.querySelectorAll('.reveal-type');
+
+        if (revealElements.length > 0) {
+            
+            // 1. PREGĂTIREA TEXTULUI: Împărțim textul în structuri sigure cu măști CSS
+            revealElements.forEach(element => {
+                const textStr = element.getAttribute('data-reveal') || element.textContent;
+                const words = textStr.split(' ');
+                element.innerHTML = ''; // Golim textul brut vechi
+
+                words.forEach((word) => {
+                    // Creăm masca exterioară pentru fiecare cuvânt
+                    const wordDiv = document.createElement('span');
+                    wordDiv.className = 'reveal-word';
+
+                    // Creăm elementul intern care se va mișca
+                    const innerSpan = document.createElement('span');
+                    innerSpan.className = 'reveal-word-inner';
+                    innerSpan.textContent = word;
+
+                    wordDiv.appendChild(innerSpan);
+                    element.appendChild(wordDiv);
+                });
+            });
+
+            // 2. INTERSECTION OBSERVER: Detectăm când titlul intră pe ecran la scroll
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Declanșează când 15% din titlu este vizibil
+            };
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        const inners = target.querySelectorAll('.reveal-word-inner');
+
+                        // Adăugăm clasa de bază
+                        target.classList.add('animated');
+
+                        // Aplicăm un decalaj de timp (stagger) pentru fiecare cuvânt în parte
+                        inners.forEach((inner, index) => {
+                            inner.style.transitionDelay = `${index * 45}ms`;
+                        });
+
+                        // Opriți monitorizarea pentru acest element deoarece s-a animat deja
+                        observer.unobserve(target);
+                    }
+                });
+            }, observerOptions);
+
+            // Pornim monitorizarea pentru toate elementele cu clasa reveal-type
+            revealElements.forEach(el => revealObserver.observe(el));
+        }
+    });
+})();
