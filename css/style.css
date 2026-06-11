@@ -2771,3 +2771,271 @@ img[alt*="Service Preview"],
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
 }
+
+/* ==========================================================================
+   SECTION 4.5: PROCESS LOGIC // BRUTALIST GRID CSS
+   ========================================================================== */
+#process {
+    padding: 140px 0;
+    background-color: #050505;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.process-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+}
+
+.process-sidebar {
+    width: 25%;
+}
+
+.process-side-tag {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: var(--accent-orange-acid);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.process-main-content {
+    width: 75%;
+}
+
+.process-header {
+    margin-bottom: 80px;
+}
+
+.process-main-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 54px;
+    font-weight: 700;
+    color: var(--text-white);
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+}
+
+.process-subtitle {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.5);
+    max-width: 540px;
+}
+
+/* Structura rândurilor de proces */
+.process-step-item {
+    position: relative;
+    padding: 40px 0;
+}
+
+/* Linia tehnică brutalistă orizontală */
+.step-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%; /* Pornește de la 0% lățime */
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.15);
+    /* Se întinde fluid pe 1.4 secunde folosind curba Axiobyte standard */
+    transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: width;
+}
+
+/* Când rândul primește clasa .is-revealed din JS, linia se întinde complet */
+.process-step-item.is-revealed .step-line {
+    width: 100%;
+}
+
+/* Alinierea asimetrică din interior */
+.step-grid {
+    display: flex;
+    align-items: flex-start;
+}
+
+.step-number {
+    width: 30%;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent-orange-acid);
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+.step-details {
+    width: 70%;
+}
+
+.step-details h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-white);
+    margin-bottom: 12px;
+    transition: color 0.3s ease;
+}
+
+.step-details p {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.6;
+    max-width: 580px;
+}
+
+/* Efect discret de hover pe titlul pasului curent */
+.process-step-item:hover .step-details h4 {
+    color: var(--accent-orange-acid);
+}
+
+/* RESPONSIVE OPTIMIZATION */
+@media (max-width: 1024px) {
+    .process-container { flex-direction: column; }
+    .process-sidebar { width: 100%; margin-bottom: 40px; }
+    .process-main-content { width: 100%; }
+    .step-grid { flex-direction: column; gap: 16px; }
+    .step-number { width: 100%; }
+    .step-details { width: 100%; }
+}
+
+/* ==========================================================================
+   SECTION 4.5: PROCESS SUPREME ENGINE // INTERACTIVE BRUTALIST CSS
+   ========================================================================== */
+#process {
+    padding: 140px 0;
+    background-color: #050505;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.process-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+}
+
+.process-sidebar {
+    width: 25%;
+}
+
+/* Stilul indicatorului din sidebar care va primi efectul Matrix din JS */
+.process-side-tag {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: var(--accent-orange-acid);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: inline-block;
+    will-change: content;
+}
+
+.process-main-content {
+    width: 75%;
+}
+
+.process-header {
+    margin-bottom: 80px;
+}
+
+.process-main-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 54px;
+    font-weight: 700;
+    color: var(--text-white);
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+}
+
+.process-subtitle {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.5);
+    max-width: 540px;
+}
+
+/* Structura rândurilor de proces */
+.process-step-item {
+    position: relative;
+    padding: 40px 0;
+    transition: opacity 0.5s ease;
+}
+
+/* Linia tehnică brutalistă orizontală */
+.step-line {
+    position: absolute;
+    top: 0; left: 0;
+    width: 0%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.12);
+    transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: width;
+}
+
+.process-step-item.is-revealed .step-line {
+    width: 100%;
+}
+
+.step-grid {
+    display: flex;
+    align-items: flex-start;
+}
+
+/* Numărul pasului (Varianta 1: Tranziție pe culoare) */
+.step-number {
+    width: 30%;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.2); /* Pornește stins */
+    letter-spacing: 1px;
+    margin-top: 4px;
+    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: color;
+}
+
+.step-details {
+    width: 70%;
+}
+
+/* Titlul pasului (Pornește stins) */
+.step-details h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4); /* Pornește stins */
+    margin-bottom: 12px;
+    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: color;
+}
+
+.step-details p {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.6;
+    max-width: 580px;
+    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* VARIANTA 1 ACTIVE STATE: Când pasul devine activ la scroll, îl aprindem intens */
+.process-step-item.step-active .step-number {
+    color: var(--accent-orange-acid);
+}
+.process-step-item.step-active .step-details h4 {
+    color: var(--text-white);
+}
+.process-step-item.step-active .step-details p {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .process-container { flex-direction: column; }
+    .process-sidebar { width: 100%; margin-bottom: 40px; }
+    .process-main-content { width: 100%; }
+    .step-grid { flex-direction: column; gap: 16px; }
+    .step-number { width: 100%; }
+    .step-details { width: 100%; }
+}

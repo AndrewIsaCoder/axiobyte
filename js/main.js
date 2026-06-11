@@ -935,3 +935,84 @@ document.addEventListener('DOMContentLoaded', () => {
         revealElements.forEach(el => revealObserver.observe(el));
     });
 })();
+
+/* ==========================================================================
+   AXIOBYTE PROCESS SYSTEM // UNIFIED VARIANTS 1, 2 & 3 ENGINE
+   ========================================================================== */
+(function() {
+    document.addEventListener('DOMContentLoaded', () => {
+        const processSection = document.getElementById('process');
+        const stepItems = document.querySelectorAll('.process-step-item');
+        const sidebarTag = document.querySelector('.process-side-tag');
+
+        if (!processSection || stepItems.length === 0 || !sidebarTag) return;
+
+        // --- DEBUT VARIANTA 3: LOGICA DE GLITCH MATRIX PENTRU SIDEBAR ---
+        let lastStepIndex = -1;
+        const chars = "0123456789X/@#•";
+
+        const runMatrixGlitch = (targetText) => {
+            let iterations = 0;
+            const interval = setInterval(() => {
+                sidebarTag.textContent = targetText
+                    .split("")
+                    .map((char, index) => {
+                        if (index < iterations) return targetText[index];
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    })
+                    .join("");
+
+                if (iterations >= targetText.length) {
+                    clearInterval(interval);
+                    sidebarTag.textContent = targetText; // Fixăm textul curat la final
+                }
+                iterations += 1 / 2;
+            }, 30);
+        };
+
+        // --- DEBUT VARIANTA 1: INTERSECTION OBSERVER PENTRU ACTIVARE CROMATICĂ LIVE ---
+        // Folosim un observer dedicat cu un viewport strâns pe centrul ecranului
+        const activeObserverOptions = {
+            root: null,
+            rootMargin: "-25% 0px -25% 0px", // Detectează când pasul trece fix prin centrul ecranului
+            threshold: 0.2
+        };
+
+        const activeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const item = entry.target;
+                const stepNum = item.querySelector('.step-number').textContent.substring(0, 2);
+
+                if (entry.isIntersecting) {
+                    // Scoatem starea activă de pe toate celelalte rânduri
+                    stepItems.forEach(el => el.classList.remove('step-active'));
+                    
+                    // Aprindem pasul curent (Varianta 1)
+                    item.classList.add('step-active');
+
+                    // Dacă pasul s-a schimbat, declanșăm glitch-ul tehnic în sidebar (Varianta 3)
+                    const currentStepIndex = Array.from(stepItems).indexOf(item);
+                    if (currentStepIndex !== lastStepIndex) {
+                        lastStepIndex = currentStepIndex;
+                        runMatrixGlitch(`[PROCESS: STEP ${stepNum}/04]`);
+                    }
+                }
+            });
+        }, activeObserverOptions);
+
+        // Cuplăm observer-ul pe fiecare pas din listă
+        stepItems.forEach(item => activeObserver.observe(item));
+
+        // RESET TRIPLE SAFEGUARD: Dacă utilizatorul dă scroll rapid în sus în afara secțiunii
+        window.addEventListener('scroll', () => {
+            const sectionRect = processSection.getBoundingClientRect();
+            if (sectionRect.top > window.innerHeight || sectionRect.bottom < 0) {
+                if (lastStepIndex !== -1) {
+                    lastStepIndex = -1;
+                    sidebarTag.textContent = "[Our Process]";
+                    stepItems.forEach(el => el.classList.remove('step-active'));
+                }
+            }
+        });
+    });
+})();
