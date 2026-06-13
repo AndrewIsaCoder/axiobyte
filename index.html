@@ -12,6 +12,26 @@
     />
   </head>
   <body>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+      <defs>
+        <filter id="liquid-distortion">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.02"
+            numOctaves="3"
+            result="noise"
+          />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="noise"
+            scale="0"
+            xChannelSelector="R"
+            yChannelSelector="G"
+            id="liquid-map"
+          />
+        </filter>
+      </defs>
+    </svg>
     <div id="axiobyte-preloader">
       <div class="preloader-content">
         <div class="preloader-brand">AXIOBYTE®</div>
@@ -28,19 +48,35 @@
     <header>
       <nav>
         <ul class="nav-links">
-          <li><a href="#manifest" data-text="Studio"><span>Studio</span></a></li>
-          <li><a href="#gallery" data-text="Work"><span>Work</span></a></li>
-          <li><a href="#services" data-text="Services"><span>Services</span></a></li>
-          <li><a href="#testimonials" data-text="Reviews"><span>Reviews</span></a></li>
+          <li>
+            <a href="#manifest" data-text="Studio"><span>Studio</span></a>
+          </li>
+          <li>
+            <a href="#gallery" data-text="Work"><span>Work</span></a>
+          </li>
+          <li>
+            <a href="#services" data-text="Services"><span>Services</span></a>
+          </li>
+          <li>
+            <a href="#testimonials" data-text="Reviews"><span>Reviews</span></a>
+          </li>
           <div class="contact-information">
             <ul>
-              <li><a href="" data-text="contact@axiobyte.com"><span>contact@axiobyte.com</span></a></li>
+              <li>
+                <a href="" data-text="contact@axiobyte.com"
+                  ><span>contact@axiobyte.com</span></a
+                >
+              </li>
               <li>Bucharest, RO</li>
             </ul>
           </div>
           <div class="contact-info">
             <ul>
-              <li><a href="#contact-sales" data-text="Contact us"><span>Contact us</span></a></li>
+              <li>
+                <a href="#contact-sales" data-text="Contact us"
+                  ><span>Contact us</span></a
+                >
+              </li>
             </ul>
           </div>
         </ul>
@@ -75,32 +111,50 @@
         >
           <ul>
             <li>
-              <a href="#service-strategy" data-image="./assets/marketing-ads-photos/package-ad.png">
+              <a
+                href="#service-strategy"
+                data-image="./assets/marketing-ads-photos/package-ad.png"
+              >
                 <span class="num">01</span> Brand Strategy
               </a>
             </li>
             <li>
-              <a href="#service-identity" data-image="./assets/marketing-ads-photos/notebook-ad.png">
+              <a
+                href="#service-identity"
+                data-image="./assets/marketing-ads-photos/notebook-ad.png"
+              >
                 <span class="num">02</span> Visual Identity
               </a>
             </li>
             <li class="active">
-              <a href="#service-web" data-image="./assets/marketing-ads-photos/chair-nature-ad.png">
+              <a
+                href="#service-web"
+                data-image="./assets/marketing-ads-photos/chair-nature-ad.png"
+              >
                 <span class="num">03</span> Web Experiences
               </a>
             </li>
             <li>
-              <a href="#service-uiux" data-image="./assets/marketing-ads-photos/girl-running-ad.png">
+              <a
+                href="#service-uiux"
+                data-image="./assets/marketing-ads-photos/girl-running-ad.png"
+              >
                 <span class="num">04</span> UI/UX Design
               </a>
             </li>
             <li>
-              <a href="#service-campaigns" data-image="./assets/marketing-ads-photos/package-ad.png">
+              <a
+                href="#service-campaigns"
+                data-image="./assets/marketing-ads-photos/package-ad.png"
+              >
                 <span class="num">05</span> Digital Campaigns
               </a>
             </li>
             <li>
-              <a href="#service-native" data-image="./assets/marketing-ads-photos/notebook-ad.png">
+              <a
+                href="#service-native"
+                data-image="./assets/marketing-ads-photos/notebook-ad.png"
+              >
                 <span class="num">06</span> Native App Development
               </a>
             </li>
@@ -210,7 +264,9 @@
                 </div>
                 <div class="card-meta-info">
                   <h3 class="card-project-title">Organic Forms</h3>
-                  <span class="card-project-desc">[Identity & Product Design]</span>
+                  <span class="card-project-desc"
+                    >[Identity & Product Design]</span
+                  >
                 </div>
               </div>
 
@@ -274,7 +330,9 @@
                 </div>
                 <div class="card-meta-info">
                   <h3 class="card-project-title">Organic Forms</h3>
-                  <span class="card-project-desc">[Identity & Product Design]</span>
+                  <span class="card-project-desc"
+                    >[Identity & Product Design]</span
+                  >
                 </div>
               </div>
 
@@ -302,21 +360,68 @@
         <div class="clients-ticker-header">
           <h3>
             OUR DIGITAL ECOSYSTEM
-            <span class="ticker-header-tag">[ SELECTED LAB PROJECTS & PRODUCTS ]</span>
+            <span class="ticker-header-tag"
+              >[ SELECTED LAB PROJECTS & PRODUCTS ]</span
+            >
           </h3>
         </div>
 
         <div class="clients-marquee-container">
           <div class="clients-marquee-track row-left">
-            <div class="client-logo-card"><img src="./assets/logos/who-we-worked-with-logos-cp/bugalab-studio.png" alt="Bugalab Studio" /></div>
-            <div class="client-logo-card"><img src="./assets/logos/who-we-worked-with-logos-cp/furdeco.png" alt="FurDeco" /></div>
-            <div class="client-logo-card"><img src="./assets/logos/who-we-worked-with-logos-cp/glorious.png" alt="Animal Matchmaking" /></div>
-            <div class="client-logo-card"><img src="./assets/logos/who-we-worked-with-logos-cp/bugalab-studio.png" alt="Bugalab Studio" /></div>
-            <div class="client-logo-card"><img src="./assets/logos/who-we-worked-with-logos-cp/furdeco.png" alt="FurDeco" /></div>
-            <div class="client-logo-card"><img src="./assets/logos/who-we-worked-with-logos-cp/glorious.png" alt="Animal Matchmaking" /></div>
-            <div class="client-logo-card"><img src="./assets/logos/who-we-worked-with-logos-cp/bugalab-studio.png" alt="Bugalab Studio" /></div>
-            <div class="client-logo-card"><img src="./assets/logos/who-we-worked-with-logos-cp/furdeco.png" alt="FurDeco" /></div>
-            <div class="client-logo-card"><img src="./assets/logos/who-we-worked-with-logos-cp/glorious.png" alt="glorious" /></div>
+            <div class="client-logo-card">
+              <img
+                src="./assets/logos/who-we-worked-with-logos-cp/bugalab-studio.png"
+                alt="Bugalab Studio"
+              />
+            </div>
+            <div class="client-logo-card">
+              <img
+                src="./assets/logos/who-we-worked-with-logos-cp/furdeco.png"
+                alt="FurDeco"
+              />
+            </div>
+            <div class="client-logo-card">
+              <img
+                src="./assets/logos/who-we-worked-with-logos-cp/glorious.png"
+                alt="Animal Matchmaking"
+              />
+            </div>
+            <div class="client-logo-card">
+              <img
+                src="./assets/logos/who-we-worked-with-logos-cp/bugalab-studio.png"
+                alt="Bugalab Studio"
+              />
+            </div>
+            <div class="client-logo-card">
+              <img
+                src="./assets/logos/who-we-worked-with-logos-cp/furdeco.png"
+                alt="FurDeco"
+              />
+            </div>
+            <div class="client-logo-card">
+              <img
+                src="./assets/logos/who-we-worked-with-logos-cp/glorious.png"
+                alt="Animal Matchmaking"
+              />
+            </div>
+            <div class="client-logo-card">
+              <img
+                src="./assets/logos/who-we-worked-with-logos-cp/bugalab-studio.png"
+                alt="Bugalab Studio"
+              />
+            </div>
+            <div class="client-logo-card">
+              <img
+                src="./assets/logos/who-we-worked-with-logos-cp/furdeco.png"
+                alt="FurDeco"
+              />
+            </div>
+            <div class="client-logo-card">
+              <img
+                src="./assets/logos/who-we-worked-with-logos-cp/glorious.png"
+                alt="glorious"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -328,13 +433,19 @@
           </div>
 
           <div class="services-accordion-list">
-            <div id="service-strategy" class="services-accordion-item scroll-reveal reveal-up" data-delay="0">
+            <div
+              id="service-strategy"
+              class="services-accordion-item scroll-reveal reveal-up"
+              data-delay="0"
+            >
               <div class="accordion-trigger">
                 <div class="trigger-headline">
                   <h2><span class="acc-num">01</span> BRAND STRATEGY</h2>
                   <span class="accordion-icon">+</span>
                 </div>
-                <p class="short-desc">Brand positioning, messaging, and strategic direction.</p>
+                <p class="short-desc">
+                  Brand positioning, messaging, and strategic direction.
+                </p>
               </div>
               <div class="accordion-content">
                 <div class="accordion-inner-layout">
@@ -348,31 +459,70 @@
                     <div class="capabilities-list">
                       <h4>What we do:</h4>
                       <ul>
-                        <li><span class="bullet">→</span> Competitive Analysis & Auditing</li>
-                        <li><span class="bullet">→</span> Brand Architecture & Naming Systems</li>
-                        <li><span class="bullet">→</span> Core Positioning & Messaging Frameworks</li>
-                        <li><span class="bullet">→</span> Go-To-Market Strategy Design</li>
+                        <li>
+                          <span class="bullet">→</span> Competitive Analysis &
+                          Auditing
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> Brand Architecture &
+                          Naming Systems
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> Core Positioning &
+                          Messaging Frameworks
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> Go-To-Market Strategy
+                          Design
+                        </li>
                       </ul>
                     </div>
                   </div>
                   <div class="accordion-visual-side">
                     <div class="mockup-glide-carousel">
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/package-ad.png" alt="Asset" class="parallax-element" data-speed="0.02" /></div>
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/notebook-ad.png" alt="Asset" class="parallax-element" data-speed="0.04" /></div>
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/chair-nature-ad.png" alt="Asset" class="parallax-element" data-speed="0.03" /></div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/package-ad.png"
+                          alt="Asset"
+                          class="parallax-element"
+                          data-speed="0.02"
+                        />
+                      </div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/notebook-ad.png"
+                          alt="Asset"
+                          class="parallax-element"
+                          data-speed="0.04"
+                        />
+                      </div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/chair-nature-ad.png"
+                          alt="Asset"
+                          class="parallax-element"
+                          data-speed="0.03"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div id="service-identity" class="services-accordion-item scroll-reveal reveal-up" data-delay="100">
+            <div
+              id="service-identity"
+              class="services-accordion-item scroll-reveal reveal-up"
+              data-delay="100"
+            >
               <div class="accordion-trigger">
                 <div class="trigger-headline">
                   <h2><span class="acc-num">02</span> VISUAL IDENTITY</h2>
                   <span class="accordion-icon">+</span>
                 </div>
-                <p class="short-desc">Striking, memorable design systems and visual armor.</p>
+                <p class="short-desc">
+                  Striking, memorable design systems and visual armor.
+                </p>
               </div>
               <div class="accordion-content">
                 <div class="accordion-inner-layout">
@@ -386,31 +536,71 @@
                     <div class="capabilities-list">
                       <h4>What we do:</h4>
                       <ul>
-                        <li><span class="bullet">→</span> Custom Typography & Logotypes</li>
-                        <li><span class="bullet">→</span> Digital Design Systems (Figma Native)</li>
-                        <li><span class="bullet">→</span> Brand Styleguides & Technical Guidelines</li>
-                        <li><span class="bullet">→</span> Corporate Identity & Marketing Collateral</li>
+                        <li>
+                          <span class="bullet">→</span> Custom Typography &
+                          Logotypes
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> Digital Design Systems
+                          (Figma Native)
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> Brand Styleguides &
+                          Technical Guidelines
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> Corporate Identity &
+                          Marketing Collateral
+                        </li>
                       </ul>
                     </div>
                   </div>
                   <div class="accordion-visual-side">
                     <div class="mockup-glide-carousel">
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/notebook-ad.png" alt="Identity Asset 1" class="parallax-element" data-speed="0.02" /></div>
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/chair-nature-ad.png" alt="Identity Asset 2" class="parallax-element" data-speed="0.04" /></div>
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/package-ad.png" alt="Identity Asset 3" class="parallax-element" data-speed="0.03" /></div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/notebook-ad.png"
+                          alt="Identity Asset 1"
+                          class="parallax-element"
+                          data-speed="0.02"
+                        />
+                      </div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/chair-nature-ad.png"
+                          alt="Identity Asset 2"
+                          class="parallax-element"
+                          data-speed="0.04"
+                        />
+                      </div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/package-ad.png"
+                          alt="Identity Asset 3"
+                          class="parallax-element"
+                          data-speed="0.03"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div id="service-web" class="services-accordion-item active scroll-reveal reveal-up" data-delay="200">
+            <div
+              id="service-web"
+              class="services-accordion-item active scroll-reveal reveal-up"
+              data-delay="200"
+            >
               <div class="accordion-trigger">
                 <div class="trigger-headline">
                   <h2><span class="acc-num">03</span> WEB EXPERIENCES</h2>
                   <span class="accordion-icon">+</span>
                 </div>
-                <p class="short-desc">High-performance interactive front-end and digital architecture.</p>
+                <p class="short-desc">
+                  High-performance interactive front-end and digital
+                  architecture.
+                </p>
               </div>
               <div class="accordion-content">
                 <div class="accordion-inner-layout">
@@ -419,36 +609,77 @@
                       We design and build immersive digital experiences that
                       combine strong visual identity, intuitive UX, and clean
                       performance. From landing pages to complex platforms, we
-                      focus on clarity, emotion, and usability across all devices.
+                      focus on clarity, emotion, and usability across all
+                      devices.
                     </p>
                     <div class="capabilities-list">
                       <h4>What we do:</h4>
                       <ul>
-                        <li><span class="bullet">→</span> Website design & creative redesign</li>
-                        <li><span class="bullet">→</span> High-End UX/UI for complex web products</li>
-                        <li><span class="bullet">→</span> Interactive cinematic layouts & animations</li>
-                        <li><span class="bullet">→</span> Modular design systems for scalable products</li>
+                        <li>
+                          <span class="bullet">→</span> Website design &
+                          creative redesign
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> High-End UX/UI for
+                          complex web products
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> Interactive cinematic
+                          layouts & animations
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> Modular design systems
+                          for scalable products
+                        </li>
                       </ul>
                     </div>
                   </div>
                   <div class="accordion-visual-side">
                     <div class="mockup-glide-carousel">
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/chair-nature-ad.png" alt="Web Experience 1" class="parallax-element" data-speed="0.02" /></div>
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/notebook-ad.png" alt="Web Experience 2" class="parallax-element" data-speed="0.04" /></div>
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/girl-running-ad.png" alt="Web Experience 3" class="parallax-element" data-speed="0.03" /></div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/chair-nature-ad.png"
+                          alt="Web Experience 1"
+                          class="parallax-element"
+                          data-speed="0.02"
+                        />
+                      </div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/notebook-ad.png"
+                          alt="Web Experience 2"
+                          class="parallax-element"
+                          data-speed="0.04"
+                        />
+                      </div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/girl-running-ad.png"
+                          alt="Web Experience 3"
+                          class="parallax-element"
+                          data-speed="0.03"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div id="service-uiux" class="services-accordion-item scroll-reveal reveal-up" data-delay="300">
+            <div
+              id="service-uiux"
+              class="services-accordion-item scroll-reveal reveal-up"
+              data-delay="300"
+            >
               <div class="accordion-trigger">
                 <div class="trigger-headline">
                   <h2><span class="acc-num">04</span> UI/UX DESIGN</h2>
                   <span class="accordion-icon">+</span>
                 </div>
-                <p class="short-desc">User-centric digital interfaces engineered for maximum retention.</p>
+                <p class="short-desc">
+                  User-centric digital interfaces engineered for maximum
+                  retention.
+                </p>
               </div>
               <div class="accordion-content">
                 <div class="accordion-inner-layout">
@@ -462,31 +693,70 @@
                     <div class="capabilities-list">
                       <h4>What we do:</h4>
                       <ul>
-                        <li><span class="bullet">→</span> User Journey Mapping & Logic Flowcharts</li>
-                        <li><span class="bullet">→</span> High-Fidelity Wireframing & Prototyping</li>
-                        <li><span class="bullet">→</span> Usability Testing & Interface Audits</li>
-                        <li><span class="bullet">→</span> Product Interface Architecture</li>
+                        <li>
+                          <span class="bullet">→</span> User Journey Mapping &
+                          Logic Flowcharts
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> High-Fidelity
+                          Wireframing & Prototyping
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> Usability Testing &
+                          Interface Audits
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> Product Interface
+                          Architecture
+                        </li>
                       </ul>
                     </div>
                   </div>
                   <div class="accordion-visual-side">
                     <div class="mockup-glide-carousel">
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/notebook-ad.png" alt="UIUX Asset 1" class="parallax-element" data-speed="0.02" /></div>
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/girl-running-ad.png" alt="UIUX Asset 2" class="parallax-element" data-speed="0.04" /></div>
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/package-ad.png" alt="UIUX Asset 3" class="parallax-element" data-speed="0.03" /></div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/notebook-ad.png"
+                          alt="UIUX Asset 1"
+                          class="parallax-element"
+                          data-speed="0.02"
+                        />
+                      </div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/girl-running-ad.png"
+                          alt="UIUX Asset 2"
+                          class="parallax-element"
+                          data-speed="0.04"
+                        />
+                      </div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/package-ad.png"
+                          alt="UIUX Asset 3"
+                          class="parallax-element"
+                          data-speed="0.03"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div id="service-campaigns" class="services-accordion-item scroll-reveal reveal-up" data-delay="400">
+            <div
+              id="service-campaigns"
+              class="services-accordion-item scroll-reveal reveal-up"
+              data-delay="400"
+            >
               <div class="accordion-trigger">
                 <div class="trigger-headline">
                   <h2><span class="acc-num">05</span> DIGITAL CAMPAIGNS</h2>
                   <span class="accordion-icon">+</span>
                 </div>
-                <p class="short-desc">High-impact marketing assets and modern brand activations.</p>
+                <p class="short-desc">
+                  High-impact marketing assets and modern brand activations.
+                </p>
               </div>
               <div class="accordion-content">
                 <div class="accordion-inner-layout">
@@ -500,31 +770,73 @@
                     <div class="capabilities-list">
                       <h4>What we do:</h4>
                       <ul>
-                        <li><span class="bullet">→</span> Strategic Campaign Art Direction</li>
-                        <li><span class="bullet">→</span> Ad Content & Digital Asset Production</li>
-                        <li><span class="bullet">→</span> Social Infrastructure & Asset Packs</li>
-                        <li><span class="bullet">→</span> Conversion Rate Optimization (CRO)</li>
+                        <li>
+                          <span class="bullet">→</span> Strategic Campaign Art
+                          Direction
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> Ad Content & Digital
+                          Asset Production
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> Social Infrastructure &
+                          Asset Packs
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> Conversion Rate
+                          Optimization (CRO)
+                        </li>
                       </ul>
                     </div>
                   </div>
                   <div class="accordion-visual-side">
                     <div class="mockup-glide-carousel">
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/girl-running-ad.png" alt="Campaign Asset 1" class="parallax-element" data-speed="0.02" /></div>
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/package-ad.png" alt="Campaign Asset 2" class="parallax-element" data-speed="0.04" /></div>
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/notebook-ad.png" alt="Campaign Asset 3" class="parallax-element" data-speed="0.03" /></div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/girl-running-ad.png"
+                          alt="Campaign Asset 1"
+                          class="parallax-element"
+                          data-speed="0.02"
+                        />
+                      </div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/package-ad.png"
+                          alt="Campaign Asset 2"
+                          class="parallax-element"
+                          data-speed="0.04"
+                        />
+                      </div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/notebook-ad.png"
+                          alt="Campaign Asset 3"
+                          class="parallax-element"
+                          data-speed="0.03"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div id="service-native" class="services-accordion-item scroll-reveal reveal-up" data-delay="500">
+            <div
+              id="service-native"
+              class="services-accordion-item scroll-reveal reveal-up"
+              data-delay="500"
+            >
               <div class="accordion-trigger">
                 <div class="trigger-headline">
-                  <h2><span class="acc-num">06</span> NATIVE APP DEVELOPMENT</h2>
+                  <h2>
+                    <span class="acc-num">06</span> NATIVE APP DEVELOPMENT
+                  </h2>
                   <span class="accordion-icon">+</span>
                 </div>
-                <p class="short-desc">High-performance mobile software built for native environments.</p>
+                <p class="short-desc">
+                  High-performance mobile software built for native
+                  environments.
+                </p>
               </div>
               <div class="accordion-content">
                 <div class="accordion-inner-layout">
@@ -538,98 +850,52 @@
                     <div class="capabilities-list">
                       <h4>What we do:</h4>
                       <ul>
-                        <li><span class="bullet">→</span> iOS & Android Native Deployment</li>
-                        <li><span class="bullet">→</span> Cross-Platform Architecture Frameworks</li>
-                        <li><span class="bullet">→</span> Micro-Interactions & Interface Rendering</li>
-                        <li><span class="bullet">→</span> API Integrations & Core Infrastructure</li>
+                        <li>
+                          <span class="bullet">→</span> iOS & Android Native
+                          Deployment
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> Cross-Platform
+                          Architecture Frameworks
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> Micro-Interactions &
+                          Interface Rendering
+                        </li>
+                        <li>
+                          <span class="bullet">→</span> API Integrations & Core
+                          Infrastructure
+                        </li>
                       </ul>
                     </div>
                   </div>
                   <div class="accordion-visual-side">
                     <div class="mockup-glide-carousel">
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/package-ad.png" alt="Apps Asset 1" class="parallax-element" data-speed="0.02" /></div>
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/chair-nature-ad.png" alt="Apps Asset 2" class="parallax-element" data-speed="0.04" /></div>
-                      <div class="mock-img-box animate-glide"><img src="./assets/marketing-ads-photos/girl-running-ad.png" alt="Apps Asset 3" class="parallax-element" data-speed="0.03" /></div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/package-ad.png"
+                          alt="Apps Asset 1"
+                          class="parallax-element"
+                          data-speed="0.02"
+                        />
+                      </div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/chair-nature-ad.png"
+                          alt="Apps Asset 2"
+                          class="parallax-element"
+                          data-speed="0.04"
+                        />
+                      </div>
+                      <div class="mock-img-box animate-glide">
+                        <img
+                          src="./assets/marketing-ads-photos/girl-running-ad.png"
+                          alt="Apps Asset 3"
+                          class="parallax-element"
+                          data-speed="0.03"
+                        />
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="process">
-        <div class="process-container">
-          <div class="process-sidebar">
-            <span class="process-side-tag">[Our Process]</span>
-          </div>
-
-          <div class="process-main-content">
-            <div class="process-header scroll-reveal reveal-up">
-              <h2 class="process-main-title">HOW WE WORK</h2>
-              <p class="process-subtitle">
-                From absolute zero to a high-end digital weapon. No shortcuts.
-              </p>
-            </div>
-
-            <div class="process-steps-list">
-              <div class="process-step-item scroll-reveal reveal-up" data-delay="0">
-                <div class="step-line"></div>
-                <div class="step-grid">
-                  <span class="step-number">01 / AUDIT</span>
-                  <div class="step-details">
-                    <h4>Discovery & Strategy Architecture</h4>
-                    <p>
-                      We dissect your market, audit your competitors, and
-                      extract the unique core value of your brand before
-                      building anything.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="process-step-item scroll-reveal reveal-up" data-delay="100">
-                <div class="step-line"></div>
-                <div class="step-grid">
-                  <span class="step-number">02 / INTERFACE</span>
-                  <div class="step-details">
-                    <h4>High-End UI/UX Engineering</h4>
-                    <p>
-                      We forge native Figma prototypes and modular design
-                      systems, tailoring premium, brutalist, and high-contrast
-                      armor for your product.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="process-step-item scroll-reveal reveal-up" data-delay="200">
-                <div class="step-line"></div>
-                <div class="step-grid">
-                  <span class="step-number">03 / DEVELOPMENT</span>
-                  <div class="step-details">
-                    <h4>Clean-Code & Pixel-Perfect Front-End</h4>
-                    <p>
-                      We deploy high-performance interactive interfaces running
-                      at 120Hz. Lightweight data structures combined with fluid
-                      layouts.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="process-step-item scroll-reveal reveal-up" data-delay="300">
-                <div class="step-line"></div>
-                <div class="step-grid">
-                  <span class="step-number">04 / DEPLOYMENT</span>
-                  <div class="step-details">
-                    <h4>Launch, Scale & Performance Monitoring</h4>
-                    <p>
-                      We clear the cache, optimize server rendering, and push
-                      your system live with total protection and extreme
-                      acceleration.
-                    </p>
                   </div>
                 </div>
               </div>
@@ -645,29 +911,50 @@
           </div>
 
           <div class="testimonials-main-content">
-            <h2 class="testimonials-main-title reveal-type" data-reveal="OUR CLIENTS SAY">
+            <h2
+              class="testimonials-main-title reveal-type"
+              data-reveal="OUR CLIENTS SAY"
+            >
               OUR CLIENTS SAY
             </h2>
 
-            <div class="testimonials-avatars-group scroll-reveal reveal-scale" data-delay="0">
+            <div
+              class="testimonials-avatars-group scroll-reveal reveal-scale"
+              data-delay="0"
+            >
               <div class="avatar-item active" data-index="0">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80" alt="Client 1" />
+                <img
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80"
+                  alt="Client 1"
+                />
               </div>
               <div class="avatar-item" data-index="1">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80" alt="Client 2" />
+                <img
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80"
+                  alt="Client 2"
+                />
               </div>
               <div class="avatar-item" data-index="2">
-                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80" alt="Client 3" />
+                <img
+                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80"
+                  alt="Client 3"
+                />
               </div>
               <div class="avatar-item" data-index="3">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&h=150&q=80" alt="Client 4" />
+                <img
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&h=150&q=80"
+                  alt="Client 4"
+                />
               </div>
               <div class="avatar-counter-badge">
                 <span>+35</span>
               </div>
             </div>
 
-            <div class="testimonial-display-box scroll-reveal reveal-up" data-delay="150">
+            <div
+              class="testimonial-display-box scroll-reveal reveal-up"
+              data-delay="150"
+            >
               <p class="testimonial-quote-text">
                 "Our collaboration was smooth from start to finish. The team
                 took time to understand our business goals, offered thoughtful
@@ -690,56 +977,162 @@
           </div>
 
           <div class="contact-sales-main-content">
-            <div class="contact-sales-header scroll-reveal reveal-up" data-delay="0">
+            <div
+              class="contact-sales-header scroll-reveal reveal-up"
+              data-delay="0"
+            >
               <h2 class="sales-title">TRANSFORM YOUR BRAND</h2>
               <p class="sales-subtitle">
                 Ready to start a project? Leave a message or reach us directly.
               </p>
             </div>
 
-            <div class="contact-form-wrapper scroll-reveal reveal-up" data-delay="100">
+            <div
+              class="contact-form-wrapper scroll-reveal reveal-up"
+              data-delay="100"
+            >
               <div class="sales-radial-glow"></div>
 
               <form action="" class="sales-form" id="axiobyte-lead-form">
-                <div class="form-group scroll-reveal reveal-up" data-delay="150">
+                <div
+                  class="form-group scroll-reveal reveal-up"
+                  data-delay="150"
+                >
                   <label>What type of project is this?</label>
                   <div class="project-chips-grid">
-                    <div class="chip-item" data-type="project-type" data-value="Brand Strategy">Brand Strategy</div>
-                    <div class="chip-item" data-type="project-type" data-value="Visual Identity">Visual Identity</div>
-                    <div class="chip-item" data-type="project-type" data-value="Web Experiences">Web Experiences</div>
-                    <div class="chip-item" data-type="project-type" data-value="UI/UX Design">UI/UX DESIGN</div>
-                    <div class="chip-item" data-type="project-type" data-value="Digital Campaigns">Digital Campaigns</div>
+                    <div
+                      class="chip-item"
+                      data-type="project-type"
+                      data-value="Brand Strategy"
+                    >
+                      Brand Strategy
+                    </div>
+                    <div
+                      class="chip-item"
+                      data-type="project-type"
+                      data-value="Visual Identity"
+                    >
+                      Visual Identity
+                    </div>
+                    <div
+                      class="chip-item"
+                      data-type="project-type"
+                      data-value="Web Experiences"
+                    >
+                      Web Experiences
+                    </div>
+                    <div
+                      class="chip-item"
+                      data-type="project-type"
+                      data-value="UI/UX Design"
+                    >
+                      UI/UX DESIGN
+                    </div>
+                    <div
+                      class="chip-item"
+                      data-type="project-type"
+                      data-value="Digital Campaigns"
+                    >
+                      Digital Campaigns
+                    </div>
                   </div>
-                  <input type="hidden" id="selected-project-type" name="project_type" value="" />
+                  <input
+                    type="hidden"
+                    id="selected-project-type"
+                    name="project_type"
+                    value=""
+                  />
                 </div>
 
-                <div class="form-group scroll-reveal reveal-up" data-delay="200">
+                <div
+                  class="form-group scroll-reveal reveal-up"
+                  data-delay="200"
+                >
                   <label>Estimated Budget Range</label>
                   <div class="project-chips-grid">
-                    <div class="chip-item budget-chip" data-type="budget" data-value="500 - 1k €">500 - 1k €</div>
-                    <div class="chip-item budget-chip" data-type="budget" data-value="2k - 5k €">2k - 5k €</div>
-                    <div class="chip-item budget-chip" data-type="budget" data-value="5k - 10k €">5k - 10k €</div>
-                    <div class="chip-item budget-chip" data-type="budget" data-value="10k € +">10k € +</div>
+                    <div
+                      class="chip-item budget-chip"
+                      data-type="budget"
+                      data-value="500 - 1k €"
+                    >
+                      500 - 1k €
+                    </div>
+                    <div
+                      class="chip-item budget-chip"
+                      data-type="budget"
+                      data-value="2k - 5k €"
+                    >
+                      2k - 5k €
+                    </div>
+                    <div
+                      class="chip-item budget-chip"
+                      data-type="budget"
+                      data-value="5k - 10k €"
+                    >
+                      5k - 10k €
+                    </div>
+                    <div
+                      class="chip-item budget-chip"
+                      data-type="budget"
+                      data-value="10k € +"
+                    >
+                      10k € +
+                    </div>
                   </div>
-                  <input type="hidden" id="selected-budget" name="budget" value="" />
+                  <input
+                    type="hidden"
+                    id="selected-budget"
+                    name="budget"
+                    value=""
+                  />
                 </div>
 
-                <div class="form-group scroll-reveal reveal-up" data-delay="250">
+                <div
+                  class="form-group scroll-reveal reveal-up"
+                  data-delay="250"
+                >
                   <label>Name</label>
-                  <input type="text" id="client-name" placeholder="Your name" required autocomplete="off" />
+                  <input
+                    type="text"
+                    id="client-name"
+                    placeholder="Your name"
+                    required
+                    autocomplete="off"
+                  />
                 </div>
 
-                <div class="form-group scroll-reveal reveal-up" data-delay="300">
+                <div
+                  class="form-group scroll-reveal reveal-up"
+                  data-delay="300"
+                >
                   <label>E-mail</label>
-                  <input type="email" id="client-email" placeholder="Your e-mail" required autocomplete="off" />
+                  <input
+                    type="email"
+                    id="client-email"
+                    placeholder="Your e-mail"
+                    required
+                    autocomplete="off"
+                  />
                 </div>
 
-                <div class="form-group scroll-reveal reveal-up" data-delay="350">
+                <div
+                  class="form-group scroll-reveal reveal-up"
+                  data-delay="350"
+                >
                   <label>Message</label>
-                  <textarea id="client-message" rows="5" placeholder="Your message" required></textarea>
+                  <textarea
+                    id="client-message"
+                    rows="5"
+                    placeholder="Your message"
+                    required
+                  ></textarea>
                 </div>
 
-                <button type="submit" class="btn-submit-sales scroll-reveal reveal-up" data-delay="400">
+                <button
+                  type="submit"
+                  class="btn-submit-sales scroll-reveal reveal-up"
+                  data-delay="400"
+                >
                   <span class="btn-text">Send message</span>
                 </button>
               </form>
@@ -751,7 +1144,11 @@
 
     <footer id="axiobyte-magnetic-footer">
       <div class="footer-magnetic-wrap">
-        <a href="#contact-sales" class="footer-magnetic-trigger" id="magnetic-huge-cta">
+        <a
+          href="#contact-sales"
+          class="footer-magnetic-trigger"
+          id="magnetic-huge-cta"
+        >
           <span class="cta-line-top">LET'S BUILD WEAPONS</span>
           <span class="cta-line-bottom text-stroke">START A PROJECT ↗</span>
         </a>

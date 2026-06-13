@@ -1016,3 +1016,119 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 })();
+
+// --- 2. CUSTOM CURSOR UPGRADED // WITH CONTEXT TEXT & LIQUID IMAGE DISTORTION ENGINE ---
+    const cursorDot = document.querySelector('.custom-cursor-dot');
+    const cursorOutline = document.querySelector('.custom-cursor-outline');
+    
+    if (cursorDot && cursorOutline) {
+        window.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+            cursorOutline.style.left = e.clientX + 'px';
+            cursorOutline.style.top = e.clientY + 'px';
+        });
+
+        window.addEventListener('mousedown', () => cursorOutline.classList.add('cursor-click'));
+        window.addEventListener('mouseup', () => cursorOutline.classList.remove('cursor-click'));
+
+        // ==========================================
+        // VARIANTA 3 LOGIC: CURSORUL CONTEXTUAL LIVE
+        // ==========================================
+        const setCursorContext = (text) => {
+            cursorOutline.classList.add('cursor-context-active');
+            cursorOutline.textContent = text;
+            cursorDot.style.opacity = '0'; // Ascundem punctul din mijloc ca să se citească textul curat
+        };
+
+        const resetCursorContext = () => {
+            cursorOutline.classList.remove('cursor-context-active');
+            cursorOutline.classList.remove('cursor-hover');
+            cursorDot.classList.remove('cursor-hover');
+            cursorOutline.textContent = '';
+            cursorDot.style.opacity = '1';
+        };
+
+        // Scanăm dinamic zonele de interes din layout
+        document.body.addEventListener('mouseover', (e) => {
+            const target = e.target;
+
+            // 1. Dacă suntem în secțiunea de Galerie (Work)
+            if (target.closest('#gallery')) {
+                setCursorContext('[VIEW]');
+                if (target.closest('.gallery-card')) {
+                    cursorOutline.textContent = '[EXPLORE]';
+                }
+                return;
+            }
+
+            // 2. Dacă suntem pe elementele de input sau textarea din formular
+            if (target.closest('input') || target.closest('textarea')) {
+                setCursorContext('[WRITE]');
+                return;
+            }
+
+            // 3. Dacă suntem pe butoane magnetice, form-chips, link-uri sau acordioane
+            if (target.closest('a') || target.closest('button') || target.closest('.chip-item') || target.closest('.avatar-item') || target.closest('.accordion-trigger')) {
+                cursorOutline.classList.add('cursor-hover');
+                cursorDot.classList.add('cursor-hover');
+                
+                if (target.closest('#axiobyte-magnetic-footer')) {
+                    setCursorContext('[TALK]');
+                }
+                return;
+            }
+
+            // Dacă mouse-ul părăsește zonele speciale, resetăm cursorul
+            resetCursorContext();
+        }, { passive: true });
+
+
+        // ==========================================
+        // VARIANTA 1 LOGIC: LIQUID DISTORTION MOTOR
+        // ==========================================
+        const svgMap = document.getElementById('liquid-map');
+        const galleryCards = document.querySelectorAll('.gallery-card');
+
+        if (svgMap && galleryCards.length > 0) {
+            galleryCards.forEach(card => {
+                let animationFrame;
+                
+                card.addEventListener('mouseenter', () => {
+                    let progress = 0;
+                    
+                    const animateWave = () => {
+                        progress += 0.08; // Viteza valului lichid
+                        // Generăm o curbă trigonometrică superbă de tip val (pornește de la 0, urcă la 25, revine la 0)
+                        let scaleValue = Math.sin(progress * Math.PI) * 25; 
+                        
+                        if (progress <= 1) {
+                            svgMap.setAttribute('scale', scaleValue);
+                            animationFrame = requestAnimationFrame(animateWave);
+                        } else {
+                            svgMap.setAttribute('scale', 0); // Reset de siguranță
+                        }
+                    };
+                    
+                    cancelAnimationFrame(animationFrame);
+                    animateWave();
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    cancelAnimationFrame(animationFrame);
+                    // Efect elastic de stingere a distorsiunii când mouse-ul pleacă rapid
+                    let currentScale = parseFloat(svgMap.getAttribute('scale')) || 0;
+                    const fadeWave = () => {
+                        currentScale *= 0.82;
+                        if (currentScale > 0.5) {
+                            svgMap.setAttribute('scale', currentScale);
+                            requestAnimationFrame(fadeWave);
+                        } else {
+                            svgMap.setAttribute('scale', 0);
+                        }
+                    };
+                    fadeWave();
+                });
+            });
+        }
+    }

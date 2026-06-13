@@ -3040,3 +3040,43 @@ img[alt*="Service Preview"],
     .step-details { width: 100%; }
 }
 
+/* ==========================================================================
+   INTERACTIVE UPGRADES // VARIANTA 1 (LIQUID) & VARIANTA 3 (CONTEXT CURSOR)
+   ========================================================================== */
+
+/* Upgrade la structura cursorului outline ca să poată ține text centrat */
+.custom-cursor-outline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--accent-orange-acid);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: transform 0.08s cubic-bezier(0.25, 1, 0.5, 1), 
+                width 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                height 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.3s ease, 
+                background-color 0.3s ease;
+}
+
+/* Starea cursorului când "vorbește" în Galerie sau Contact */
+.custom-cursor-outline.cursor-context-active {
+    width: 65px;
+    height: 65px;
+    background-color: rgba(255, 114, 55, 0.06);
+    border-color: var(--accent-orange-acid);
+}
+
+/* Forțăm placa video să animeze filtrul pe imagini la hover */
+.card-image-box img {
+    filter: grayscale(0.2) url(#liquid-distortion);
+    will-change: filter, transform;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                filter 0.5s ease;
+}
