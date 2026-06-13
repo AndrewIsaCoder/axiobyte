@@ -5,14 +5,34 @@ const cursorDot = document.querySelector('.custom-cursor-dot');
 const cursorOutline = document.querySelector('.custom-cursor-outline');
 
 if (cursorDot && cursorOutline) {
+    let cursorActive = false;
+
     // 1. Urmărirea poziției mouse-ului în timp real
     window.addEventListener('mousemove', (e) => {
+        if (!cursorActive) {
+            cursorDot.style.opacity = '1';
+            cursorOutline.style.opacity = '1';
+            cursorActive = true;
+        }
         cursorDot.style.left = e.clientX + 'px';
         cursorDot.style.top = e.clientY + 'px';
         
         cursorOutline.style.left = e.clientX + 'px';
         cursorOutline.style.top = e.clientY + 'px';
     });
+
+    document.addEventListener('mouseleave', () => {
+        cursorDot.style.opacity = '0';
+        cursorOutline.style.opacity = '0';
+        cursorActive = false;
+    });
+
+    document.addEventListener('mouseenter', () => {
+        cursorDot.style.opacity = '1';
+        cursorOutline.style.opacity = '1';
+        cursorActive = true;
+    });
+
 
     // 2. Efectul de CLICK pe toată pagina
     window.addEventListener('mousedown', () => {
@@ -67,6 +87,8 @@ if (cursorDot && cursorOutline) {
         });
     };
 
+
+    
 /* ==========================================================================
    1. SISTEM AUTO-HOVER MEMORABIL (SERVICES INDEX)
    ========================================================================== */
@@ -245,8 +267,15 @@ accordionItems.forEach(item => {
 
     if (trigger && content) {
         trigger.addEventListener('click', () => {
-            // Dacă utilizatorul apasă pe tab-ul deja deschis, nu facem nimic
-            if (item.classList.contains('active')) return;
+            // Dacă utilizatorul apasă pe tab-ul deja deschis, îl închidem (toggle-off)
+            if (item.classList.contains('active')) {
+                content.style.height = '0px';
+                item.classList.remove('active');
+                if (typeof lenis !== 'undefined') {
+                    setTimeout(() => { lenis.resize(); }, 150);
+                }
+                return;
+            }
             
             // Închidem fluid elementul deschis anterior
             accordionItems.forEach(i => {
@@ -674,12 +703,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const cursorOutline = document.querySelector('.custom-cursor-outline');
 
     if (cursorDot && cursorOutline) {
+        let cursorActive = false;
+
         window.addEventListener('mousemove', (e) => {
+            if (!cursorActive) {
+                cursorDot.style.opacity = '1';
+                cursorOutline.style.opacity = '1';
+                cursorActive = true;
+            }
             cursorDot.style.left = e.clientX + 'px';
             cursorDot.style.top = e.clientY + 'px';
             
             cursorOutline.style.left = e.clientX + 'px';
             cursorOutline.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mouseleave', () => {
+            cursorDot.style.opacity = '0';
+            cursorOutline.style.opacity = '0';
+            cursorActive = false;
+        });
+
+        document.addEventListener('mouseenter', () => {
+            cursorDot.style.opacity = '1';
+            cursorOutline.style.opacity = '1';
+            cursorActive = true;
         });
 
         window.addEventListener('mousedown', () => cursorOutline.classList.add('cursor-click'));

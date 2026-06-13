@@ -1,4 +1,4 @@
-﻿@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Space+Grotesk:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Space+Grotesk:wght@300..700&display=swap");
 @media (min-width: 1025px) {
   body,
   body *,
@@ -35,7 +35,9 @@
   border-radius: 50%;
   z-index: 9999;
   pointer-events: none; /* Elementul e fantomă, nu blochează click-urile */
+  opacity: 0;
   transition:
+    opacity 0.2s ease,
     width 0.2s ease,
     height 0.2s ease,
     background-color 0.2s ease;
@@ -51,8 +53,10 @@
   z-index: 9998;
   pointer-events: none;
   will-change: transform;
+  opacity: 0;
   /* Mișcare fluidă, amortizată (inertia) */
   transition:
+    opacity 0.2s ease,
     transform 0.08s cubic-bezier(0.25, 1, 0.5, 1),
     width 0.2s ease,
     height 0.2s ease,
@@ -744,11 +748,7 @@ header.scrolled {
     transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translate3d(
-      calc(-50% - 20px),
-      0,
-      0
-    ); /* Mutare exactă la jumătatea setului duplicat */
+    transform: translate3d(-33.3333%, 0, 0);
   }
 }
 
@@ -2003,6 +2003,11 @@ header.scrolled {
    BREAKPOINT 3: TABLET LANDSCAPE (max-width: 1024px)
    -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
+  .custom-cursor-dot,
+  .custom-cursor-outline {
+    display: none !important;
+  }
+
   #manifest {
     padding: 100px 40px;
   }
@@ -2037,6 +2042,7 @@ header.scrolled {
     position: relative;
   }
 
+  .gallery-mini-tag,
   .services-side-tag,
   .testimonials-side-tag,
   .sales-side-tag {
@@ -2056,8 +2062,12 @@ header.scrolled {
     flex-direction: column;
   }
   .gallery-header-main {
+    flex-direction: column;
     padding: 0 40px;
-    gap: 40px;
+    gap: 10px;
+  }
+  .gallery-mini-tag {
+    width: auto;
   }
 
   .hero-services-index {
@@ -2237,6 +2247,12 @@ header.scrolled {
   }
   .clients-ticker-header h3 {
     font-size: 11px;
+  }
+  .ticker-header-tag {
+    display: block;
+    margin-left: 0;
+    margin-top: 5px;
+    font-size: 10px;
   }
   .client-logo-card {
     width: 150px;
