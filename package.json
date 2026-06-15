@@ -1,0 +1,23 @@
+{
+  "name": "axiobyte",
+  "version": "1.0.0",
+  "description": "Axiobyte Studio - Next-Gen Tech & Design Studio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndrewIsaCoder/axiobyte.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndrewIsaCoder/axiobyte/issues"
+  },
+  "homepage": "https://github.com/AndrewIsaCoder/axiobyte#readme",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
