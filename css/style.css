@@ -102,6 +102,18 @@ html.lenis body {
   overflow: hidden;
 }
 
+main {
+  /* Prevent blur and text rendering issues during kinetic scroll skew on the whole page */
+  will-change: transform;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
 :root {
   --bg-black: #050505;
   --accent-orange-acid: #e36b2c;
@@ -2647,7 +2659,7 @@ header.scrolled {
 .stamp-pointer {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 20px;
-    color: var(--accent-orange-acid);
+    color: var(--text-white);
     font-weight: 300;
     transform: translateY(-1px);
     animation: stampArrowPulse 2s infinite ease-in-out;

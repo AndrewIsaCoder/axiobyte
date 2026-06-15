@@ -594,8 +594,8 @@ if (hamburgerBtn && mobileMenu) {
         // O salvăm pe fereastră pentru a putea fi accesată de alte scripturi dacă e nevoie
         window.lenis = lenis;
 
-        // 2. Selectăm cardurile din galerie pe care vrem să le deformăm elastic
-        const galleryCards = document.querySelectorAll('.gallery-card');
+        // 2. Selectăm containerul principal pe care vrem să îl deformăm elastic
+        const galleryCards = document.querySelectorAll('main');
 
         if (galleryCards.length > 0) {
             // Ascultăm evenimentul de scroll în timp real din motorul Lenis
@@ -760,7 +760,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         window.lenis = lenis;
 
-        const galleryCards = document.querySelectorAll('.gallery-card');
+        const galleryCards = document.querySelectorAll('main');
         if (galleryCards.length > 0) {
             lenis.on('scroll', (attributes) => {
                 let clampedSpeed = Math.min(Math.max(attributes.velocity, -12), 12);
