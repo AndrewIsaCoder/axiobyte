@@ -55,39 +55,6 @@
       href="./assets/logos-axiobyteITsolution/square-axiobyteITsolution.png"
       type="image/x-icon"
     />
-
-    <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "Axiobyte® Studio",
-        "url": "https://axiobyte.online/",
-        "logo": "https://axiobyte.online/assets/logos-axiobyteITsolution/square-axiobyteITsolution.png",
-        "image": "https://axiobyte.online/assets/marketing-ads-photos/axiobyte-preview.png",
-        "description": "Premium creative tech studio in Bucharest specializing in Brand Strategy, UI/UX Design, Web Experiences, and Native App Development.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Bucharest",
-          "addressCountry": "RO"
-        },
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "email": "contact@axiobyte.com",
-          "contactType": "customer service"
-        },
-        "priceRange": "$$$",
-        "knowsAbout": [
-          "Brand Strategy",
-          "Visual Identity",
-          "Web Experiences",
-          "UI/UX Design",
-          "Digital Campaigns",
-          "Native App Development"
-        ]
-      }
-    </script>
   </head>
   <body>
     <div id="axiobyte-preloader">
@@ -1424,5 +1391,9 @@
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
     <script src="./js/main.js"></script>
     <script defer src="/_vercel/insights/script.js"></script>
+    <script type="module">
+      import { injectSpeedInsights } from 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights@2.0.0/dist/index.mjs';
+      injectSpeedInsights();
+    </script>
   </body>
 </html>
