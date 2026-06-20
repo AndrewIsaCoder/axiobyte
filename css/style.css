@@ -117,6 +117,9 @@ body {
   color: var(--text-white);
   margin: 0;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Adăugăm accelerare hardware pe tot site-ul pentru mișcarea fluidă a mouse-ului */
@@ -1710,6 +1713,95 @@ header.scrolled {
   box-shadow: 0 15px 40px rgba(255, 114, 55, 0.3);
 }
 
+/* Stări interactive pentru formularul de vânzări (Web3Forms) */
+.sales-form.submitting {
+  pointer-events: none;
+}
+
+.sales-form.submitting input,
+.sales-form.submitting textarea,
+.sales-form.submitting .chip-item {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-submit-sales.submitting {
+  background-color: rgba(227, 107, 44, 0.4);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-submit-sales.submitting .btn-text {
+  animation: pulse-transmitting 1.5s ease-in-out infinite;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.btn-submit-sales.success {
+  background-color: #2e7d32; /* Sleek dark green */
+  box-shadow: 0 10px 30px rgba(46, 125, 50, 0.3);
+  transform: scale(1.02);
+}
+
+.btn-submit-sales.success .btn-text {
+  color: #ffffff;
+}
+
+.btn-submit-sales.error {
+  background-color: #c62828; /* Sleek dark red */
+  box-shadow: 0 10px 30px rgba(198, 40, 40, 0.3);
+  transform: scale(1.02);
+}
+
+.btn-submit-sales.error .btn-text {
+  color: #ffffff;
+}
+
+/* Container feedback elegant de eroare/succes */
+.form-feedback-message {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 18px 24px;
+  border-radius: 6px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  display: none;
+  margin-top: 15px;
+}
+
+.form-feedback-message.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.form-feedback-message.success {
+  background-color: rgba(46, 125, 50, 0.08);
+  border: 1px solid rgba(46, 125, 50, 0.2);
+  color: #81c784;
+}
+
+.form-feedback-message.error {
+  background-color: rgba(198, 40, 40, 0.08);
+  border: 1px solid rgba(198, 40, 40, 0.2);
+  color: #e57373;
+}
+
+@keyframes pulse-transmitting {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+
 /* --- STRUCTURA GRILĂ PENTRU CHIPS (BUTOANE DE SELECȚIE) --- */
 .project-chips-grid {
   display: flex;
@@ -2796,6 +2888,7 @@ img[alt*="Service Preview"],
 .scroll-reveal.is-revealed {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
+    will-change: auto; /* Reset GPU isolation to fix subpixel text blurring after reveal */
 }
 
 /* ==========================================================================

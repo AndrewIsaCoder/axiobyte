@@ -380,24 +380,106 @@ if (formInputs.length > 0 && radialGlow) {
     });
 }
 
-// Micro-interacțiune la trimiterea cu succes a mesajului
+// Micro-interacțiune și trimitere funcțională a formularului via Web3Forms
 if (leadForm) {
     leadForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const submitBtn = leadForm.querySelector('.btn-submit-sales');
-        const btnText = submitBtn.querySelector('.btn-text');
         
-        if (btnText) {
-            btnText.textContent = "Transmission successful.";
-            submitBtn.style.backgroundColor = "#ffffff";
-            btnText.style.color = "#050505";
-            leadForm.reset();
-            
-            setTimeout(() => {
-                btnText.textContent = "Send message";
-                submitBtn.style.backgroundColor = "var(--accent-orange-acid)";
-            }, 3000);
+        const submitBtn = leadForm.querySelector('.btn-submit-sales');
+        const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+        const formFeedback = document.getElementById('form-feedback');
+        const interactiveInputs = leadForm.querySelectorAll('input[type="text"], input[type="email"], textarea');
+        
+        // Activăm clasa de trimitere pe formular (pentru blocare din CSS)
+        leadForm.classList.add('submitting');
+        
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.classList.add('submitting');
         }
+        if (btnText) {
+            btnText.textContent = "TRANSMITTING...";
+        }
+        
+        // Resetăm stările anterioare ale feedback-ului
+        if (formFeedback) {
+            formFeedback.classList.remove('success', 'error', 'show');
+            formFeedback.textContent = '';
+        }
+        
+        // Colectăm datele din formular
+        const formData = new FormData(leadForm);
+        const dataObject = Object.fromEntries(formData);
+        
+        // Trimitem prin AJAX către endpoint-ul Web3Forms
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(dataObject)
+        })
+        .then(async (response) => {
+            const result = await response.json();
+            if (response.status === 200 && result.success) {
+                // Succes!
+                if (submitBtn) {
+                    submitBtn.classList.remove('submitting');
+                    submitBtn.classList.add('success');
+                }
+                if (btnText) {
+                    btnText.textContent = "TRANSMISSION SUCCESSFUL";
+                }
+                if (formFeedback) {
+                    formFeedback.textContent = "Thank you! Your message has been sent successfully. We'll get back to you shortly.";
+                    formFeedback.classList.add('success', 'show');
+                }
+                
+                // Resetează datele formularului
+                leadForm.reset();
+                
+                // Resetează vizual chip-urile active
+                const activeChips = leadForm.querySelectorAll('.chip-item.active');
+                activeChips.forEach(chip => chip.classList.remove('active'));
+            } else {
+                throw new Error(result.message || "Submission failed. Please check your details.");
+            }
+        })
+        .catch((error) => {
+            console.error('Form submission error:', error);
+            if (submitBtn) {
+                submitBtn.classList.remove('submitting');
+                submitBtn.classList.add('error');
+            }
+            if (btnText) {
+                btnText.textContent = "TRANSMISSION FAILED";
+            }
+            if (formFeedback) {
+                formFeedback.textContent = error.message || "Failed to send message. Please try again later.";
+                formFeedback.classList.add('error', 'show');
+            }
+        })
+        .finally(() => {
+            // Permitem din nou interacțiunea după un scurt delay, revenind la starea inițială
+            setTimeout(() => {
+                leadForm.classList.remove('submitting');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('success', 'error');
+                }
+                if (btnText) {
+                    btnText.textContent = "Send message";
+                }
+                
+                // Ascundem mesajul de succes după un timp, dar lăsăm erorile vizibile pentru a fi citite
+                if (formFeedback && formFeedback.classList.contains('success')) {
+                    setTimeout(() => {
+                        formFeedback.classList.remove('show');
+                    }, 3000);
+                }
+            }, 3500);
+        });
     });
 }
 

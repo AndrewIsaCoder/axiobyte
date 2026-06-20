@@ -1231,13 +1231,15 @@
               </p>
             </div>
 
-            <div
-              class="contact-form-wrapper scroll-reveal reveal-up"
-              data-delay="100"
-            >
+            <div class="contact-form-wrapper">
               <div class="sales-radial-glow"></div>
 
               <form action="" class="sales-form" id="axiobyte-lead-form">
+                <!-- Web3Forms Configuration -->
+                <input type="hidden" name="access_key" value="d9ad5bf2-adc6-4bc9-a1ba-31b3f1a1ee5b" />
+                <input type="hidden" name="subject" value="New Lead from Axiobyte Studio" />
+                <input type="hidden" name="from_name" value="Axiobyte Contact Form" />
+
                 <div
                   class="form-group scroll-reveal reveal-up"
                   data-delay="150"
@@ -1346,6 +1348,7 @@
                   <input
                     type="text"
                     id="client-name"
+                    name="name"
                     placeholder="Your name"
                     required
                     autocomplete="off"
@@ -1360,6 +1363,7 @@
                   <input
                     type="email"
                     id="client-email"
+                    name="email"
                     placeholder="Your e-mail"
                     required
                     autocomplete="off"
@@ -1373,6 +1377,7 @@
                   <label>Message</label>
                   <textarea
                     id="client-message"
+                    name="message"
                     rows="5"
                     placeholder="Your message"
                     required
@@ -1386,6 +1391,7 @@
                 >
                   <span class="btn-text">Send message</span>
                 </button>
+                <div id="form-feedback" class="form-feedback-message"></div>
               </form>
             </div>
           </div>
