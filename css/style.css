@@ -377,7 +377,7 @@ header.scrolled {
 
 .hero-center-title h1 {
   font-family: "Oswald", sans-serif;
-  font-size: 120px;
+  font-size: clamp(38px, 7.5vw, 120px);
   font-weight: 700;
   line-height: 0.9;
   letter-spacing: -0.01em;
@@ -486,7 +486,7 @@ header.scrolled {
   width: 100%;
   min-height: 100vh;
   background-color: #000000;
-  padding: 180px 80px;
+  padding: clamp(60px, 9vw, 180px) clamp(16px, 5vw, 100px);
   display: flex;
   align-items: center;
   position: relative;
@@ -542,7 +542,7 @@ header.scrolled {
 
 .manifest-title {
   font-family: "Oswald", sans-serif;
-  font-size: clamp(54px, 6.5vw, 100px);
+  font-size: clamp(30px, 6vw, 100px);
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.01em;
@@ -614,7 +614,7 @@ header.scrolled {
   width: 100%;
   min-height: 100vh;
   background-color: #000000;
-  padding: 140px 0; /* Scoatere padding lateral pentru a rula din ecran în ecran */
+  padding: clamp(60px, 9vw, 140px) 0; /* Scoatere padding lateral pentru a rula din ecran în ecran */
   position: relative;
   overflow: hidden;
 }
@@ -646,7 +646,7 @@ header.scrolled {
 
 .gallery-main-title {
   font-family: "Oswald", sans-serif;
-  font-size: clamp(54px, 6vw, 85px);
+  font-size: clamp(32px, 5.5vw, 85px);
   font-weight: 700;
   color: var(--text-white);
   text-transform: uppercase;
@@ -773,7 +773,7 @@ header.scrolled {
   width: 100%;
   min-height: 100vh;
   background-color: #050505;
-  padding: 180px 100px;
+  padding: clamp(60px, 9vw, 180px) clamp(16px, 5vw, 100px);
   position: relative;
   overflow: hidden;
 }
@@ -830,7 +830,7 @@ header.scrolled {
 
 .accordion-trigger h2 {
   font-family: "Oswald", sans-serif;
-  font-size: clamp(48px, 5.5vw, 76px);
+  font-size: clamp(22px, 5vw, 76px);
   font-weight: 700;
   color: rgba(255, 255, 255, 0.25); /* Stare inactivă implicită */
   text-transform: uppercase;
@@ -1052,7 +1052,7 @@ header.scrolled {
   width: 100%;
   min-height: 100vh;
   background-color: #050505;
-  padding: 180px 100px; /* Aliniere master cu marginile din restul site-ului */
+  padding: clamp(60px, 9vw, 180px) clamp(16px, 5vw, 100px); /* Aliniere master cu marginile din restul site-ului */
   display: flex;
   align-items: center;
   position: relative;
@@ -1278,7 +1278,7 @@ header.scrolled {
   width: 100%;
   min-height: 100vh;
   background-color: #050505;
-  padding: 160px 80px; /* Padding global identic cu restul secțiunilor */
+  padding: clamp(60px, 9vw, 180px) clamp(16px, 5vw, 100px); /* Padding global identic cu restul secțiunilor */
   display: flex;
   align-items: center;
   position: relative;
@@ -1352,7 +1352,7 @@ header.scrolled {
 /* --- TITLUL DIN GALERIE ȘI RESTUL CONȚINUTULUI SE ALINIAZĂ DUPĂ TAG --- */
 .gallery-main-title {
   font-family: "Oswald", sans-serif;
-  font-size: clamp(54px, 6vw, 85px);
+  font-size: clamp(32px, 5.5vw, 85px);
   font-weight: 700;
   color: var(--text-white);
   text-transform: uppercase;
@@ -1434,7 +1434,7 @@ header.scrolled {
 #clients-ticker {
   width: 100%;
   background-color: #ececec;
-  padding: 85px 0;
+  padding: clamp(45px, 5vw, 85px) 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1541,7 +1541,7 @@ header.scrolled {
   width: 100%;
   min-height: 100vh;
   background-color: #050505;
-  padding: 160px 100px;
+  padding: clamp(60px, 9vw, 180px) clamp(16px, 5vw, 100px);
   display: flex;
   align-items: center;
   position: relative;
@@ -1595,7 +1595,7 @@ header.scrolled {
 
 .sales-title {
   font-family: "Oswald", sans-serif;
-  font-size: clamp(44px, 5vw, 68px);
+  font-size: clamp(28px, 4.5vw, 68px);
   font-weight: 700;
   color: var(--text-white);
   text-transform: uppercase;
@@ -1991,6 +1991,10 @@ header.scrolled {
   letter-spacing: 0.02em;
 }
 
+/* ==========================================================================
+   15. AXIOBYTE ULTRA RESPONSIVE ENGINE
+   ========================================================================== */
+
 /* --------------------------------------------------------------------------
    BREAKPOINT 1: LARGE LAPTOPS (max-width: 1440px)
    -------------------------------------------------------------------------- */
@@ -2001,19 +2005,6 @@ header.scrolled {
   .contact-sales-container,
   .gallery-container {
     max-width: 1300px;
-  }
-
-  #manifest {
-    padding: 140px 60px;
-  }
-  #services {
-    padding: 140px 80px;
-  }
-  #testimonials {
-    padding: 140px 80px;
-  }
-  #contact-sales {
-    padding: 140px 80px;
   }
 
   .gallery-card {
@@ -2028,35 +2019,6 @@ header.scrolled {
   .contact-sales-container {
     gap: 60px;
   }
-}
-
-/* --------------------------------------------------------------------------
-   BREAKPOINT 2: STANDARD LAPTOPS (max-width: 1200px)
-   -------------------------------------------------------------------------- */
-@media (max-width: 1200px) {
-  .manifest-container,
-  .services-wrapper,
-  .testimonials-container,
-  .contact-sales-container,
-  .gallery-container {
-    max-width: 1100px;
-  }
-
-  #manifest {
-    padding: 120px 50px;
-  }
-  #services {
-    padding: 120px 60px;
-  }
-  #testimonials {
-    padding: 120px 60px;
-  }
-  #contact-sales {
-    padding: 120px 60px;
-  }
-  #gallery {
-    padding: 100px 0;
-  }
 
   header {
     padding: 25px 40px;
@@ -2065,25 +2027,12 @@ header.scrolled {
     padding: 16px 40px;
   }
 
-  .hero-center-title h1 {
-    font-size: 100px;
-  }
   .hero-services-index {
     left: 40px;
   }
   .hero-description {
     left: 40px;
     max-width: 360px;
-  }
-
-  .gallery-card {
-    width: 340px;
-  }
-  .card-image-box {
-    height: 400px;
-  }
-  .mock-img-box {
-    height: 300px;
   }
 
   .nav-links a {
@@ -2102,34 +2051,37 @@ header.scrolled {
 }
 
 /* --------------------------------------------------------------------------
-   BREAKPOINT 3: TABLET LANDSCAPE (max-width: 1024px)
+   BREAKPOINT 2: TABLETS LANDSCAPE / SMALL LAPTOPS (max-width: 1024px)
    -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
+  /* Disable custom cursor on touch devices to improve responsiveness */
   .custom-cursor-dot,
   .custom-cursor-outline {
     display: none !important;
   }
 
-  #manifest {
-    padding: 100px 40px;
+  /* Hamburger navigation activation */
+  .nav-links {
+    display: none !important;
   }
-  #services {
-    padding: 100px 40px;
+  .hamburger-btn {
+    display: flex;
   }
-  #testimonials {
-    padding: 100px 40px;
-  }
-  #contact-sales {
-    padding: 100px 40px;
-  }
-  #gallery {
-    padding: 80px 0;
-  }
-  #clients-ticker {
-    padding: 60px 0;
+  .contact-information {
+    display: none;
   }
 
-  /* Break all sidebar + content splits into single column */
+  header {
+    padding: 16px 20px !important;
+    background: rgba(5, 5, 5, 0.5);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+  header.scrolled {
+    padding: 14px 20px !important;
+  }
+
+  /* Structural wrappers to single column */
   .services-wrapper,
   .testimonials-container,
   .contact-sales-container {
@@ -2160,6 +2112,7 @@ header.scrolled {
     max-width: 100%;
   }
 
+  /* Gallery restructure */
   .gallery-container {
     flex-direction: column;
   }
@@ -2172,6 +2125,7 @@ header.scrolled {
     width: auto;
   }
 
+  /* Hero redesign */
   .hero-services-index {
     display: none;
   }
@@ -2185,9 +2139,6 @@ header.scrolled {
     flex-direction: column;
     align-items: center;
   }
-  .hero-center-title h1 {
-    font-size: 90px;
-  }
   .hero-description {
     width: 100%;
     text-align: center;
@@ -2197,9 +2148,21 @@ header.scrolled {
     margin: 0 auto;
   }
 
+  /* Manifest footer: asymmetric 3-col grid to 2-col grid */
   .manifest-footer-grid {
-    gap: 40px;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 40px;
   }
+  .manifest-detail {
+    grid-column: span 2;
+  }
+  .manifest-meta-right {
+    align-items: flex-start;
+    text-align: left;
+  }
+
   .accordion-inner-layout {
     padding-left: 30px;
   }
@@ -2210,34 +2173,34 @@ header.scrolled {
     width: 100vw;
     height: 100vw;
   }
+
+  /* Process section responsive rules merged here */
+  .process-container {
+    flex-direction: column;
+  }
+  .process-sidebar {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  .process-main-content {
+    width: 100%;
+  }
+  .step-grid {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .step-number {
+    width: 100%;
+  }
+  .step-details {
+    width: 100%;
+  }
 }
 
 /* --------------------------------------------------------------------------
-   BREAKPOINT 4: TABLET PORTRAIT / LARGE PHONES (max-width: 768px)
+   BREAKPOINT 3: TABLETS PORTRAIT (max-width: 768px)
    -------------------------------------------------------------------------- */
 @media (max-width: 768px) {
-  /* Navigation: hamburger activation */
-  .nav-links {
-    display: none !important;
-  }
-  .hamburger-btn {
-    display: flex;
-  }
-  .contact-information {
-    display: none;
-  }
-
-  header {
-    padding: 16px 20px !important;
-    background: rgba(5, 5, 5, 0.5);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-  }
-  header.scrolled {
-    padding: 14px 20px !important;
-  }
-
-  /* Hero: complete restructure for mobile */
   #hero {
     display: flex;
     flex-direction: column;
@@ -2255,11 +2218,6 @@ header.scrolled {
     transform: none;
     width: 100%;
     text-align: center;
-    align-items: center;
-  }
-
-  .hero-center-title h1 {
-    font-size: clamp(48px, 14vw, 90px);
     align-items: center;
   }
 
@@ -2295,39 +2253,27 @@ header.scrolled {
   }
 
   /* Manifest */
-  #manifest {
-    padding: 80px 20px !important;
-  }
   .manifest-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
   }
-  .manifest-title {
-    font-size: clamp(36px, 10vw, 100px) !important;
-  }
+  
+  /* Manifest footer: 2-col to 1-col stacked */
   .manifest-footer-grid {
     grid-template-columns: 1fr;
     gap: 30px;
   }
-  .manifest-meta-right {
-    align-items: flex-start;
-    text-align: left;
+  .manifest-detail {
+    grid-column: span 1;
   }
   .manifest-detail p {
     font-size: 15px;
   }
 
   /* Gallery */
-  #gallery {
-    padding: 60px 0 !important;
-  }
   .gallery-header-main {
     padding: 0 20px;
-  }
-  .gallery-main-title {
-    font-size: clamp(36px, 10vw, 85px) !important;
-    text-align: left;
   }
   .gallery-card {
     width: 260px;
@@ -2363,14 +2309,8 @@ header.scrolled {
   }
 
   /* Services Accordion */
-  #services {
-    padding: 80px 20px !important;
-  }
   .services-accordion-item {
     padding: 25px 0;
-  }
-  .accordion-trigger h2 {
-    font-size: clamp(28px, 8vw, 76px) !important;
   }
   .acc-num {
     font-size: 18px;
@@ -2404,13 +2344,6 @@ header.scrolled {
   }
 
   /* Testimonials */
-  #testimonials {
-    padding: 80px 20px !important;
-  }
-  .testimonials-main-title {
-    font-size: clamp(36px, 10vw, 85px) !important;
-    margin-bottom: 40px;
-  }
   .avatar-item {
     width: 55px;
     height: 55px;
@@ -2433,29 +2366,13 @@ header.scrolled {
     font-size: 16px;
   }
 
-  /* Contact Form */
-  #contact-sales {
-    padding: 80px 20px !important;
-  }
-  .sales-title {
-    font-size: clamp(32px, 10vw, 68px) !important;
-  }
-  .contact-sales-main-content {
-    padding-right: 0;
-  }
-  .contact-form-wrapper {
-    max-width: 100%;
-  }
-  .contact-sales-header {
-    max-width: 100%;
-  }
-
+  /* Contact Form Chips Grid (touch friendly 2 columns) */
   .project-chips-grid {
     gap: 8px;
     justify-content: center;
   }
   .chip-item {
-    width: calc(50% - 4px);
+    width: calc(50% - 6px);
     padding: 12px 10px;
     font-size: 12px;
     text-align: center;
@@ -2468,52 +2385,29 @@ header.scrolled {
     font-size: 14px;
     min-height: 44px;
   }
-
   .btn-submit-sales {
     padding: 18px 0;
     min-height: 48px;
   }
 
-  /* Global mobile rules */
+  /* Disable heavy parallax elements on mobile/tablet to ensure raw performance */
   .parallax-element {
     transform: none !important;
     transition: none !important;
   }
-
   img {
     max-width: 100%;
+    height: auto;
+    object-fit: cover;
   }
 }
 
 /* --------------------------------------------------------------------------
-   BREAKPOINT 5: SMALL PHONES (max-width: 480px)
+   BREAKPOINT 4: MOBILE PHONES (max-width: 480px)
    -------------------------------------------------------------------------- */
 @media (max-width: 480px) {
-  #hero {
-    padding: 80px 16px 50px !important;
-  }
-  #manifest {
-    padding: 60px 16px !important;
-  }
-  #services {
-    padding: 60px 16px !important;
-  }
-  #testimonials {
-    padding: 60px 16px !important;
-  }
-  #contact-sales {
-    padding: 60px 16px !important;
-  }
-
-  .hero-center-title h1 {
-    font-size: clamp(40px, 15vw, 70px);
-  }
   .hero-description p {
     font-size: 13px;
-    transform: translateZ(0);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    backface-visibility: hidden;
   }
 
   .gallery-card {
@@ -2535,9 +2429,6 @@ header.scrolled {
     padding: 8px 12px;
   }
 
-  .accordion-trigger h2 {
-    font-size: clamp(24px, 8vw, 50px) !important;
-  }
   .acc-num {
     font-size: 14px;
     margin-right: 10px;
@@ -2560,10 +2451,8 @@ header.scrolled {
   .avatar-counter-badge span {
     font-size: 12px;
   }
-  .testimonial-quote-text {
-    font-size: 14px;
-  }
 
+  /* Single column chips for standard phone widths */
   .chip-item {
     width: 100%;
   }
@@ -2575,9 +2464,6 @@ header.scrolled {
     gap: 22px;
   }
 
-  .manifest-title {
-    font-size: clamp(30px, 10vw, 60px) !important;
-  }
   .manifest-detail p {
     font-size: 14px;
   }
@@ -2587,51 +2473,17 @@ header.scrolled {
 }
 
 /* --------------------------------------------------------------------------
-   BREAKPOINT 6: VERY SMALL SCREENS (max-width: 360px)
+   BREAKPOINT 5: ULTRA-WIDE DISPLAYS (min-width: 1920px)
    -------------------------------------------------------------------------- */
-@media (max-width: 360px) {
-  #hero {
-    padding: 70px 12px 40px !important;
-  }
-
-  .hero-center-title h1 {
-    font-size: clamp(32px, 16vw, 55px);
-  }
-  .btn-session {
-    padding: 14px 24px;
-    font-size: 14px;
-  }
-
-  .accordion-trigger h2 {
-    font-size: clamp(22px, 7vw, 40px) !important;
-  }
-
-  .gallery-card {
-    width: 180px;
-  }
-  .card-image-box {
-    height: 200px;
-  }
-
-  .avatar-item {
-    width: 42px;
-    height: 42px;
-  }
-  .avatar-counter-badge {
-    width: 42px;
-    height: 42px;
-  }
-
-  .mobile-menu-link {
-    font-size: 26px;
-  }
-
-  .sales-title {
-    font-size: clamp(28px, 10vw, 48px) !important;
-  }
-  .contact-form-wrapper,
-  .contact-sales-header {
-    max-width: 100%;
+@media (min-width: 1920px) {
+  .manifest-container,
+  .services-wrapper,
+  .testimonials-container,
+  .contact-sales-container,
+  .gallery-container {
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -3009,15 +2861,6 @@ img[alt*="Service Preview"],
     color: var(--accent-orange-acid);
 }
 
-/* RESPONSIVE OPTIMIZATION */
-@media (max-width: 1024px) {
-    .process-container { flex-direction: column; }
-    .process-sidebar { width: 100%; margin-bottom: 40px; }
-    .process-main-content { width: 100%; }
-    .step-grid { flex-direction: column; gap: 16px; }
-    .step-number { width: 100%; }
-    .step-details { width: 100%; }
-}
 
 /* ==========================================================================
    SECTION 4.5: PROCESS SUPREME ENGINE // INTERACTIVE BRUTALIST CSS
@@ -3147,14 +2990,4 @@ img[alt*="Service Preview"],
 }
 .process-step-item.step-active .step-details p {
     color: rgba(255, 255, 255, 0.85);
-}
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-    .process-container { flex-direction: column; }
-    .process-sidebar { width: 100%; margin-bottom: 40px; }
-    .process-main-content { width: 100%; }
-    .step-grid { flex-direction: column; gap: 16px; }
-    .step-number { width: 100%; }
-    .step-details { width: 100%; }
-}
+}
