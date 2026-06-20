@@ -102,17 +102,6 @@ html.lenis body {
   overflow: hidden;
 }
 
-main {
-  /* Prevent blur and text rendering issues during kinetic scroll skew on the whole page */
-  will-change: transform;
-  transform-origin: center center;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
-}
 
 :root {
   --bg-black: #050505;
@@ -372,6 +361,15 @@ header.scrolled {
   flex-direction: column;
   align-items: center;
   pointer-events: auto;
+}
+
+/* Fix centering conflict with generic scroll-reveal styles */
+.hero-center-title.reveal-up {
+  transform: translate(-50%, calc(-50% + 50px));
+}
+
+.hero-center-title.scroll-reveal.is-revealed {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .hero-center-title h1 {

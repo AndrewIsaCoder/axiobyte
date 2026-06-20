@@ -191,49 +191,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-/* ==========================================================================
-   4. MOTOR PARALLAX GLOBAL RECTIV LA CURSOR (SMOOTH INTERACTIVE LERP)
-   ========================================================================== */
-const parallaxElements = document.querySelectorAll('.parallax-element');
 
-let mouseX = 0;
-let mouseY = 0;
-let targetX = 0;
-let targetY = 0;
-
-/* --- PANOUL TĂU DE CONTROL PENTRU MIȘCAREA SITE-ULUI --- */
-const easeFactor = 0.08;     // Fluiditate: Cu cât e mai mic (ex: 0.04), cu atât plutirea e mai leneșă și smooth
-const maxDeplasare = 20;    // Amplitudine: Distanța maximă în pixeli pe care o pot parcurge elementele
-
-window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX - window.innerWidth / 2;
-    mouseY = e.clientY - window.innerHeight / 2;
-});
-
-function animateParallax() {
-    targetX += (mouseX - targetX) * easeFactor;
-    targetY += (mouseY - targetY) * easeFactor;
-
-    parallaxElements.forEach(element => {
-        const speed = parseFloat(element.getAttribute('data-speed')) || 0.05;
-        
-        // Calculăm translația finală raportată la rezoluția ecranului și limita setată
-        const xTranslation = (targetX / (window.innerWidth / 2)) * maxDeplasare * (speed * 10);
-        const yTranslation = (targetY / (window.innerHeight / 2)) * maxDeplasare * (speed * 10);
-
-        if (element.classList.contains('hero-center-title')) {
-            element.style.transform = `translate(calc(-50% + ${xTranslation}px), calc(-50% + ${yTranslation}px))`;
-        } else {
-            element.style.transform = `translate3d(${xTranslation}px, ${yTranslation}px, 0)`;
-        }
-    });
-
-    requestAnimationFrame(animateParallax);
-}
-
-if (window.matchMedia('(min-width: 1024px)').matches) {
-    animateParallax();
-}
 
 /* ==========================================================================
    5. DETECTARE SCROLL PENTRU NAVBAR GLASSMORPHISM
@@ -594,35 +552,7 @@ if (hamburgerBtn && mobileMenu) {
         // O salvăm pe fereastră pentru a putea fi accesată de alte scripturi dacă e nevoie
         window.lenis = lenis;
 
-        // 2. Selectăm containerul principal pe care vrem să îl deformăm elastic
-        const galleryCards = document.querySelectorAll('main');
 
-        if (galleryCards.length > 0) {
-            // Ascultăm evenimentul de scroll în timp real din motorul Lenis
-            lenis.on('scroll', (attributes) => {
-                // Extragere viteză curentă
-                let currentSpeed = attributes.velocity;
-                
-                // Limităm viteza (clamp) ca să nu strâmbăm imaginile exagerat la un scroll violent
-                let clampedSpeed = Math.min(Math.max(currentSpeed, -12), 12);
-                
-                // Împărțim la 45 pentru a obține un unghi de înclinare fin și extrem de luxos
-                let finalAngle = clampedSpeed * 0.3;
-
-                // Aplicăm deformarea geometrică pe fiecare card din carusel
-                galleryCards.forEach(card => {
-                    card.style.transform = `skewY(${finalAngle}deg)`;
-                });
-            });
-
-            // Când utilizatorul ridică degetul de pe mouse și scroll-ul se oprește complet,
-            // forțăm cardurile să facă snap-back la unghiuri drepte perfecte
-            lenis.on('scrollEnd', () => {
-                galleryCards.forEach(card => {
-                    card.style.transform = 'skewY(0deg)';
-                });
-            });
-        }
 
         // 3. Bucla obligatorie de animație RequestAnimationFrame (RAF) pentru randare continuă
         function updateScroll(time) {
@@ -760,18 +690,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         window.lenis = lenis;
 
-        const galleryCards = document.querySelectorAll('main');
-        if (galleryCards.length > 0) {
-            lenis.on('scroll', (attributes) => {
-                let clampedSpeed = Math.min(Math.max(attributes.velocity, -12), 12);
-                let finalAngle = clampedSpeed * 0.3;
-                galleryCards.forEach(card => card.style.transform = `skewY(${finalAngle}deg)`);
-            });
-
-            lenis.on('scrollEnd', () => {
-                galleryCards.forEach(card => card.style.transform = 'skewY(0deg)');
-            });
-        }
 
         function updateScroll(time) {
             lenis.raf(time);
