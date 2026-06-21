@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Axiobyte® | Thank You — We'll Be In Touch</title>
+    <meta
+      name="description"
+      content="Thank you for reaching out to Axiobyte Studio. We have received your message and will contact you shortly."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link
+      rel="shortcut icon"
+      href="./assets/logos-axiobyteITsolution/square-axiobyteITsolution.png"
+      type="image/x-icon"
+    />
+
+    <link rel="stylesheet" href="./css/thank-you.css" />
+  </head>
+  <body>
+
+    <!-- Page Transition Entrance Overlay -->
+    <div id="ty-entrance-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #f5f5f3; z-index: 999999; opacity: 1; pointer-events: none; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);"></div>
+
+    <!-- Custom cursor -->
+    <div class="ty-cursor-dot"></div>
+    <div class="ty-cursor-outline"></div>
+
+    <!-- =====================================================================
+         HEADER
+         ===================================================================== -->
+    <header class="ty-header">
+      <a href="./index.html" class="ty-logo" aria-label="Axiobyte — back to home">
+        <div class="ty-logo-mark">
+          <img
+            src="./assets/logos-axiobyteITsolution/square-axiobyteITsolution.png"
+            alt="Axiobyte mark"
+          />
+        </div>
+        <div class="ty-logo-info">
+          <span class="ty-logo-name">Axiobyte®</span>
+          <span class="ty-logo-sub">Creative Studio</span>
+        </div>
+      </a>
+
+      <button class="ty-hamburger" aria-label="Back to home">
+        <span class="ty-hamburger-line"></span>
+        <span class="ty-hamburger-line"></span>
+        <span class="ty-hamburger-line"></span>
+      </button>
+    </header>
+
+    <!-- =====================================================================
+         MAIN
+         ===================================================================== -->
+    <main class="ty-main">
+
+      <!-- Two-column grid: text left, phone right -->
+      <div class="ty-content-grid">
+
+        <!-- LEFT — message + meta -->
+        <div class="ty-left">
+          <section class="ty-message-section" aria-label="Confirmation">
+            <p class="ty-label">Message received</p>
+            <p class="ty-message">
+              Thank you,<br />
+              we will contact<br />
+              you shortly.
+            </p>
+          </section>
+
+          <hr class="ty-sep" aria-hidden="true" />
+
+          <div class="ty-meta-row" role="list" aria-label="Next steps">
+            <div class="ty-meta-item" role="listitem">
+              <span class="ty-meta-label">Status</span>
+              <span class="ty-meta-value">Under review</span>
+            </div>
+            <div class="ty-meta-item" role="listitem">
+              <span class="ty-meta-label">Response time</span>
+              <span class="ty-meta-value">24 – 48 hours</span>
+            </div>
+            <div class="ty-meta-item" role="listitem">
+              <span class="ty-meta-label">Contact</span>
+              <span class="ty-meta-value">contact@axiobyte.com</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT — phone mockup with video -->
+        <div class="ty-right" aria-hidden="true">
+          <div class="ty-phone-wrapper">
+
+            <!-- Phone chrome -->
+            <div class="ty-phone">
+
+              <!-- Side buttons (decorative) -->
+              <div class="ty-phone-btn ty-phone-btn--vol-up"></div>
+              <div class="ty-phone-btn ty-phone-btn--vol-down"></div>
+              <div class="ty-phone-btn ty-phone-btn--power"></div>
+
+              <!-- Screen area -->
+              <div class="ty-phone-screen">
+                <!-- Dynamic Island notch -->
+                <div class="ty-phone-island"></div>
+
+                <!-- Video fills the screen -->
+                <video
+                  class="ty-phone-video"
+                  src="./assets/marketing-ads-photos/axiobyte-video-intro.mp4"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="auto"
+                ></video>
+              </div>
+
+              <!-- Home indicator bar -->
+              <div class="ty-phone-home"></div>
+            </div>
+
+            <!-- Floating label below phone -->
+            <div class="ty-phone-caption">
+              <span class="ty-phone-caption-dot"></span>
+              Axiobyte® — Showreel
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /.ty-content-grid -->
+
+      <!-- Display typography — full width, spans below the grid -->
+      <div class="ty-display-section" aria-hidden="true">
+        <span class="ty-display-line">WE CRAFT</span>
+        <span class="ty-display-line is-outline">YOUR BRAND.</span>
+
+        <p class="ty-tagline">
+          Digital experiences for an<br />ever-shifting world.
+        </p>
+      </div>
+
+    </main>
+
+    <script src="./js/thank-you.js"></script>
+  </body>
+</html>

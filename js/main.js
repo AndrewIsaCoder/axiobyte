@@ -422,26 +422,39 @@ if (leadForm) {
         })
         .then(async (response) => {
             const result = await response.json();
-            if (response.status === 200 && result.success) {
-                // Succes!
+            if (response.ok && result.success) {
+                // Succes! — Actualizăm butonul și redirecționăm la pagina thank-you
                 if (submitBtn) {
                     submitBtn.classList.remove('submitting');
                     submitBtn.classList.add('success');
                 }
                 if (btnText) {
-                    btnText.textContent = "TRANSMISSION SUCCESSFUL";
+                    btnText.textContent = "TRANSMISSION SUCCESSFUL ✓";
                 }
-                if (formFeedback) {
-                    formFeedback.textContent = "Thank you! Your message has been sent successfully. We'll get back to you shortly.";
-                    formFeedback.classList.add('success', 'show');
-                }
-                
-                // Resetează datele formularului
+
+                // Resetează datele formularului și chip-urile active
                 leadForm.reset();
-                
-                // Resetează vizual chip-urile active
                 const activeChips = leadForm.querySelectorAll('.chip-item.active');
                 activeChips.forEach(chip => chip.classList.remove('active'));
+
+                // Pornim tranziția fluidă după ce s-a văzut confirmarea de succes (600ms)
+                setTimeout(() => {
+                    // Creăm overlay-ul în DOM
+                    const transitionOverlay = document.createElement('div');
+                    transitionOverlay.className = 'page-transition-overlay';
+                    document.body.appendChild(transitionOverlay);
+                    
+                    // Activăm clasa pentru fade-in fluid
+                    setTimeout(() => {
+                        transitionOverlay.classList.add('active');
+                    }, 10);
+
+                    // Executăm redirecționarea la thank-you.html când ecranul este complet acoperit de overlay (600ms)
+                    setTimeout(() => {
+                        window.location.href = './thank-you.html';
+                    }, 600);
+                }, 600);
+
             } else {
                 throw new Error(result.message || "Submission failed. Please check your details.");
             }
@@ -461,23 +474,13 @@ if (leadForm) {
             }
         })
         .finally(() => {
-            // Permitem din nou interacțiunea după un scurt delay, revenind la starea inițială
+            // Restaurăm starea inițială DOAR în caz de eroare (succes → redirect, nu ajungem aici)
             setTimeout(() => {
+                if (!submitBtn || submitBtn.classList.contains('success')) return;
                 leadForm.classList.remove('submitting');
-                if (submitBtn) {
-                    submitBtn.disabled = false;
-                    submitBtn.classList.remove('success', 'error');
-                }
-                if (btnText) {
-                    btnText.textContent = "Send message";
-                }
-                
-                // Ascundem mesajul de succes după un timp, dar lăsăm erorile vizibile pentru a fi citite
-                if (formFeedback && formFeedback.classList.contains('success')) {
-                    setTimeout(() => {
-                        formFeedback.classList.remove('show');
-                    }, 3000);
-                }
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('error');
+                if (btnText) btnText.textContent = "Send message";
             }, 3500);
         });
     });
