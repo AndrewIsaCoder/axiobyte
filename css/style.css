@@ -2488,79 +2488,213 @@ header.scrolled {
 }
 
 /* ==========================================================================
-   14. CINEMATIC PRELOADER SETUP (BRUTALIST TECH LUXURY)
+   14. CINEMATIC PRELOADER — AXIOBYTE CURTAIN EDITION
    ========================================================================== */
+
+/* ---- WRAPPER ---- */
 #axiobyte-preloader {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: #050505; /* Întuneric total la boot */
-  z-index: 10000; /* Stă deasupra navigației și a cursorului */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  inset: 0;
+  z-index: 999999;
   overflow: hidden;
-  /* Tranziție ultra-smooth cubic-bezier pentru ridicarea cortinei */
+  background: #000;
+  will-change: transform, opacity;
   transition:
-    transform 1.2s cubic-bezier(0.85, 0, 0.15, 1),
-    opacity 1s ease;
-  will-change: transform;
+    opacity 1s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 1.2s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-.preloader-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-
-.preloader-brand {
-  font-family: "Oswald", sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--text-white);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: preloaderFadeIn 0.6s ease forwards 0.2s;
-}
-
-.preloader-counter {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 48px;
-  font-weight: 700;
-  color: var(
-    --accent-orange-acid
-  ); /* Procentul se aprinde în portocaliu acid */
-  letter-spacing: -0.02em;
-}
-
-.preloader-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background-color: var(--accent-orange-acid);
-  transition: width 0.1s linear;
-}
-
-/* Când scriptul declară încărcarea gata, aruncăm preloader-ul în sus în afara ecranului */
 #axiobyte-preloader.loaded {
-  transform: translate3d(0, -100%, 0);
+  opacity: 0;
+  transform: translateY(-4px) scale(1.015);
   pointer-events: none;
 }
 
-@keyframes preloaderFadeIn {
-  to {
-    opacity: 0.5;
-    transform: translateY(0);
+/* ---- FULLSCREEN VIDEO ---- */
+#preloader-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transition: opacity 1.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ---- OVERLAY — contrasted vignette ---- */
+.pl-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.72) 100%);
+  z-index: 2;
+}
+
+/* ---- LETTERBOX BARS (cinematic 2.39:1 feel) ---- */
+.pl-bar {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  background: #000;
+  transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1) 0.2s;
+}
+
+.pl-bar--top {
+  top: 0;
+  height: 10vh;
+  transform: translateY(0);
+}
+
+.pl-bar--bottom {
+  bottom: 0;
+  height: 10vh;
+  transform: translateY(0);
+}
+
+/* When loaded, bars retract out of frame */
+#axiobyte-preloader.loaded .pl-bar--top    { transform: translateY(-100%); }
+#axiobyte-preloader.loaded .pl-bar--bottom { transform: translateY(100%); }
+
+/* ---- CENTER BRAND ---- */
+.pl-brand-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  opacity: 0;
+  animation: plBrandIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+
+@keyframes plBrandIn {
+  from { opacity: 0; letter-spacing: 0.6em; }
+  to   { opacity: 1; letter-spacing: 0.28em; }
+}
+
+.pl-brand-title {
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(28px, 5vw, 64px);
+  font-weight: 200;
+  color: #fff;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Animated separator lines emanating from centre */
+.pl-brand-line {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.25));
+  width: 0;
+  animation: plLineExpand 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+}
+
+.pl-brand-line--left {
+  transform: scaleX(-1);
+}
+
+@keyframes plLineExpand {
+  from { width: 0; }
+  to   { width: clamp(40px, 6vw, 90px); }
+}
+
+/* ---- FOOTER — skip / progress / percent ---- */
+.pl-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  padding: 0 40px 36px;
+  gap: 20px;
+  box-sizing: border-box;
+  opacity: 0;
+  animation: plFooterIn 0.8s ease 1s forwards;
+}
+
+@keyframes plFooterIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Skip button — ultra-minimal */
+.pl-skip {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: lowercase;
+  color: rgba(255, 255, 255, 0.35);
+  white-space: nowrap;
+  padding: 0;
+  transition: color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.pl-skip:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Progress track */
+.pl-progress-track {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.10);
+  position: relative;
+  overflow: hidden;
+}
+
+.pl-progress-fill {
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  transition: width 0.12s linear;
+}
+
+/* Percentage */
+.pl-percent {
+  font-family: "Oswald", sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.40);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 38px;
+  text-align: right;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+  .pl-bar--top,
+  .pl-bar--bottom {
+    height: 8vh;
+  }
+
+  .pl-footer {
+    padding: 0 24px 28px;
+    gap: 14px;
+  }
+
+  .pl-brand-wrap {
+    gap: 12px;
   }
 }
+
+
 
 .btn-session {
     font-family: 'Space Grotesk', sans-serif; /* Proprietățile tale existente */

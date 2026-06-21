@@ -545,7 +545,7 @@ if (hamburgerBtn && mobileMenu) {
 }
 
 /* ==========================================================================
-   AXIOBYTE CINEMATIC PRELOADER ENGINE // SECURED & ISOLATED
+   AXIOBYTE CINEMATIC PRELOADER ENGINE // SECURED & ISOLATED (VIDEO INTRO EDITION)
    ========================================================================== */
 (function() {
     // Forțăm oprirea scroll-ului instantaneu, chiar înainte de citirea completă a paginii
@@ -555,8 +555,10 @@ if (hamburgerBtn && mobileMenu) {
     window.addEventListener('DOMContentLoaded', () => {
         const preloader = document.getElementById('axiobyte-preloader');
         const percentText = document.getElementById('loader-percentage');
-        const progressBar = document.querySelector('.preloader-bar');
-        
+        const progressBar = document.querySelector('.pl-progress-fill');
+        const video = document.getElementById('preloader-video');
+        const skipBtn = document.getElementById('skip-preloader-btn');
+
         if (!preloader || !percentText) {
             // FAILING SAFE: Dacă elementele nu există în HTML, dăm drumul la scroll direct
             document.documentElement.style.overflow = '';
@@ -565,52 +567,181 @@ if (hamburgerBtn && mobileMenu) {
         }
 
         let currentPercent = 0;
+        let isLoaded = false;
+        let videoStarted = false;
+
+        const updateProgressUI = (percentage) => {
+            currentPercent = percentage;
+            percentText.textContent = currentPercent < 10 ? "0" + currentPercent : currentPercent;
+            if (progressBar) progressBar.style.width = currentPercent + "%";
+        };
 
         // FUNCȚIA MASTER DE RIDICARE A CORTINEI
         const removePreloader = () => {
+            if (isLoaded) return;
+            isLoaded = true;
+
+            // Salvăm în sessionStorage faptul că intro-ul a fost vizualizat în această sesiune
+            sessionStorage.setItem('axiobyte_intro_played', 'true');
+
             preloader.classList.add('loaded');
+            
+            // Oprim videoclipul ca să eliberăm resursele
+            if (video) {
+                video.pause();
+            }
+
             // Redăm scroll-ul înapoi pe tot site-ul
             document.documentElement.style.overflow = '';
             document.body.style.overflow = '';
         };
 
-        // MOTORUL RECURSIV DE NUMĂRARE
-        const runCounter = () => {
-            // Pas de incrementare rapid și organic
-            let increment = Math.floor(Math.random() * 6) + 2; 
-            currentPercent += increment;
+        // Verificăm dacă utilizatorul a vizitat deja site-ul în această sesiune (Session Bypass)
+        // NOTĂ DE DEZVOLTARE: Am dezactivat temporar acest check (hasPlayedThisSession = false)
+        // ca să poți testa intro-ul video la fiecare refresh.
+        // Pentru producție, reactivează linia de mai jos prin stergerea comentariului.
+        const hasPlayedThisSession = false; // sessionStorage.getItem('axiobyte_intro_played') === 'true';
 
-            if (currentPercent >= 100) {
-                currentPercent = 100;
-                percentText.textContent = "100";
-                if (progressBar) progressBar.style.width = "100%";
-                
-                // Scurtă pauză dramatică la 100% înainte de deschidere
-                setTimeout(removePreloader, 500);
-            } else {
-                percentText.textContent = currentPercent < 10 ? "0" + currentPercent : currentPercent;
-                if (progressBar) progressBar.style.width = currentPercent + "%";
-                
-                // Delay variabil fluid pentru viteză cinematică
-                let adaptiveDelay = Math.floor(Math.random() * 30) + 15;
-                setTimeout(runCounter, adaptiveDelay);
+        if (hasPlayedThisSession) {
+            // Secvență ultra-rapidă de boot pentru UX optim la navigări secundare
+            if (video) video.style.display = 'none';
+            let fastPercent = 0;
+            const runFastCounter = () => {
+                fastPercent += Math.floor(Math.random() * 15) + 12;
+                if (fastPercent >= 100) {
+                    updateProgressUI(100);
+                    setTimeout(removePreloader, 200);
+                } else {
+                    updateProgressUI(fastPercent);
+                    setTimeout(runFastCounter, 40);
+                }
+            };
+            runFastCounter();
+            return;
+        }
+
+        // --- PORNIRE NUMĂRĂTOARE STANDARD ---
+        // Pasul 1: Buffering (0% - 30%) - Crește progresiv până când videoclipul este gata de redare
+        let bufferingInterval = setInterval(() => {
+            if (videoStarted) {
+                clearInterval(bufferingInterval);
+                return;
+            }
+            if (currentPercent < 30) {
+                updateProgressUI(currentPercent + 1);
+            }
+        }, 80);
+
+        // Declanșăm redarea imediat ce browserul indică faptul că poate rula clipul
+        const startVideoIntro = () => {
+            if (videoStarted || isLoaded) return;
+            videoStarted = true;
+            clearInterval(bufferingInterval);
+
+            // Îi dăm vizibilitate video-ului chiar înainte de a porni (pentru feedback instant)
+            video.style.opacity = '0.85';
+
+            // Redăm videoclipul
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Redare inițiată cu succes
+                }).catch(error => {
+                    console.warn("Autoplay block detected or video error. Falling back to simulated load.", error);
+                    runSimulatedCounter();
+                });
             }
         };
 
-        // Pornim numărătoarea imediat
-        runCounter();
+        if (video) {
+            // Evenimente de pregătire video
+            video.addEventListener('canplaythrough', startVideoIntro);
+            video.addEventListener('loadedmetadata', startVideoIntro);
+            video.addEventListener('playing', startVideoIntro);
 
-        // REZERVĂ CRITICĂ DE SIGURANȚĂ (FAILSAFE SYSTEM):
-        // Dacă din cauza unui script extern sau a unei erori contorul se blochează,
-        // forțăm deschiderea site-ului după exact 3 secunde, ca să nu piardă niciun client interfața.
+            // Sincronizăm progresul video (de la 30% la 100%) cu redarea efectivă
+            video.addEventListener('timeupdate', () => {
+                if (!videoStarted || isLoaded || !video.duration) return;
+                const progress = video.currentTime / video.duration;
+                const mappedPercent = Math.min(100, Math.floor(30 + progress * 70));
+                
+                if (mappedPercent > currentPercent) {
+                    updateProgressUI(mappedPercent);
+                }
+            });
+
+            video.addEventListener('ended', () => {
+                updateProgressUI(100);
+                setTimeout(removePreloader, 300);
+            });
+
+            // Failsafe în caz că video-ul este deja în cache / ready state încărcat înainte de adăugarea listenerilor
+            if (video.readyState >= 3) {
+                startVideoIntro();
+            }
+
+            // FALLBACK AUTOPLAY BLOCK: Dacă autoplay-ul este blocat de browser,
+            // videoclipul va porni la primul click/touch al utilizatorului oriunde pe ecran.
+            const handleUserInteractionPlay = () => {
+                if (video.paused && !isLoaded) {
+                    video.play().then(() => {
+                        video.style.opacity = '0.85';
+                        if (!videoStarted) {
+                            startVideoIntro();
+                        }
+                    }).catch(err => console.log("User click play attempt: ", err));
+                }
+                document.removeEventListener('click', handleUserInteractionPlay);
+                document.removeEventListener('touchstart', handleUserInteractionPlay);
+            };
+            document.addEventListener('click', handleUserInteractionPlay);
+            document.addEventListener('touchstart', handleUserInteractionPlay);
+        } else {
+            runSimulatedCounter();
+        }
+
+        // Simulator de progres în caz că videoclipul nu pornește sau este blocat de browser
+        function runSimulatedCounter() {
+            let simPercent = currentPercent;
+            const runSim = () => {
+                if (isLoaded) return;
+                simPercent += Math.floor(Math.random() * 5) + 2;
+                if (simPercent >= 100) {
+                    updateProgressUI(100);
+                    setTimeout(removePreloader, 400);
+                } else {
+                    updateProgressUI(simPercent);
+                    setTimeout(runSim, 40 + Math.random() * 30);
+                }
+            };
+            runSim();
+        }
+
+        // --- SISTEM DE BYPASS / SKIP INTRO ---
+        const triggerBypass = () => {
+            updateProgressUI(100);
+            removePreloader();
+        };
+
+        if (skipBtn) {
+            skipBtn.addEventListener('click', triggerBypass);
+        }
+
+        // Tasta ESC pentru bypass rapid
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                triggerBypass();
+            }
+        });
+
+        // --- FAILSAFE SYSTEM (6 secunde max) ---
         setTimeout(() => {
-            if (!preloader.classList.contains('loaded')) {
+            if (!isLoaded) {
                 console.warn("Axiobyte Failsafe triggered: Preloader forced close.");
-                percentText.textContent = "100";
-                if (progressBar) progressBar.style.width = "100%";
+                updateProgressUI(100);
                 removePreloader();
             }
-        }, 3000);
+        }, 6000);
     });
 })();
 
@@ -653,59 +784,8 @@ if (hamburgerBtn && mobileMenu) {
    AXIOBYTE CLEAN ENGINE // UNIFIED INTERACTIVE JAVASCRIPT
    ========================================================================== */
 
-// --- 1. ENGINE: CINEMATIC PRELOADER (00% - 100%) ---
-(function() {
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-
-    window.addEventListener('DOMContentLoaded', () => {
-        const preloader = document.getElementById('axiobyte-preloader');
-        const percentText = document.getElementById('loader-percentage');
-        const progressBar = document.querySelector('.preloader-bar');
-        
-        if (!preloader || !percentText) {
-            document.documentElement.style.overflow = '';
-            document.body.style.overflow = '';
-            return;
-        }
-
-        let currentPercent = 0;
-
-        const removePreloader = () => {
-            preloader.classList.add('loaded');
-            document.documentElement.style.overflow = '';
-            document.body.style.overflow = '';
-        };
-
-        const runCounter = () => {
-            let increment = Math.floor(Math.random() * 6) + 2; 
-            currentPercent += increment;
-
-            if (currentPercent >= 100) {
-                currentPercent = 100;
-                percentText.textContent = "100";
-                if (progressBar) progressBar.style.width = "100%";
-                setTimeout(removePreloader, 500);
-            } else {
-                percentText.textContent = currentPercent < 10 ? "0" + currentPercent : currentPercent;
-                if (progressBar) progressBar.style.width = currentPercent + "%";
-                let adaptiveDelay = Math.floor(Math.random() * 30) + 15;
-                setTimeout(runCounter, adaptiveDelay);
-            }
-        };
-
-        runCounter();
-
-        // FAILSAFE SAFEGUARD (3 secunde max)
-        setTimeout(() => {
-            if (!preloader.classList.contains('loaded')) {
-                percentText.textContent = "100";
-                if (progressBar) progressBar.style.width = "100%";
-                removePreloader();
-            }
-        }, 3000);
-    });
-})();
+// --- 1. ENGINE: CINEMATIC PRELOADER (DEPRECATED - INTEGRATED ABOVE) ---
+// Integrat în motorul securizat de mai sus pentru a evita execuția duplicată și erorile de concurență.
 
 // --- 2. ENGINE: CUSTOM INTERACTIVE CURSOR & LYNIS SKEW & ELEMENTS ---
 document.addEventListener('DOMContentLoaded', () => {

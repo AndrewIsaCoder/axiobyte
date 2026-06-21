@@ -63,13 +63,32 @@
 </head>
   <body>
     <div id="axiobyte-preloader">
-      <div class="preloader-content">
-        <div class="preloader-brand">AXIOBYTE®</div>
-        <div class="preloader-counter">
-          <span id="loader-percentage">00</span>%
-        </div>
+
+      <!-- Fullscreen Video -->
+      <video id="preloader-video" src="./assets/marketing-ads-photos/axiobyte-video-intro.mp4" autoplay muted playsinline preload="auto"></video>
+
+      <!-- Dark overlay -->
+      <div class="pl-overlay"></div>
+
+      <!-- Letterbox bars -->
+      <div class="pl-bar pl-bar--top"></div>
+      <div class="pl-bar pl-bar--bottom"></div>
+
+      <!-- Center Brand -->
+      <div class="pl-brand-wrap">
+        <div class="pl-brand-line pl-brand-line--left"></div>
+        <div class="pl-brand-line pl-brand-line--right"></div>
       </div>
-      <div class="preloader-bar"></div>
+
+      <!-- Bottom progress -->
+      <div class="pl-footer">
+        <button id="skip-preloader-btn" class="pl-skip" aria-label="Skip intro">skip</button>
+        <div class="pl-progress-track">
+          <div class="pl-progress-fill"></div>
+        </div>
+        <span class="pl-percent"><span id="loader-percentage">00</span>%</span>
+      </div>
+
     </div>
 
     <div class="custom-cursor-dot"></div>
