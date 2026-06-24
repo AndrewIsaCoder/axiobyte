@@ -585,6 +585,12 @@ body {
    9. RESPONSIVE
    ========================================================================== */
 @media (max-width: 1024px) {
+  /* Disable custom cursor on touch devices to improve responsiveness */
+  .ty-cursor-dot,
+  .ty-cursor-outline {
+    display: none !important;
+  }
+
   .ty-content-grid {
     grid-template-columns: 1fr;
     min-height: auto;
